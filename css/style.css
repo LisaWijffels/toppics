@@ -101,6 +101,35 @@ nav
     text-align: center;
 }
 
+h1
+{
+    text-align: center;
+}
+
+.formToppic
+{
+    display: block;
+    text-align: center;
+}
+
+#buttonplus
+{
+    padding-left: 95px;
+    padding-right: 95px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-size: 72px;
+}
+
+#buttondrop
+{
+    padding-left: 65px;
+    padding-right: 65px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+
 @media (min-width: 30em)
 {
     nav 
@@ -122,6 +151,12 @@ nav
     .navItems
     {
        font-size: 11px;
+    }
+
+    #buttonplus
+    {
+        margin-left: 20px;
+        margin-right: 20px;
     }
 }
 

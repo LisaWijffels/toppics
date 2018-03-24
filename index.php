@@ -24,10 +24,11 @@
     <main>
         <h1>DROP A TOP PIC</h1>
 
+    <form class="formToppic">
         <input class="inputfield" type="text" name="topic" value="What's your topic about?"><br>
-        <input class="button" type="button" value="+">
-        <input class="button" type="submit" value="Drop it like it's hot">
-    
+        <input class="button" id="buttonplus" type="button" value="+">
+        <input class="button" id="buttondrop" type="submit" value="Drop it like it's hot">
+    </form>
     </main>
 
 </body>
