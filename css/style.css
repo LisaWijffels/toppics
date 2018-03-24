@@ -33,6 +33,7 @@ body
    padding-left: 30px;
    padding-right: 30px;
    margin-bottom: 10px;
+   border-style: none;
 }
 
 .button
@@ -44,6 +45,7 @@ body
     margin-top: 20px;
     color: #4584C2;
     background-color: white;
+    border-style: none;
 }
 
 #registerlink
