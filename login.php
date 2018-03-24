@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Top Pics</title>
 </head>
-<body background="img/background.png">
+<body background="img/background2.png">
     <img src="img/logo2.png" alt="logo" id="logo">
 
     <form action="/action_page.php" method="post" class="formlogin">

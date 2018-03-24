@@ -57,3 +57,83 @@ body
     font-size: 12px;
     font-style: italic;
 }
+
+/*index.php*/
+
+nav
+{
+    background-color: #4584C2;
+    padding: 5px;
+}
+
+#navLogo
+{
+    max-width: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navItems
+{
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+}
+
+#searchNav
+{
+    display: flex;
+    justify-content: center;
+    opacity: 0.5;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#searchNav input
+{
+    border-radius: 15px;
+    border-style: none;
+    color: black;
+    text-align: center;
+}
+
+@media (min-width: 30em)
+{
+    nav 
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #navLogo 
+    {
+        width: 60%;
+        max-width: 70%;
+        margin-left: 10px;
+        margin-right: 0px;
+    }
+
+    .navItems
+    {
+       font-size: 11px;
+    }
+}
+
+@media (min-width: 40em)
+{
+    .navItems
+    {
+       font-size: 18px;
+    }
+
+    #searchNav
+    {
+        margin-right: 40px;
+    }
+}
