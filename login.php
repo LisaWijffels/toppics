@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Top Pics</title>
 </head>
-<body>
-    <img src="img/logo-8.png" alt="logo" id="logo">
+<body background="background.png">
+    <img src="img/logo2.png" alt="logo" id="logo">
 
     <form action="/action_page.php" method="post" class="formlogin">
         <label class="label" for="username">Username</label><br>
