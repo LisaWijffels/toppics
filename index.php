@@ -26,10 +26,41 @@
 
     <form class="formToppic">
         <input class="inputfield" type="text" name="topic" value="What's your topic about?"><br>
-        <input class="button" id="buttonplus" type="button" value="+">
-        <input class="button" id="buttondrop" type="submit" value="Drop it like it's hot">
+        <input class="button" id="buttonplus" type="file" value="+">
+        <input class="button postForm__Button" id="buttondrop" type="submit" value="Drop it like it's hot">
     </form>
     </main>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <script>
+        $(".postForm__button").on("click", function(e) {
+            var comment = $(".inputfield").val();
+            var postId = <?php echo $_GET['id']; ?>;
+
+            //TO DATABASS?
+            $.ajax({
+                //post want we willen het plaatsen onder de post
+                method: "POST",
+                //Data brengen naar addComment
+                url: "ajax/addPost.php",
+                data: { comment: comment, postId: postId }
+            })
+            .done(function( res ) {
+                //alert( "Data Saved: " + res );
+                if(res.status == "success") {
+                    //append new comment
+                    var newComment = `<div><strong class="post__commentUser">Some Wan</strong>
+                    <p class="post__commentText">${res.comment}</p></div>`;
+                    $(".post__comment").append(newComment);
+
+                }
+            });
+            //
+            console.log("clicked");
+            //als je klinkt mag je pagina niet refreshen
+            e.preventDefault();
+        });
+    </script>
 </body>
 </html>
