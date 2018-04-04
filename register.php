@@ -1,5 +1,5 @@
 <?php
-
+include_once("classes/Db.class.php");
 include_once("classes/User.class.php");
 include_once("helpers/Security.class.php");
     
@@ -11,11 +11,14 @@ if ( !empty($_POST) ) {
         $security->passwordConfirmation = $_POST['password_confirmation'];
 
         if($security->passwordsAreSecure() ){
-            $user = new User();
+            $db = Db::getInstance();
+            $user = new User($db);
             $user->setEmail($_POST['email'] );
             $user->setPassword($_POST['password'] );
+            $user->setUsername($_POST['username'] );
             if ($user->register() ){
                 $user->login();
+                
             }
         } else {
             echo "nope";
@@ -40,7 +43,15 @@ if ( !empty($_POST) ) {
 <body background="img/background2.png">
     <img src="img/logo2.png" alt="logo" id="logo">
 
-    <form action="/action_page.php" method="post" class="formlogin">
+    <?php if (isset($error)): ?>
+		<div class="form__error hidden">
+			<p>
+				Some error here, oops
+			</p>
+		</div>
+	<?php endif; ?>
+
+    <form action="" method="post" class="formlogin">
 
         <label class="label" for="username">Username</label><br>
         <input class="inputfield" type="text" name="username"><br>
@@ -49,12 +60,12 @@ if ( !empty($_POST) ) {
         <input class="inputfield" type="text" name="email"><br>
 
         <label class="label" for="password">Password</label><br>
-        <input class="inputfield" type="text" name="password"><br>
+        <input class="inputfield" type="password" name="password"><br>
 
-        <label class="label" for="repeatPassword">Repeat Password</label><br>
-        <input class="inputfield" type="text" name="repeatPassword"><br>
+        <label class="label" for="password_confirmation">Confirm Password</label><br>
+        <input class="inputfield" type="password" name="password_confirmation"><br>
 
-        <input class="button" type="submit" value="Login">
+        <input class="button" type="submit" value="Register">
     </form>
 
 </body>

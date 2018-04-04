@@ -2,6 +2,31 @@
     class User {
         private $email;
         private $password;
+        private $username;
+        private $db;
+
+        public function __construct($db){
+            $this->db = $db;
+        }
+
+         
+        public function getUsername()
+        {
+                return $this->username;
+        }
+
+    
+        public function setUsername($username)
+        {
+            if( empty($username) ){
+                throw new Exception("Username cannot be empty");
+            }
+            
+            $this->username = $username;
+            return $this;
+    
+            
+        }
         
         public function getPassword(){
     
@@ -27,17 +52,15 @@
         }
         
         public function register(){
-            //connectie
-            $conn = new PDO('mysql:host=localhost:3307; dbname=netflix', 'root', '');
             
-            //query
-            $stm = $conn->prepare("INSERT INTO users (email, password) values (:email, :password)");
+            $stm = $this->db->prepare("INSERT INTO users (username, email, password) values (:username, :email, :password)");
             
             $options = [
                 'cost' => 12,
             ];
         
             $hash = password_hash($this->password, PASSWORD_DEFAULT, $options);
+            $stm->bindParam(":username", $this->username);
             $stm->bindParam(":email", $this->email);
             $stm->bindParam(":password", $hash);
             
@@ -50,10 +73,12 @@
         
         public function login(){
             session_start();
-            $_SESSION['username'] = $this->email;
+            $_SESSION['username'] = $this->username;
             header("Location: index.php");
         }
 
+
+        
     }
 
 

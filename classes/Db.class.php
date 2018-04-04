@@ -10,16 +10,16 @@
         */
         public static function getInstance() {
             
-            include_once("../settings/db.php");
+            include_once("settings/db.php");
 
             if( self::$conn == null ){
                 self::$conn = new PDO("mysql:host=".$db['host'].";dbname=".$db['dbname'], $db['username'], $db['password']);
-                // echo "💩";
+                echo "nope";
                 return self::$conn;
                 
             }
             else {
-                // echo "🚀";
+                echo "yep";
                 return self::$conn;
             }
         }
