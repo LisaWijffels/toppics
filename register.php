@@ -1,4 +1,34 @@
-<!DOCTYPE html>
+<?php
+
+include_once("classes/User.class.php");
+include_once("helpers/Security.class.php");
+    
+if ( !empty($_POST) ) {
+    
+    try{
+        $security = new Security();
+        $security->password = $_POST['password'];
+        $security->passwordConfirmation = $_POST['password_confirmation'];
+
+        if($security->passwordsAreSecure() ){
+            $user = new User();
+            $user->setEmail($_POST['email'] );
+            $user->setPassword($_POST['password'] );
+            if ($user->register() ){
+                $user->login();
+            }
+        } else {
+            echo "nope";
+             
+        }
+        
+    } catch(Exception $e){
+        
+    }
+    
+}
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
