@@ -1,4 +1,4 @@
-<?php
+ <?php
     /*
         this is a function that checks if a user can login
         and return TRUE or FALSE

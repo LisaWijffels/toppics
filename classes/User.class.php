@@ -77,6 +77,25 @@
             header("Location: index.php");
         }
 
+        public function canIlogin(){
+            $stm = $this->db->prepare("SELECT * FROM users WHERE username = :username");
+            $stm->bindParam(":username", $this->username);
+            $result = $stm->execute();
+            if($result){
+                $user = $stm->fetch(PDO::FETCH_ASSOC);
+                if(password_verify($this->password, $user['password']) ){
+                    return true;
+                    echo "Login succes";
+                } else {
+                    return false;
+                    echo "login failed";
+                }
+            }else{
+                return true;
+                echo "No rowcount";
+            }
+        }
+
 
         
     }

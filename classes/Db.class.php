@@ -14,12 +14,12 @@
 
             if( self::$conn == null ){
                 self::$conn = new PDO("mysql:host=".$db['host'].";dbname=".$db['dbname'], $db['username'], $db['password']);
-                echo "nope";
+                echo "nope no instance <br>";
                 return self::$conn;
                 
             }
             else {
-                echo "yep";
+                echo "yep instance <br>";
                 return self::$conn;
             }
         }

@@ -21,7 +21,7 @@ if ( !empty($_POST) ) {
                 
             }
         } else {
-            echo "nope";
+            echo "nope can't register";
              
         }
         

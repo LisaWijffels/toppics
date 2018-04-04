@@ -6,22 +6,19 @@ include_once("helpers/Security.class.php");
 if ( !empty($_POST) ) {
     
     try{
-        $security = new Security();
-        $security->password = $_POST['password'];
-        $security->username = $_POST['username'];
+        $db = Db::getInstance();
+        $user = new User($db);
 
-        if($security->passwordsAreSecure() ){
-            $db = Db::getInstance();
-            $user = new User($db);
-            $user->setEmail($_POST['email'] );
-            $user->setPassword($_POST['password'] );
-            $user->setUsername($_POST['username'] );
-            if ($user->register() ){
-                $user->login();
-                
-            }
+        $user->setPassword($_POST['password'] );
+        $user->setUsername($_POST['username'] );
+        if($user->canIlogin() ){
+            echo "yep can login ";
+            
+            $user->login();
+            
         } else {
-            echo "nope";
+            echo "nope can't login ";
+            
              
         }
         

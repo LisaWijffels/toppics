@@ -3,6 +3,12 @@
     class Security {
         public $password;
         public $passwordConfirmation;
+        public $username;
+        
+
+        
+
+        
 
         public function passwordsAreSecure(){
             if($this->passwordsAreEqual() ) {
