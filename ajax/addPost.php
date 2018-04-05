@@ -4,12 +4,14 @@ include_once("../classes/Post.class.php");
 
     if(!empty($_POST)){
         //wat je als data meegeeft vanuit die $.ajax 
-        $post = $_POST['post'];
+        $comment = $_POST['comment'];
+        $postId = $_POST['postId'];
 
         $db = Db::getInstance();
         //we gaan een klasse gebruiken zodat we dat nooit meer  2x moeten schrijven.
         $c = new Post($db);
-        $c->setPost($post);
+        $c->setPost($comment);
+        $c->setPostId($postId);
         $c->Save();
 
         //echo "oke";
@@ -17,7 +19,7 @@ include_once("../classes/Post.class.php");
 
         $response = [
             "status"    =>  "success",
-            "post"   =>  $post
+            "comment"   =>  $comment
 
         ];
         

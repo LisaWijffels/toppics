@@ -51,8 +51,8 @@ if(isset ($_SESSION['username'])){
     
     <script>
         $(".postForm__button").on("click", function(e) {
-            var post = $(".inputfield").val();
-           
+            var post_desc = $(".inputfield").val();
+            /*var post_id = <?php echo $_GET['post_id']; ?>;*/
 
             //TO DATABASS?
             $.ajax({
@@ -60,14 +60,14 @@ if(isset ($_SESSION['username'])){
                 method: "POST",
                 //Data brengen naar addPost
                 url: "ajax/addPost.php",
-                data: { post: post}
+                data: { post_desc: post_desc/*, post_id: post_id*/}
             })
             .done(function( res ) {
                 //alert( "Data Saved: " + res );
                 if(res.status == "success") {
                     //append new post
                     var newPost = `<div><strong class="feed__postUser">Dwayne johnson</strong>
-            <p class="feed__postText">${res.post}</p></div>`;
+            <p class="feed__postText">${res.post_desc}</p></div>`;
                     $(".feed__postText").append(newPost);
 
                 }
