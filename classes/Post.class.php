@@ -92,15 +92,11 @@ include_once('Db.class.php');
         }
 
         public function Save() {
-            $statement = $this->db->prepare("insert into posts (post_id, post_desc, post_image, post_likes, post_user_id, post_date) values (:post_id, :post_desc, :post_image, :post_likes, :post_user_id, :post_date)");
-            $statement->bindValue(":post_id", $this->getPost_id());
-            $statement->bindValue(":post_desc", $this->getPost_desc());
-            $statement->bindValue(":post_image", $this->getPost_image());
-            $statement->bindValue(":post_likes", $this->getPost_likes());
-            $statement->bindValue(":post_user_id", $this->getPost_user_id());
-            $statement->bindValue(":post_date", $this->getPost_date());
+            $stm = $this->db->prepare("INSERT INTO posts (post_desc) VALUES (:post_desc)");
+            $stm->bindValue(":post_desc", $this->post_desc);
+            $result = $stm->execute();
             //dat gaat die query in db uitvoeren en true terug sturen als gelukt en false als niet gelukt.
-            return $statement->execute();
+            return $result;
 
         }
 

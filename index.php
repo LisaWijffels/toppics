@@ -37,8 +37,8 @@ $posts = Post::showPosts();
     <main>
         <h1>DROP A TOP PIC</h1>
 
-    <form class="formToppic">
-        <input class="inputfield post_desc" type="text" name="topic" placeholder="What's your topic about?"><br>
+    <form action="" method="post" class="formToppic">
+        <input class="inputfield post_desc" type="text" name="post_desc" placeholder="What's your topic about?"><br>
         <!--<input class="button" id="buttonplus" type="file" value="+">!-->
         <input class="button postForm__Button" id="buttondrop" type="submit" value="Drop it like it's hot">
     </form>
@@ -64,31 +64,31 @@ $posts = Post::showPosts();
     <script>
         $(".postForm__button").on("click", function(e) {
             var post_desc = $(".post_desc").val();
-            // LISA: de waarde werd niet goed uit het text veld gehaald -> FIXED
+            
             
             /*var post_id = <?php echo $_GET['post_id']; ?>;*/
 
             //TO DATABASS?
             $.ajax({
                 //post want we willen het plaatsen onder de post
-                method: "POST",
+                type: "POST",
                 //Data brengen naar addPost
                 url: "ajax/addPost.php",
-                data: { post_desc: post_desc/*, post_id: post_id*/}
-            })
-            .done(function( res ) {
-                //alert( "Data Saved: " + res );
-                if(res.status == "success") {
+                data: { post_desc: post_desc}
+            }).done(function( res ) {
+                console.log( "Data Saved: " + res );
+                if(res.test == "test") {
                     //append new post
-                    var newPost = `<div><strong class="feed__postUser">Dwayne johnson</strong>
-            <p class="feed__postText">${res.post_desc}</p></div>`;
-                    $(".feed__postText").append(newPost);
-
+                    var newPost = `<div><strong class="feed__postUser">Dwayne johnson</strong><p class="feed__postText">${res.post_desc}</p></div>`;
+                    $(".feed__post").append(newPost);
+                    
+                } else {
+                    console.log("??");
                 }
             });
             // code testing
-            console.log("clicked");
-            console.log("This is post_desc "+post_desc);
+            //console.log("clicked");
+            //console.log("This is post_desc "+post_desc);
             //als je klinkt mag je pagina niet refreshen
             e.preventDefault();
         });
