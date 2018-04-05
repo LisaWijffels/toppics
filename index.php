@@ -35,33 +35,40 @@ if(isset ($_SESSION['username'])){
 
     <form class="formToppic">
         <input class="inputfield" type="text" name="topic" value="What's your topic about?"><br>
-        <input class="button" id="buttonplus" type="file" value="+">
+        <!--<input class="button" id="buttonplus" type="file" value="+">!-->
         <input class="button postForm__Button" id="buttondrop" type="submit" value="Drop it like it's hot">
     </form>
+
+    <div class=feed>
+        <div class="feed__post">
+            <strong class="feed__postUser">Dwayne johnson</strong>
+            <p class="feed__postText">ik ben sterk</p>
+        </div>
+    </div>
     </main>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
     <script>
         $(".postForm__button").on("click", function(e) {
-            var comment = $(".inputfield").val();
-            var postId = <?php echo $_GET['id']; ?>;
+            var post = $(".inputfield").val();
+           
 
             //TO DATABASS?
             $.ajax({
                 //post want we willen het plaatsen onder de post
                 method: "POST",
-                //Data brengen naar addComment
+                //Data brengen naar addPost
                 url: "ajax/addPost.php",
-                data: { comment: comment, postId: postId }
+                data: { post: post}
             })
             .done(function( res ) {
                 //alert( "Data Saved: " + res );
                 if(res.status == "success") {
-                    //append new comment
-                    var newComment = `<div><strong class="post__commentUser">Some Wan</strong>
-                    <p class="post__commentText">${res.comment}</p></div>`;
-                    $(".post__comment").append(newComment);
+                    //append new post
+                    var newPost = `<div><strong class="feed__postUser">Dwayne johnson</strong>
+            <p class="feed__postText">${res.post}</p></div>`;
+                    $(".feed__postText").append(newPost);
 
                 }
             });

@@ -1,6 +1,6 @@
 <?php
-    $db['host'] = 'localhost:3307';
+    $db['host'] = 'localhost';
     $db['username'] = 'root';
-    $db['password'] = '';
+    $db['password'] = 'root';
     $db['dbname'] = 'toppics';
     

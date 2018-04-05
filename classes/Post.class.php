@@ -134,13 +134,7 @@
         }
 
         public function Save() {
-           /* private $post_id;
-        private $post_desc;
-        private $post_image;
-        private $post_likes;
-        private $post_user_id;
-        private $post_date;*/
-            $statement = $this->db->prepare("insert into posts (post_id, post_desc, post_image, post_likes, post_user_id, post_date) values (post_id, post_desc, post_image, post_likes, post_user_id, post_date)");
+            $statement = $this->db->prepare("insert into posts (post_id, post_desc, post_image, post_likes, post_user_id, post_date) values (:post_id, :post_desc, :post_image, :post_likes, :post_user_id, :post_date)");
             $statement->bindValue(":post_id", $this->getPost_id());
             $statement->bindValue(":post_desc", $this->getPost_desc());
             $statement->bindValue(":post_image", $this->getPost_image());
