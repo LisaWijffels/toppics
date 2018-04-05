@@ -38,7 +38,7 @@ $posts = Post::showPosts();
         <h1>DROP A TOP PIC</h1>
 
     <form class="formToppic">
-        <input class="inputfield" type="text" name="topic" value="What's your topic about?"><br>
+        <input class="inputfield post_desc" type="text" name="topic" placeholder="What's your topic about?"><br>
         <!--<input class="button" id="buttonplus" type="file" value="+">!-->
         <input class="button postForm__Button" id="buttondrop" type="submit" value="Drop it like it's hot">
     </form>
@@ -63,7 +63,9 @@ $posts = Post::showPosts();
     
     <script>
         $(".postForm__button").on("click", function(e) {
-            var post_desc = $(".inputfield").val();
+            var post_desc = $(".post_desc").val();
+            // LISA: de waarde werd niet goed uit het text veld gehaald -> FIXED
+            
             /*var post_id = <?php echo $_GET['post_id']; ?>;*/
 
             //TO DATABASS?
@@ -84,8 +86,9 @@ $posts = Post::showPosts();
 
                 }
             });
-            //
+            // code testing
             console.log("clicked");
+            console.log("This is post_desc "+post_desc);
             //als je klinkt mag je pagina niet refreshen
             e.preventDefault();
         });
