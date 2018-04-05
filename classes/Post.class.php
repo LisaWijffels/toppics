@@ -1,5 +1,7 @@
 <?php
 
+include_once('Db.class.php');
+
     class Post {
         private $post_id;
         private $post_desc;
@@ -102,9 +104,13 @@
 
         }
 
-        public function ShowPics()
+        public static function ShowPosts()
         {
-             $statement = $this->db->prepare("select * from posts ORDER BY post_date desc limit 2");
+             $conn = Db::getInstance();
+             $statement = $conn->prepare("select * from posts ORDER BY post_date desc limit 2");
+             $statement->execute();
+
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 

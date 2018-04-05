@@ -1,12 +1,15 @@
 <?php
-/*session_start();
+session_start();
 
 if(isset ($_SESSION['username'])){
     echo "logged user is ".$_SESSION['username'];
 } else {
     header('Location: login.php');
 }
-*/
+
+include_once("classes/Post.class.php");
+
+$posts = Post::showPosts();
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -42,8 +45,16 @@ if(isset ($_SESSION['username'])){
 
     <div class=feed>
         <div class="feed__post">
+
+        <?php foreach ($posts as $p): ?>
+
             <strong class="feed__postUser">Dwayne johnson</strong>
-            <p class="feed__postText">ik ben sterk</p>
+            <img src="<?php echo $p['post_image']; ?>">
+            <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
+            <p class="feed__postLikes"><?php echo $p['post_likes']; ?></p>
+            <p class="feed__postDate"><?php echo $p['post_date']; ?></p>
+
+        <?php endforeach; ?>
         </div>
     </div>
     </main>
