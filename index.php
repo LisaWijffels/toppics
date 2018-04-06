@@ -1,11 +1,12 @@
 <?php
-session_start();
+/*session_start();
 
 if(isset ($_SESSION['username'])){
     echo "logged user is ".$_SESSION['username'];
 } else {
     header('Location: login.php');
 }
+*/
 
 include_once("classes/Post.class.php");
 
@@ -37,26 +38,23 @@ $posts = Post::showPosts();
     <main>
         <h1>DROP A TOP PIC</h1>
 
-    <form action="" method="post" class="formToppic">
-        <input class="inputfield post_desc" type="text" name="post_desc" placeholder="What's your topic about?"><br>
-        <!--<input class="button" id="buttonplus" type="file" value="+">!-->
-        <input class="button postForm__Button" id="buttondrop" type="submit" value="Drop it like it's hot">
-    </form>
+        <form action="" method="post" class="formToppic">
+            <input class="inputfield post_desc" type="text" name="post_desc" placeholder="What's your topic about?"><br>
+            <!--<input class="button" id="buttonplus" type="file" value="+">!-->
+            <input class="button postForm__Button" id="buttondrop" type="submit" value="Drop it like it's hot">
+        </form>
 
-    <div class=feed>
-        <div class="feed__post">
+        <div class=feed>
+            <div class="feed__post">
 
-        <?php foreach ($posts as $p): ?>
+                <p class="feed__postUser">Grant Gustin</p>
+                <img class="feed__postImg" src="img/grantgustin.jpg">
+                <p class="feed__postDesc">Zalige acteur en super knappe gast</p>
+                <p class="feed__postLikes">42 likes</p>
+                <p class="feed__postDate">2018-04-08</p>
 
-            <strong class="feed__postUser">Dwayne johnson</strong>
-            <img src="<?php echo $p['post_image']; ?>">
-            <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
-            <p class="feed__postLikes"><?php echo $p['post_likes']; ?></p>
-            <p class="feed__postDate"><?php echo $p['post_date']; ?></p>
-
-        <?php endforeach; ?>
+            </div>
         </div>
-    </div>
     </main>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
