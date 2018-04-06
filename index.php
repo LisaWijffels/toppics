@@ -49,13 +49,37 @@ $posts = Post::showPosts();
 
                 <p class="feed__postUser">Grant Gustin</p>
                 <img class="feed__postImg" src="img/grantgustin.jpg">
-                <p class="feed__postDesc">Grant Gustin is een Amerikaanse acteur. Hij is vooral bekend van de serie Glee en de rol van Barry Allen in The Flash </p>
+                <p class="feed__postDesc">Grant Gustin is een Amerikaanse acteur. Hij is vooral bekend van de serie Glee en de rol van Barry Allen in The Flash. </p>
                 <div class="feed__flex">   
                     <p class="feed__postLikes">💗 42 likes</p>
                     <p class="feed__postDate">2018/04/08</p>
                 </div>
 
             </div>
+
+            <div class="feed__post">
+
+                <p class="feed__postUser">Colton Haynes</p>
+                <img class="feed__postImg" src="img/coltonhaynes.jpg">
+                <p class="feed__postDesc">Colton Haynes is een Amerikaanse acteur en model. Hij kreeg bekendheid door zijn rollen in series zoals Teen Wolf en Arrow. </p>
+                <div class="feed__flex">   
+                    <p class="feed__postLikes">💗 24 likes</p>
+                    <p class="feed__postDate">2018/04/04</p>
+                </div>
+
+            </div>
+
+            <div class="feed__post">
+
+                <p class="feed__postUser">Handsome man</p>
+                <img class="feed__postImg" src="img/handsome.jpg">
+                <p class="feed__postDesc">knap! </p>
+                <div class="feed__flex">   
+                    <p class="feed__postLikes">💗 12 likes</p>
+                    <p class="feed__postDate">2018/04/02</p>
+                </div>
+
+                </div>
         </div>
     </main>
 

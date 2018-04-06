@@ -143,9 +143,8 @@ h1
 
 .feed
 {
-    
     margin-top: 10px;
-    display: grid;
+    
 }
 
 .feed__post
@@ -153,6 +152,7 @@ h1
     background-color: #ADD9E6;
     margin-left: 15px;
     margin-right: 15px;
+    margin-top: 20px;
     max-width: 300px;
     
 }
@@ -178,6 +178,8 @@ h1
 {
     font-size: 0.8em;
     margin: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
     margin-bottom: 5px;
     color:grey;
 }
@@ -187,6 +189,8 @@ h1
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-left: 5px;
+    margin-right: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
     color: gray;
@@ -228,6 +232,13 @@ h1
        font-size: 11px;
     }
 
+    .feed
+    {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 50% 50%;
+    }
+
 }
 
 @media (min-width: 40em)
@@ -242,4 +253,23 @@ h1
         margin-right: 40px;
     }
 
+    .feed
+    {
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
+        grid-template-rows: 33% 33% 33%;
+        
+    }
+
+    .feed__post
+    {
+        max-width: 400px;
+    }
+
+    .feed__postImg
+    {
+        width: 400px;
+        height: 400px;
+        object-fit: cover;
+    }
 }
