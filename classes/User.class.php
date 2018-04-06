@@ -4,6 +4,8 @@
         private $password;
         private $username;
         private $db;
+        private $user_picture;
+        private $usertext;
 
         public function __construct($db){
             $this->db = $db;
@@ -49,6 +51,33 @@
             return $this;
     
             //todo: valid email? -> filter_var();
+        }
+
+        public function getUser_picture()
+        {
+                return $this->user_picture;
+        }
+
+         
+        public function setUser_picture($user_picture)
+        {
+                $this->user_picture = $user_picture;
+
+                return $this;
+        }
+
+        
+        public function getUsertext()
+        {
+                return $this->usertext;
+        }
+
+        
+        public function setUsertext($usertext)
+        {
+                $this->usertext = $usertext;
+
+                return $this;
         }
         
         public function register(){
@@ -97,37 +126,34 @@
         }
         
 
-        public function editText($user_text){
+        public function editText(){
             $stm = $this->db->prepare("UPDATE users SET user_text = :user_text WHERE username = :username");
             $stm->bindParam(":username", $this->username);
-            $stm->bindParam(":user_text", $user_text);
+            $stm->bindParam(":user_text", $this->usertext);
             $result = $stm->execute();
 
-            /*if($result){
-                $user = $stm->fetch(PDO::FETCH_ASSOC);
-                if(password_verify($this->password, $user['password']) ){
-                    return true;
-                    echo "Login succes";
-                } else {
-                    return false;
-                    echo "login failed";
-                }
-            }else{
-                return true;
-                echo "No rowcount";
-            }*/
+            
         }
 
-        public static function getValues($loggeduser){
-            $conn = Db::getInstance();
-            $stm = $conn->prepare("SELECT * from users WHERE username = :username");
-            $stm->bindParam(":username", $loggeduser);
+        public function editEmail(){
+            $stm = $this->db->prepare("UPDATE users SET email = :email WHERE username = :username");
+            $stm->bindParam(":username", $this->username);
+            $stm->bindParam(":email", $this->email);
+            $result = $stm->execute();
+
+            
+        }
+
+        public function getValues(){
+            
+            $stm = $this->db->prepare("SELECT * from users WHERE username = :username");
+            $stm->bindParam(":username", $this->username);
             $stm->execute();
 
             return $stm->fetch(PDO::FETCH_ASSOC);
         }
 
-        public function editPicture($picture){
+        public function editPicture(){
             function random_string($length) {
                 $key = '';
                 $keys = array_merge(range(0, 9), range('a', 'z'));
@@ -139,13 +165,13 @@
                 return $key;
             }
             
-            $conn = Db::getInstance();
+            
 
-            $save_path= dirname(__FILE__) . '\..\images\ ';
-            $myname = random_string(10).$picture['name'];
-            move_uploaded_file($picture['tmp_name'], $save_path.$myname);
+            $save_path= dirname(__FILE__) . '\..\user_images\ ';
+            $myname = random_string(10).$this->user_picture['name'];
+            move_uploaded_file($this->user_picture['tmp_name'], $save_path.$myname);
 
-            $stm = $conn->prepare("UPDATE users SET picture_url = :user_picture WHERE username = :username");
+            $stm = $this->db->prepare("UPDATE users SET user_picture = :user_picture WHERE username = :username");
             $stm->bindParam(":username", $this->username);
             $stm->bindParam(":user_picture", $myname);
             $stm->execute();
@@ -154,10 +180,6 @@
 
             
         }
-
-        
-        
-        
 
 
         

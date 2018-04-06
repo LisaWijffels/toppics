@@ -3,36 +3,44 @@ include_once("classes/Db.class.php");
 include_once("classes/User.class.php");
 
 session_start();
-$userInfo = User::getValues($_SESSION['username']);
 
+// Enkel deze pagina tonen als er een user ingelogged is
 if(isset ($_SESSION['username']) ){
     echo "logged user is ".$_SESSION['username'];
 } else {
     header('Location: login.php');
 }
 
-if(isset($_POST["btnprofileText"]) ){
-    $db = Db::getInstance();
-    $user = new User($db);
 
-    $user->setUsername($_SESSION['username']);
+// Alle gegevens van ingelogde user binnenhalen
+$db = Db::getInstance();
+$user = new User($db);
+$user->setUsername($_SESSION['username']);
+
+$userInfo = $user->getValues();
+
+// Wijzig profile text
+if(isset($_POST["btnprofileText"]) ){
     $user_text = $_POST['profileText'];
-    $user->editText($user_text);
+    $user->setUsertext($user_text);
+    $user->editText();
 }
 
+// Wijzig profielfoto
 if(isset($_POST["btnprofilePicture"]) ){
     if($_FILES['profilePicture']['name']){
         
-        $db = Db::getInstance();
-        $user = new User($db);
-        $user->setUsername($_SESSION['username']);
-
-        
-        $picture_file = $_FILES['profilePicture'];
-        
-        
-        $user->editPicture($picture_file);
+        $user_picture = $_FILES['profilePicture'];
+        $user->setUser_picture($user_picture);
+        $user->editPicture();
     }
+}
+
+// Wijzig email
+if(isset($_POST["btnEmail"]) ){
+    $email = $_POST['email'];
+    $user->setEmail($email);
+    $user->editEmail();
 }
 
 
@@ -69,40 +77,38 @@ if(isset($_POST["btnprofilePicture"]) ){
         <div class="profile">
             <div>
                 <h3>Profielfoto</h3>
-                <img src="images/ <?php echo $userInfo['picture_url'] ?>">
-                <div id="formEditPic">
+                <p><img src="user_images/ <?php echo $userInfo['user_picture'] ?>"></p>
+                <div id="formEditPic" class="hidden">
                     <form method="post" enctype="multipart/form-data">
                         <label class="label" for="profilePicture">Profielfoto</label><br>
                         <input class="inputfield" type="file" name="profilePicture"><br>
                         <input class="button" type="submit" name="btnprofilePicture" value="Wijzig profielfoto">
                     </form>
                 </div>
-                <a href="#" class="editProfileText">Wijzig profielfoto</a>
+                <a href="#" class="editPic visible">Wijzig profielfoto</a>
             </div>
             <div>
                 <h3>Profieltekst</h3>
-                <p><?php echo $userInfo['user_text'] ?></p>
+                <p id="valueEditText" class="visible"><?php echo $userInfo['user_text'] ?></p>
                 <div id="formEditText" class="hidden">
                     <form method="post">
-                        <label class="label" for="profileText">Profieltekst</label><br>
-                        <input class="inputfield" type="text" name="profileText"><br>
+                        <input class="inputfield" type="text" name="profileText" value="<?php echo $userInfo['user_text'] ?>"><br>
                         <input class="button" type="submit" name="btnprofileText" value="Wijzig profieltekst">
                     </form>
                 </div>
-                <a href="#" class="editProfileText">Wijzig profieltekst</a>
+                <a href="#" class="editProfileText visible">Wijzig profieltekst</a>
             </div>
             <div>
                 <h3>Email</h3>
-                <p><?php echo $userInfo['email'] ?></p>
+                <p id="valueEditEmail" class="visible"><?php echo $userInfo['email'] ?></p>
                 
                 <div id="formEditEmail" class="hidden">
                     <form method="post">
-                        <label class="label" for="email">Email</label><br>
-                        <input class="inputfield" type="text" name="email"><br>
-                        <input class="button" type="submit" value="Wijzig email">
+                        <input class="inputfield" type="text" name="email" value="<?php echo $userInfo['email'] ?>"><br>
+                        <input class="button" type="submit" name="btnEmail" value="Wijzig email">
                     </form>
                 </div>
-                <a href="#" class="editEmail">Wijzig email</a>
+                <a href="#" class="editEmail visible">Wijzig email</a>
             </div>
         </div>
         
@@ -114,13 +120,28 @@ if(isset($_POST["btnprofilePicture"]) ){
     $(".editProfileText").on("click", function(e){
             e.preventDefault();
             $("#formEditText").toggleClass('hidden visible');
+            $("#valueEditText").toggleClass('visible hidden');
+            $(".editProfileText").toggleClass('visible hidden');
             console.log("check");
     });
+
     $(".editEmail").on("click", function(e){
             e.preventDefault();
             $("#formEditEmail").toggleClass('hidden visible');
+            $("#valueEditEmail").toggleClass('visible hidden');
+            $(".editMail").toggleClass('visible hidden');
             console.log("check");
     });
+
+    $(".editPic").on("click", function(e){
+            e.preventDefault();
+            $("#formEditPic").toggleClass('hidden visible');
+            
+            $(".editPic").toggleClass('visible hidden');
+            console.log("check");
+    });
+
+    
 </script>
 </body>
 </html>

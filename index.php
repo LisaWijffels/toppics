@@ -26,7 +26,7 @@ $posts = Post::showPosts();
     <nav>
         <a href="index.php" id="aLogo"><img id="navLogo" src="img/logo2.png" alt="logo"></a>
         <a href="index.php" class="navItems">Home</a>
-        <a href="#" class="navItems">Profile</a>
+        <a href="profile.php" class="navItems">Profile</a>
         <a href="#" class="navItems">Discover</a>
         <a href="#" class="navItems">Friends</a>
 
@@ -45,20 +45,21 @@ $posts = Post::showPosts();
         </form>
 
         <div class=feed>
-            <div class="feed__post">
+            
 
                 <?php foreach ($posts as $p): ?>
-
-                <p class="feed__postUser">Dwayne johnson</p>
-                <img class="feed__postImg" src="<?php echo $p['post_image']; ?>">
-                <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
-                <div class="feed__flex">  
-                    <p class="feed__postLikes">💗<?php echo $p['post_likes']; ?> likes</p>
-                    <p class="feed__postDate"><?php echo $p['post_date']; ?></p>
+                    <div class="feed__post">
+                    <p class="feed__postUser">Dwayne johnson</p>
+                    <img class="feed__postImg" src="<?php echo $p['post_image']; ?>">
+                    <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
+                    <div class="feed__flex">  
+                        <p class="feed__postLikes">💗<?php echo $p['post_likes']; ?> likes</p>
+                        <p class="feed__postDate"><?php echo $p['post_date']; ?></p>
+                    </div>
                  </div>
                 <?php endforeach; ?>
 
-            </div>
+            
 
         </div>
     </main>
