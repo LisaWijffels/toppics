@@ -110,9 +110,29 @@ if(isset($_POST["btnEmail"]) ){
                 </div>
                 <a href="#" class="editEmail visible">Wijzig email</a>
             </div>
+
+            <div>
+                
+                
+                <div id="formEditPassword" class="hidden">
+                    <form method="post">
+                        <label for="passord">Huidig wachtwoord</label><br>
+                        <input class="inputfield" type="password" name="password"><br>
+
+                        <label for="passord">Nieuw wachtwoord</label><br>
+                        <input class="inputfield" type="password" name="password"><br>
+
+                        <label for="passord">Bevestig nieuw wachtwoord</label><br>
+                        <input class="inputfield" type="password" name="password"><br>
+                        <input class="button" type="submit" name="btnEmail" value="Wijzig email">
+                    </form>
+                </div>
+                <a href="#" class="editPassword visible">Wijzig wachtwoord</a>
+            </div>
+
         </div>
         
-        <a href="#" class="editPassword">Wijzig wachtwoord</a>
+        
 
     </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -138,6 +158,14 @@ if(isset($_POST["btnEmail"]) ){
             $("#formEditPic").toggleClass('hidden visible');
             
             $(".editPic").toggleClass('visible hidden');
+            console.log("check");
+    });
+
+    $(".editPassword").on("click", function(e){
+            e.preventDefault();
+            $("#formEditPassword").toggleClass('hidden visible');
+            
+            $(".editPassword").toggleClass('visible hidden');
             console.log("check");
     });
 
