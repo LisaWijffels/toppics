@@ -95,6 +95,69 @@
                 echo "No rowcount";
             }
         }
+        
+
+        public function editText($user_text){
+            $stm = $this->db->prepare("UPDATE users SET user_text = :user_text WHERE username = :username");
+            $stm->bindParam(":username", $this->username);
+            $stm->bindParam(":user_text", $user_text);
+            $result = $stm->execute();
+
+            /*if($result){
+                $user = $stm->fetch(PDO::FETCH_ASSOC);
+                if(password_verify($this->password, $user['password']) ){
+                    return true;
+                    echo "Login succes";
+                } else {
+                    return false;
+                    echo "login failed";
+                }
+            }else{
+                return true;
+                echo "No rowcount";
+            }*/
+        }
+
+        public static function getValues($loggeduser){
+            $conn = Db::getInstance();
+            $stm = $conn->prepare("SELECT * from users WHERE username = :username");
+            $stm->bindParam(":username", $loggeduser);
+            $stm->execute();
+
+            return $stm->fetch(PDO::FETCH_ASSOC);
+        }
+
+        public function editPicture($picture){
+            function random_string($length) {
+                $key = '';
+                $keys = array_merge(range(0, 9), range('a', 'z'));
+            
+                for ($i = 0; $i < $length; $i++) {
+                    $key .= $keys[array_rand($keys)];
+                }
+            
+                return $key;
+            }
+            
+            $conn = Db::getInstance();
+
+            $save_path= dirname(__FILE__) . '\..\images\ ';
+            $myname = random_string(10).$picture['name'];
+            move_uploaded_file($picture['tmp_name'], $save_path.$myname);
+
+            $stm = $conn->prepare("UPDATE users SET picture_url = :user_picture WHERE username = :username");
+            $stm->bindParam(":username", $this->username);
+            $stm->bindParam(":user_picture", $myname);
+            $stm->execute();
+
+        
+
+            
+        }
+
+        
+        
+        
 
 
         
