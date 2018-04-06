@@ -141,11 +141,69 @@ h1
     margin-bottom: 20px;
 }
 
+.feed
+{
+    
+    margin-top: 10px;
+    display: grid;
+}
+
+.feed__post
+{
+    background-color: #ADD9E6;
+    margin-left: 15px;
+    margin-right: 15px;
+    max-width: 300px;
+    
+}
+
 .feed__postUser
 {
     font-weight: bold;
+    margin: 0px;
+    padding: 2px;
+    
 }
 
+.feed__postImg
+{
+    max-width: 100%;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    background-color: white;
+}
+
+.feed__postDesc
+{
+    font-size: 0.8em;
+    margin: 0px;
+    margin-bottom: 5px;
+    color:grey;
+}
+
+.feed__flex
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: gray;
+}
+
+.feed__postLikes
+{
+    margin: 0px;
+    font-size: 0.8em;
+    
+}
+
+.feed__postDate
+{
+    margin: 0px;
+    font-size: 0.8em;
+}
 
 @media (min-width: 30em)
 {

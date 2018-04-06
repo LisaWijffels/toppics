@@ -49,9 +49,11 @@ $posts = Post::showPosts();
 
                 <p class="feed__postUser">Grant Gustin</p>
                 <img class="feed__postImg" src="img/grantgustin.jpg">
-                <p class="feed__postDesc">Zalige acteur en super knappe gast</p>
-                <p class="feed__postLikes">42 likes</p>
-                <p class="feed__postDate">2018-04-08</p>
+                <p class="feed__postDesc">Grant Gustin is een Amerikaanse acteur. Hij is vooral bekend van de serie Glee en de rol van Barry Allen in The Flash </p>
+                <div class="feed__flex">   
+                    <p class="feed__postLikes">💗 42 likes</p>
+                    <p class="feed__postDate">2018/04/08</p>
+                </div>
 
             </div>
         </div>
