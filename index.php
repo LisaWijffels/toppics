@@ -68,27 +68,28 @@ $posts = Post::showPosts();
             
             /*var post_id = <?php echo $_GET['post_id']; ?>;*/
 
-            //TO DATABASS?
+            //start Ajax
             $.ajax({
-                //post want we willen het plaatsen onder de post
+                //stuurt gevens naar ajax addPost file
                 type: "POST",
                 //Data brengen naar addPost
                 url: "ajax/addPost.php",
-                data: { post_desc: post_desc}
-            }).done(function( res ) {
+                data: { post_desc: post_desc},
+                
+            }).done(function( res ) { //als ajax antwoord (echo) terugstuurt
                 console.log( "Data Saved: " + res );
-                if(res.test == "test") {
+                if(res == post_desc) {
                     //append new post
-                    var newPost = `<div><strong class="feed__postUser">Dwayne johnson</strong><p class="feed__postText">${res.post_desc}</p></div>`;
+                    var newPost = `<div><strong class="feed__postUser">Dwayne johnson</strong><p class="feed__postText">${res}</p></div>`;
                     $(".feed__post").append(newPost);
                     
                 } else {
-                    console.log("??");
+                    console.log("Ajax not getting right value");
                 }
-            });
-            // code testing
-            //console.log("clicked");
-            //console.log("This is post_desc "+post_desc);
+            }).fail(function(res)  {
+               console.log("Sorry. Ajax failed "+ res);
+            }); 
+            
             //als je klinkt mag je pagina niet refreshen
             e.preventDefault();
         });
