@@ -4,12 +4,14 @@ include_once("classes/User.class.php");
 
 session_start();
 
+
 // Enkel deze pagina tonen als er een user ingelogged is
 if(isset ($_SESSION['username']) ){
     echo "logged user is ".$_SESSION['username'];
 } else {
     header('Location: login.php');
 }
+
 
 
 // Alle gegevens van ingelogde user binnenhalen
@@ -43,10 +45,6 @@ if(isset($_POST["btnEmail"]) ){
     $user->editEmail();
 }
 
-
-
-
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,63 +69,61 @@ if(isset($_POST["btnEmail"]) ){
     </nav>
 
 
-
-
     <main>
+    <h2>Profiel bewerken</h2>
         <div class="profile">
             <div>
                 <h3>Profielfoto</h3>
-                <p><img src="user_images/ <?php echo $userInfo['user_picture'] ?>"></p>
+                <img class="profile__img" src="user_images/ <?php echo $userInfo['user_picture'] ?>"><br>
                 <div id="formEditPic" class="hidden">
                     <form method="post" enctype="multipart/form-data">
-                        <label class="label" for="profilePicture">Profielfoto</label><br>
-                        <input class="inputfield" type="file" name="profilePicture"><br>
-                        <input class="button" type="submit" name="btnprofilePicture" value="Wijzig profielfoto">
+                        <input class="profile__form inputfield" type="file" name="profilePicture"><br>
+                        <input class="profile__form button" type="submit" name="btnprofilePicture" value="Bevestig">
                     </form>
                 </div>
-                <a href="#" class="editPic visible">Wijzig profielfoto</a>
+                <a href="#" class="btnedit editPic visible">Wijzig profielfoto</a>
             </div>
             <div>
-                <h3>Profieltekst</h3>
-                <p id="valueEditText" class="visible"><?php echo $userInfo['user_text'] ?></p>
+                <h3>Biografie</h3>
+                <p id="valueEditText" class="visible"><?php echo $userInfo['user_text']; ?></p>
                 <div id="formEditText" class="hidden">
                     <form method="post">
-                        <input class="inputfield" type="text" name="profileText" value="<?php echo $userInfo['user_text'] ?>"><br>
-                        <input class="button" type="submit" name="btnprofileText" value="Wijzig profieltekst">
+                        <input class="profile__form inputfield" type="text" name="profileText" value="<?php echo $userInfo['user_text'] ?>"><br>
+                        <input class="profile__form button" type="submit" name="btnprofileText" value="Bevestig">
                     </form>
                 </div>
-                <a href="#" class="editProfileText visible">Wijzig profieltekst</a>
+                <a href="#" class="btnedit editProfileText visible">Wijzig biografie</a>
             </div>
             <div>
                 <h3>Email</h3>
-                <p id="valueEditEmail" class="visible"><?php echo $userInfo['email'] ?></p>
+                <p id="valueEditEmail" class="visible"><?php echo $userInfo['email']; ?></p>
                 
                 <div id="formEditEmail" class="hidden">
                     <form method="post">
-                        <input class="inputfield" type="text" name="email" value="<?php echo $userInfo['email'] ?>"><br>
-                        <input class="button" type="submit" name="btnEmail" value="Wijzig email">
+                        <input class="profile__form inputfield" type="text" name="email" value="<?php echo $userInfo['email'] ?>"><br>
+                        <input class="profile__form button" type="submit" name="btnEmail" value="Bevestig">
                     </form>
                 </div>
-                <a href="#" class="editEmail visible">Wijzig email</a>
+                <a href="#" class="btnedit editEmail visible">Wijzig email</a>
             </div>
 
             <div>
-                
+            <h3>Wachtwoord</h3>
                 
                 <div id="formEditPassword" class="hidden">
                     <form method="post">
-                        <label for="passord">Huidig wachtwoord</label><br>
-                        <input class="inputfield" type="password" name="password"><br>
+                        <label for="passord" class="formEdit__label">Huidig wachtwoord</label><br>
+                        <input class="profile__form inputfield" type="password" name="password"><br>
 
-                        <label for="passord">Nieuw wachtwoord</label><br>
-                        <input class="inputfield" type="password" name="password"><br>
+                        <label for="passord" class="formEdit__label">Nieuw wachtwoord</label><br>
+                        <input class="profile__form inputfield" type="password" name="password"><br>
 
-                        <label for="passord">Bevestig nieuw wachtwoord</label><br>
-                        <input class="inputfield" type="password" name="password"><br>
-                        <input class="button" type="submit" name="btnEmail" value="Wijzig email">
+                        <label for="passord" class="formEdit__label">Bevestig nieuw wachtwoord</label><br>
+                        <input class="profile__form inputfield" type="password" name="password" ><br>
+                        <input class="profile__form button" type="submit" name="btnEmail" value="Bevestig">
                     </form>
                 </div>
-                <a href="#" class="editPassword visible">Wijzig wachtwoord</a>
+                <a href="#" class="btnedit editPassword visible">Wijzig wachtwoord</a>
             </div>
 
         </div>
@@ -149,7 +145,7 @@ if(isset($_POST["btnEmail"]) ){
             e.preventDefault();
             $("#formEditEmail").toggleClass('hidden visible');
             $("#valueEditEmail").toggleClass('visible hidden');
-            $(".editMail").toggleClass('visible hidden');
+            $(".editEmail").toggleClass('visible hidden');
             console.log("check");
     });
 
