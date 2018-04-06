@@ -1,12 +1,12 @@
 <?php
-/*session_start();
+session_start();
 
 if(isset ($_SESSION['username'])){
     echo "logged user is ".$_SESSION['username'];
 } else {
     header('Location: login.php');
 }
-*/
+
 
 include_once("classes/Post.class.php");
 
@@ -47,39 +47,19 @@ $posts = Post::showPosts();
         <div class=feed>
             <div class="feed__post">
 
-                <p class="feed__postUser">Grant Gustin</p>
-                <img class="feed__postImg" src="img/grantgustin.jpg">
-                <p class="feed__postDesc">Grant Gustin is een Amerikaanse acteur. Hij is vooral bekend van de serie Glee en de rol van Barry Allen in The Flash. </p>
-                <div class="feed__flex">   
-                    <p class="feed__postLikes">💗 42 likes</p>
-                    <p class="feed__postDate">2018/04/08</p>
-                </div>
+                <?php foreach ($posts as $p): ?>
+
+                <p class="feed__postUser">Dwayne johnson</p>
+                <img class="feed__postImg" src="<?php echo $p['post_image']; ?>">
+                <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
+                <div class="feed__flex">  
+                    <p class="feed__postLikes">💗<?php echo $p['post_likes']; ?> likes</p>
+                    <p class="feed__postDate"><?php echo $p['post_date']; ?></p>
+                 </div>
+                <?php endforeach; ?>
 
             </div>
 
-            <div class="feed__post">
-
-                <p class="feed__postUser">Colton Haynes</p>
-                <img class="feed__postImg" src="img/coltonhaynes.jpg">
-                <p class="feed__postDesc">Colton Haynes is een Amerikaanse acteur en model. Hij kreeg bekendheid door zijn rollen in series zoals Teen Wolf en Arrow. </p>
-                <div class="feed__flex">   
-                    <p class="feed__postLikes">💗 24 likes</p>
-                    <p class="feed__postDate">2018/04/04</p>
-                </div>
-
-            </div>
-
-            <div class="feed__post">
-
-                <p class="feed__postUser">Handsome man</p>
-                <img class="feed__postImg" src="img/handsome.jpg">
-                <p class="feed__postDesc">knap! </p>
-                <div class="feed__flex">   
-                    <p class="feed__postLikes">💗 12 likes</p>
-                    <p class="feed__postDate">2018/04/02</p>
-                </div>
-
-                </div>
         </div>
     </main>
 

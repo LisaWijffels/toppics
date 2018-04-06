@@ -1,6 +1,6 @@
 <?php
 
-//include_once('Db.class.php');
+include_once('Db.class.php');
 
     class Post {
         private $post_id;
@@ -102,11 +102,11 @@
 
         public static function ShowPosts()
         {
-             //$conn = Db::getInstance();
-             //$statement = $conn->prepare("select * from posts ORDER BY post_date desc limit 2");
-             //$statement->execute();
+             $conn = Db::getInstance();
+             $statement = $conn->prepare("select * from posts ORDER BY post_date desc limit 20");
+             $statement->execute();
 
-            //return $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         }
         }
 
