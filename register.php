@@ -14,10 +14,11 @@ if ( !empty($_POST) ) {
             $db = Db::getInstance();
             $user = new User($db);
             $user->setEmail($_POST['email'] );
-            $user->setPassword($_POST['password'] );
+            $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $user->setUsername($_POST['username'] );
-            if ($user->register() ){
+            if ($user->register($hash) ){
                 $user->login();
+                
                 
             }
         } else {
