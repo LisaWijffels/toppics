@@ -79,16 +79,25 @@
 
                 return $this;
         }
+
+        public function canIregister(){
+            $stm = $this->db->prepare("SELECT * FROM users WHERE (username=:username or email=:email)");
+            $stm->bindParam(":username", $this->username);
+            $stm->bindParam(":email", $this->email);
+            $result = $stm->execute();
+            $user = $stm->fetch(PDO::FETCH_ASSOC);
+            
+            if($user['username'] == $this->username){
+                throw new Exception('Username already exists. Please choose a different username.');
+            } else if($this->email == $user['email']) {
+                throw new Exception('Email already exists. Please choose a different username.');
+            }
+        }
         
-        public function register(){
+        public function register($hash){
             
             $stm = $this->db->prepare("INSERT INTO users (username, email, password) values (:username, :email, :password)");
             
-            $options = [
-                'cost' => 12,
-            ];
-        
-            $hash = password_hash($this->password, PASSWORD_DEFAULT, $options);
             $stm->bindParam(":username", $this->username);
             $stm->bindParam(":email", $this->email);
             $stm->bindParam(":password", $hash);
@@ -106,22 +115,22 @@
             header("Location: index.php");
         }
 
-        public function canIlogin(){
+        public function canIlogin($pw){
             $stm = $this->db->prepare("SELECT * FROM users WHERE username = :username");
             $stm->bindParam(":username", $this->username);
             $result = $stm->execute();
-            if($result){
-                $user = $stm->fetch(PDO::FETCH_ASSOC);
-                if(password_verify($this->password, $user['password']) ){
+            $user = $stm->fetch(PDO::FETCH_ASSOC);
+            
+            if(!empty($user)){
+                if(password_verify($pw, $user['password']) ){
                     return true;
-                    echo "Login succes";
+                    
                 } else {
-                    return false;
-                    echo "login failed";
+                    throw new Exception("Password is invalid. Please try again.");
                 }
-            }else{
-                return true;
-                echo "No rowcount";
+
+            } else {
+                throw new Exception("Username is invalid. Please try again.");
             }
         }
         

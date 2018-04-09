@@ -3,27 +3,18 @@ include_once("classes/Db.class.php");
 include_once("classes/User.class.php");
 include_once("helpers/Security.class.php");
     
+
+
 if ( !empty($_POST) ) {
+    $db = Db::getInstance();
+    $user = new User($db);
+    $user->setUsername($_POST['username'] );
     
     try{
-        $db = Db::getInstance();
-        $user = new User($db);
-
-        $user->setPassword($_POST['password'] );
-        $user->setUsername($_POST['username'] );
-        if($user->canIlogin() ){
-            echo "yep can login ";
-            
-            $user->login();
-            
-        } else {
-            echo "nope can't login ";
-            
-             
-        }
-        
+        $user->canIlogin($_POST['password']);
+        $user->login();
     } catch(Exception $e){
-        
+        $error = $e->getMessage();
     }
     
 }
@@ -39,7 +30,9 @@ if ( !empty($_POST) ) {
 </head>
 <body background="img/background2.png">
     <img src="img/logo2.png" alt="logo" id="logo">
-
+    <?php if(isset($error) ): ?>
+        <?php echo $error ?>
+    <?php endif; ?>
     <form action="" method="post" class="formlogin">
         <label class="label" for="username">Username</label><br>
         <input class="inputfield" type="text" name="username"><br>
