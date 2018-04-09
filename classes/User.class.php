@@ -79,13 +79,24 @@
 
                 return $this;
         }
+
+        public function canIregister(){
+            $stm = $this->db->prepare("SELECT * FROM users WHERE (username=:username or email=:email)");
+            $stm->bindParam(":username", $this->username);
+            $stm->bindParam(":email", $this->email);
+            $result = $stm->execute();
+            $user = $stm->fetch(PDO::FETCH_ASSOC);
+            
+            if($user['username'] == $this->username){
+                throw new Exception('Username already exists. Please choose a different username.');
+            } else if($this->email == $user['email']) {
+                throw new Exception('Email already exists. Please choose a different username.');
+            }
+        }
         
         public function register($hash){
             
             $stm = $this->db->prepare("INSERT INTO users (username, email, password) values (:username, :email, :password)");
-            
-            
-        
             
             $stm->bindParam(":username", $this->username);
             $stm->bindParam(":email", $this->email);

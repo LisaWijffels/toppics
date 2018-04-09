@@ -11,7 +11,7 @@
         
 
         public function passwordsAreSecure(){
-            if($this->passwordsAreEqual() ) {
+            if($this->passwordsAreEqual() && $this->passwordStrongEnough()) {
                 return true;
             }
             else {
@@ -20,25 +20,19 @@
         }
 
         private function passwordStrongEnough(){
-            if(strlen($this->password) >= 8 ) {
-                return false;
-                echo "strlen false";
+            if(strlen($this->password) < 8 ) {
+                throw new Exception("Password must be longer than 8 characters.");
             }
-            else {
-                return true;
-                echo "Same pw false";
-            }
+            
+            return true;
         }
 
         private function passwordsAreEqual(){
-            if( $this->password == $this->passwordConfirmation ) {
-                return true;
-                echo "Same pw false";
+            if( $this->password !== $this->passwordConfirmation ) {
+                throw new Exception("Password must be equal.");
             }
-            else {
-                return false;
-                echo "Same pw false";
-            }
+            
+            return true;
         }
     }
 

@@ -4,32 +4,35 @@ include_once("classes/User.class.php");
 include_once("helpers/Security.class.php");
     
 if ( !empty($_POST) ) {
-    
-    try{
-        $security = new Security();
-        $security->password = $_POST['password'];
-        $security->passwordConfirmation = $_POST['password_confirmation'];
-
-        if($security->passwordsAreSecure() ){
-            $db = Db::getInstance();
-            $user = new User($db);
-            $user->setEmail($_POST['email'] );
-            $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $user->setUsername($_POST['username'] );
-            if ($user->register($hash) ){
-                $user->login();
-                
-                
-            }
-        } else {
-            echo "nope can't register";
-             
-        }
-        
-    } catch(Exception $e){
-        
+    if(empty($_POST['email']) ){
+        $error = "Please fill in your email adress.";
     }
+
     
+    $security = new Security();
+    $security->password = $_POST['password'];
+    $security->passwordConfirmation = $_POST['password_confirmation'];
+
+    try{
+        $security->passwordsAreSecure();
+
+        $db = Db::getInstance();
+        $user = new User($db);
+        $user->setEmail($_POST['email'] );
+        $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $user->setUsername($_POST['username'] );
+            
+        try{
+            $user->canIregister();
+            $user->register($hash);
+            $user->login();
+        } catch(Exception $e) {
+            $error = $e->getMessage();
+        }
+
+    } catch(Exception $e) {
+        $error = $e->getMessage();
+    }
 }
 
 ?><!DOCTYPE html>
@@ -44,13 +47,9 @@ if ( !empty($_POST) ) {
 <body background="img/background2.png">
     <img src="img/logo2.png" alt="logo" id="logo">
 
-    <?php if (isset($error)): ?>
-		<div class="form__error hidden">
-			<p>
-				Some error here, oops
-			</p>
-		</div>
-	<?php endif; ?>
+    <?php if(isset($error) ): ?>
+        <?php echo $error ?>
+    <?php endif; ?>
 
     <form action="" method="post" class="formlogin">
 

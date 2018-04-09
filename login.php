@@ -12,7 +12,7 @@ if ( !empty($_POST) ) {
     
     try{
         $user->canIlogin($_POST['password']);
-        echo "poop";
+        $user->login();
     } catch(Exception $e){
         $error = $e->getMessage();
     }
