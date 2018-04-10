@@ -1,5 +1,5 @@
 <?php
-/*include_once("classes/Db.class.php");
+include_once("classes/Db.class.php");
 include_once("classes/User.class.php");
 include_once("helpers/Security.class.php");
 
@@ -62,7 +62,6 @@ if(isset($_POST["btnPassword"]) ){
     }
 }
 
-*/
 
 ?><!DOCTYPE html>
 <html lang="en">
