@@ -116,7 +116,9 @@ if(isset($_POST["btnPassword"]) ){
                         <input class="profile__form button" type="submit" name="btnprofileText" value="Bevestig">
                     </form>
                 </div>
-                <a href="#" class="btnedit editProfileText visible">Wijzig biografie</a>
+                <div class="editProfileButton">
+                    <a href="#" class="btnedit editProfileText visible">Wijzig biografie</a>
+                </div>      
             </div>
             <div>
                 <h3>Email</h3>
@@ -128,7 +130,9 @@ if(isset($_POST["btnPassword"]) ){
                         <input class="profile__form button" type="submit" name="btnEmail" value="Bevestig">
                     </form>
                 </div>
+                <div class="editProfileButton">
                 <a href="#" class="btnedit editEmail visible">Wijzig email</a>
+                </div>
             </div>
 
             <div>
@@ -147,7 +151,9 @@ if(isset($_POST["btnPassword"]) ){
                         <input class="profile__form button" type="submit" name="btnPassword" value="Bevestig">
                     </form>
                 </div>
+                <div class="editProfileButton">
                 <a href="#" class="btnedit editPassword visible">Wijzig wachtwoord</a>
+                </div>
             </div>
 
         </div>

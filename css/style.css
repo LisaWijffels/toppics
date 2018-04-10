@@ -315,12 +315,13 @@ h1
     .profile
     {
         max-width: 500px;
+        margin-bottom: 50px;
     }
 
     .editProfileButton
 {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 80px;
+    padding-right: 80px;
 }
 
     .feed
@@ -346,14 +347,21 @@ h1
 
     .h2
     {
-        margin-left: 70px;
+        margin-left: 60px;
     }
 
     .profile
     {
-        max-width: 700px;
-        padding-left: 50px;
-        padding right: 50px;
+        max-width: 600px;
+        padding-left: 100px;
+        padding-right: 100px;
+        
+    }
+
+    .editProfileButton
+    {
+    padding-left: 150px;
+    padding-right: 150px;
     }
 
     .feed
