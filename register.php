@@ -4,9 +4,7 @@ include_once("classes/User.class.php");
 include_once("helpers/Security.class.php");
     
 if ( !empty($_POST) ) {
-    if(empty($_POST['email']) ){
-        $error = "Please fill in your email adress.";
-    }
+    
 
     
     $security = new Security();
