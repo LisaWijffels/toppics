@@ -153,6 +153,15 @@
             
         }
 
+        public function editPassword($hash){
+            $stm = $this->db->prepare("UPDATE users SET password = :password WHERE username = :username");
+            $stm->bindParam(":username", $this->username);
+            $stm->bindParam(":password", $hash);
+            $result = $stm->execute();
+
+            
+        }
+
         public function getValues(){
             
             $stm = $this->db->prepare("SELECT * from users WHERE username = :username");
@@ -174,8 +183,6 @@
                 return $key;
             }
             
-            
-
             $save_path= dirname(__FILE__) . '\..\user_images\ ';
             $myname = random_string(10).$this->user_picture['name'];
             move_uploaded_file($this->user_picture['tmp_name'], $save_path.$myname);
@@ -184,14 +191,7 @@
             $stm->bindParam(":username", $this->username);
             $stm->bindParam(":user_picture", $myname);
             $stm->execute();
-
-        
-
-            
         }
-
-
-        
     }
 
 
