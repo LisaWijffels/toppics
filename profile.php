@@ -1,5 +1,5 @@
 <?php
-include_once("classes/Db.class.php");
+/*include_once("classes/Db.class.php");
 include_once("classes/User.class.php");
 include_once("helpers/Security.class.php");
 
@@ -19,6 +19,8 @@ $user = new User($db);
 $user->setUsername($_SESSION['username']);
 
 $userInfo = $user->getValues();
+
+
 
 // Wijzig profielfoto
 if(isset($_POST["btnprofilePicture"]) ){
@@ -60,6 +62,8 @@ if(isset($_POST["btnPassword"]) ){
     }
 }
 
+*/
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,7 +89,7 @@ if(isset($_POST["btnPassword"]) ){
 
 
     <main>
-    <h2>Profiel bewerken</h2>
+    <h2 class="h2">Profiel bewerken</h2>
         <div class="profile">
         <?php if(isset($error) ): ?>
             <?php echo $error ?>
@@ -99,7 +103,9 @@ if(isset($_POST["btnPassword"]) ){
                         <input class="profile__form button" type="submit" name="btnprofilePicture" value="Bevestig">
                     </form>
                 </div>
-                <a href="#" class="btnedit editPic visible">Wijzig profielfoto</a>
+                <div class="editProfileButton">
+                    <a href="#" class="btnedit editPic visible">Wijzig profielfoto</a>
+                </div>
             </div>
             <div>
                 <h3>Biografie</h3>
@@ -138,7 +144,7 @@ if(isset($_POST["btnPassword"]) ){
 
                         <label for="passord" class="formEdit__label">Bevestig nieuw wachtwoord</label><br>
                         <input class="profile__form inputfield" type="password" name="password" ><br>
-                        <input class="profile__form button" type="submit" name="btnEmail" value="Bevestig">
+                        <input class="profile__form button" type="submit" name="btnPassword" value="Bevestig">
                     </form>
                 </div>
                 <a href="#" class="btnedit editPassword visible">Wijzig wachtwoord</a>

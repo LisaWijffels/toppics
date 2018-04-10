@@ -33,7 +33,7 @@ $(".editEmail").on("click", function(e){
     e.preventDefault();
     $("#formEditEmail").toggleClass('hidden visible');
     $("#valueEditEmail").toggleClass('visible hidden');
-    $(".editMail").addClass("hidden");
+    $(".editEmail").addClass("hidden");
     console.log("check");
 });
 
@@ -59,10 +59,10 @@ $("[name='btnEmail']").on("click", function(e) {
     
 });
 
+
 $(".editPic").on("click", function(e){
     e.preventDefault();
     $("#formEditPic").toggleClass('hidden visible');
-    
     $(".editPic").removeClass("visible").addClass("hidden");
     console.log("check");
 });
@@ -70,7 +70,6 @@ $(".editPic").on("click", function(e){
 $(".editPassword").on("click", function(e){
     e.preventDefault();
     $("#formEditPassword").toggleClass('hidden visible');
-    
-    $(".editPassword").toggleClass('visible hidden');
+    $(".editPassword").addClass('hidden');
     console.log("check");
 });

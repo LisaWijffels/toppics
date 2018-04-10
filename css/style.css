@@ -210,6 +210,8 @@ h1
 }
 
 /* profile.php */
+
+
 .profile 
 {
     display: block;
@@ -270,6 +272,12 @@ h1
     margin-bottom: 40px;
 }
 
+.editProfileButton
+{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
 #valueEditText, #valueEditEmail
 {
     color: grey;
@@ -299,6 +307,22 @@ h1
        font-size: 11px;
     }
 
+    .h2
+    {
+        margin-left: 5px;
+    }
+
+    .profile
+    {
+        max-width: 500px;
+    }
+
+    .editProfileButton
+{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
     .feed
     {
         display: grid;
@@ -318,6 +342,18 @@ h1
     #searchNav
     {
         margin-right: 40px;
+    }
+
+    .h2
+    {
+        margin-left: 70px;
+    }
+
+    .profile
+    {
+        max-width: 700px;
+        padding-left: 50px;
+        padding right: 50px;
     }
 
     .feed
