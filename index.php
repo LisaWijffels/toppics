@@ -60,9 +60,10 @@ if ( isset($_GET['search']) ){
 
                 <?php foreach ($posts as $p): ?>
                     <div class="feed__post">
-                    <p class="feed__postUser">Dwayne johnson</p>
+                    <p class="feed__postUser"><?php echo $p[0]['username']?></p>
                     <a href="details.php?post=<?php echo $p['post_id']; ?>"><img class="feed__postImg" src="<?php echo $p['post_image']; ?>"></a>
                     <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
+                    <p class="feed__postTag"><?php echo $p[0]['tag_name']; ?></p>
                     <div class="feed__flex">  
                         <p class="feed__postLikes">💗<?php echo $p['post_likes']; ?> likes</p>
                         <p class="feed__postDate"><?php echo $p['post_date']; ?></p>
@@ -110,18 +111,6 @@ if ( isset($_GET['search']) ){
             //als je klinkt mag je pagina niet refreshen
             e.preventDefault();
         });
-
-
-        //loadmore
-        /*$('.show_more').on('click', function() {
-        
-
-        html =   '<div>'
-                 +'Load data from php/mysql database (For 1st Main Div)'
-                 +'</div>';
-            $('#main_column_1').append(html);
-        });
-        */
     
     </script>
 </body>

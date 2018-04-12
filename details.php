@@ -57,9 +57,10 @@ if ( isset($_GET['search']) ){
     <?php if(!isset($error) ): ?>
         <div class=feed>
             <div class="feed__post">
-                <p class="feed__postUser">Dwayne johnson</p>
+                <p class="feed__postUser"><?php echo $p[0]['username']?></p>
                 <img class="feed__postImg" src="<?php echo $p[0]['post_image']; ?>">
                 <p class="feed__postDesc"><?php echo $postDetails[0]['post_desc']; ?></p>
+                <p class="feed__postTag"><?php echo $p[0]['tag_name']; ?></p>
                 <div class="feed__flex">  
                     <p class="feed__postLikes">💗<?php echo $postDetails[0]['post_likes']; ?> likes</p>
                     <p class="feed__postDate"><?php echo $postDetails[0]['post_date']; ?></p>
