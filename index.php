@@ -10,7 +10,17 @@ if(isset ($_SESSION['username'])){
 
 include_once("classes/Post.class.php");
 
-$posts = Post::showPosts();
+if ( isset($_GET['search']) ){
+    $search = $_GET['search'];
+    echo $search;
+
+    $posts = Post::searchPosts($search);
+    
+} else {
+    $posts = Post::ShowPosts();
+}
+
+
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -31,7 +41,8 @@ $posts = Post::showPosts();
         <a href="#" class="navItems">Friends</a>
 
         <form action="" method="get" id="searchNav">
-            <input type="text" name="search" value="search">
+            <input type="text" name="search" placeholder="Search a toppic!">
+            
         </form>
     </nav>
 
@@ -50,7 +61,7 @@ $posts = Post::showPosts();
                 <?php foreach ($posts as $p): ?>
                     <div class="feed__post">
                     <p class="feed__postUser">Dwayne johnson</p>
-                    <img class="feed__postImg" src="<?php echo $p['post_image']; ?>">
+                    <a href="details.php?post=<?php echo $p['post_id']; ?>"><img class="feed__postImg" src="<?php echo $p['post_image']; ?>"></a>
                     <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
                     <div class="feed__flex">  
                         <p class="feed__postLikes">💗<?php echo $p['post_likes']; ?> likes</p>
