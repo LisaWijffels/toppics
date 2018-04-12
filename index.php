@@ -57,7 +57,7 @@ if ( isset($_GET['search']) ){
     </main>    
 
     <div class="postList">
-        
+
         <div class=feed>
 
                 <?php foreach ($posts as $p): ?>
@@ -127,13 +127,8 @@ if ( isset($_GET['search']) ){
                     $('.postList').append(html);
                 }
             });
-
-         
-        
-           
         });
-    });
-        });
+    
     </script>
 </body>
 </html>
