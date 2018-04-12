@@ -71,8 +71,8 @@ if ( isset($_GET['search']) ){
                 <?php endforeach; ?>
         </div>
 
-        <div class="show_more_main" id="show_more_main<?php echo $postID; ?>">
-            <span id="<?php echo $postID; ?>" class="show_more">Show more</span>
+        <div class="show_more_main">
+            <span class="show_more">Show more</span>
         </div>
     </div>
 
@@ -111,6 +111,17 @@ if ( isset($_GET['search']) ){
             e.preventDefault();
         });
 
+
+        //loadmore
+        /*$('.show_more').on('click', function() {
+        
+
+        html =   '<div>'
+                 +'Load data from php/mysql database (For 1st Main Div)'
+                 +'</div>';
+            $('#main_column_1').append(html);
+        });
+        */
     
     </script>
 </body>
