@@ -1,5 +1,5 @@
 <?php
-/*session_start();
+session_start();
 
 if(isset ($_SESSION['username'])){
     echo "logged user is ".$_SESSION['username'];
@@ -19,7 +19,7 @@ if ( isset($_GET['search']) ){
     $posts = Post::ShowPosts();
     
 }
-*/
+
 
 
 ?><!DOCTYPE html>
