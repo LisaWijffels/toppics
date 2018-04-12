@@ -118,9 +118,8 @@ include_once('Db.class.php');
 
                 public static function ShowPosts(){
 
-                        $showLimit = 20;
                         $conn = Db::getInstance();
-                        $statement = $conn->prepare("select * from posts ORDER BY post_date desc limit $showLimit");
+                        $statement = $conn->prepare("SELECT * FROM posts, users WHERE post_user_id = user.id AND tags.post_id = post_id ORDER BY post_date desc limit 20");
                         $statement->execute();
 
                         return $statement->fetchAll(PDO::FETCH_ASSOC);
