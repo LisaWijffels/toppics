@@ -108,6 +108,14 @@ include_once('Db.class.php');
                         return $result;
                 }
 
+                public function postComments(){
+                        $stm = $this->db->prepare("SELECT * FROM comments, users WHERE post_id = :post_id AND comments.user_id = users.id");
+                        $stm->bindValue(":post_id", $this->post_id);
+                        $stm->execute();
+                        return $stm->fetchAll(PDO::FETCH_ASSOC);
+                        
+                }
+
                 public static function ShowPosts(){
                         $conn = Db::getInstance();
                         $statement = $conn->prepare("select * from posts ORDER BY post_date desc limit 20");

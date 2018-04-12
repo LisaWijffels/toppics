@@ -16,6 +16,8 @@ if ( !empty($_GET) ){
     $post->setPost_id($postId);
     
     $postDetails = $post->postDetails();
+    $postComments = $post->postComments();
+    
 } else {
     $error = true;
 }
@@ -64,6 +66,12 @@ if ( isset($_GET['search']) ){
                 </div>
             </div>
         </div>
+        <?php foreach($postComments as $c): ?>
+        <div class="feed__postDesc">
+            <p class="feed__postUser"><?php echo $c['username']; ?></p>
+            <p class="feed__postDesc"><?php echo $c['text']; ?></p>
+        </div>
+        <?php endforeach; ?>
     <?php endif; ?>
     </main>
 

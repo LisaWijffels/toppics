@@ -12,12 +12,12 @@ include_once("classes/Post.class.php");
 
 if ( isset($_GET['search']) ){
     $search = $_GET['search'];
-    echo $search;
-
     $posts = Post::searchPosts($search);
+    echo $search;
     
 } else {
     $posts = Post::ShowPosts();
+    
 }
 
 
