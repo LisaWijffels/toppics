@@ -1,5 +1,5 @@
 <?php
-session_start();
+/*session_start();
 
 if(isset ($_SESSION['username'])){
     echo "logged user is ".$_SESSION['username'];
@@ -19,7 +19,7 @@ if ( isset($_GET['search']) ){
     $posts = Post::ShowPosts();
     
 }
-
+*/
 
 
 ?><!DOCTYPE html>
@@ -54,9 +54,11 @@ if ( isset($_GET['search']) ){
             <!--<input class="button" id="buttonplus" type="file" value="+">!-->
             <input class="button postForm__Button" id="buttondrop" type="submit" value="Drop it like it's hot">
         </form>
+    </main>    
 
+    <div class="postList">
+        
         <div class=feed>
-            
 
                 <?php foreach ($posts as $p): ?>
                     <div class="feed__post">
@@ -69,11 +71,12 @@ if ( isset($_GET['search']) ){
                     </div>
                  </div>
                 <?php endforeach; ?>
-
-            
-
         </div>
-    </main>
+
+        <div class="show_more_main" id="show_more_main<?php echo $postID; ?>">
+            <span id="<?php echo $postID; ?>" class="show_more">Show more</span>
+        </div>
+    </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
@@ -108,6 +111,28 @@ if ( isset($_GET['search']) ){
             
             //als je klinkt mag je pagina niet refreshen
             e.preventDefault();
+        });
+
+        //loadmore met ajax
+        $(document).on('click','.show_more',function(){
+            var showLimit = showLimit + 20;
+            var ID = $(this).attr('id');
+
+            $.ajax({
+                url:"index.php",
+                type: "POST",
+                data:'id='+ID,
+                success:function(html){
+                    $('#show_more_main'+ID).remove();
+                    $('.postList').append(html);
+                }
+            });
+
+         
+        
+           
+        });
+    });
         });
     </script>
 </body>

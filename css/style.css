@@ -209,6 +209,14 @@ h1
     font-size: 0.8em;
 }
 
+.show_more
+{
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
 /* profile.php */
 
 
