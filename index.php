@@ -20,8 +20,6 @@ if ( isset($_GET['search']) ){
     
 }
 
-
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,21 +111,6 @@ if ( isset($_GET['search']) ){
             e.preventDefault();
         });
 
-        //loadmore met ajax
-        $(document).on('click','.show_more',function(){
-            var showLimit = showLimit + 20;
-            var ID = $(this).attr('id');
-
-            $.ajax({
-                url:"index.php",
-                type: "POST",
-                data:'id='+ID,
-                success:function(html){
-                    $('#show_more_main'+ID).remove();
-                    $('.postList').append(html);
-                }
-            });
-        });
     
     </script>
 </body>
