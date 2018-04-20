@@ -119,7 +119,8 @@ include_once('Db.class.php');
                 public static function ShowPosts(){
 
                         $conn = Db::getInstance();
-                        $statement = $conn->prepare("SELECT * FROM posts, users, tags WHERE post_user_id = users.id AND tags.post_id = posts.post_id ORDER BY post_date desc limit 20");
+                        $statement = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username, tag_name FROM posts, users, tags 
+                                        WHERE posts.post_user_id = users.id AND tags.post_id = posts.post_id ORDER BY post_date desc limit 20");
                         $statement->execute();
 
                         return $statement->fetchAll(PDO::FETCH_ASSOC);
