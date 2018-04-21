@@ -125,10 +125,25 @@ include_once('Db.class.php');
                         $stm->bindValue(":post_image", $this->post_image);
                         $stm->bindValue(":post_user_id", $this->post_user_id);
                         $result = $stm->execute();
-                        $id = $conn->lastInsertId();
-                        return $id;
-                        
+                        $this->post_id = $conn->lastInsertId();
+                        return $result;
+                }
 
+                public function saveTags($post_tags){
+                        $tagsNoSpace = str_replace(' ', '', $post_tags);
+                        $tags = explode("," ,$tagsNoSpace);
+
+                        $conn = Db::getInstance();
+                        foreach ($tags as $t){
+                                $stm = $conn->prepare("INSERT INTO tags (post_id, tag_name) VALUES (:post_id, :tag_name)");
+                                $stm->bindValue(":post_id", $this->post_id);
+                                $stm->bindValue(":tag_name", $t);
+                                $result = $stm->execute();
+                                
+                        }
+
+                        return $tags;
+                        
                 }
 
                 public function postDetails(){

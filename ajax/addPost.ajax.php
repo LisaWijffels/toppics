@@ -12,12 +12,17 @@
         $post_image = $_FILES['post_image'];
         $post_desc = $_POST['post_desc'];
         $post_user = $_SESSION['username'];
+        $post_tags = $_POST['post_tags'];
+        
         
         $post->setPost_user_id($post_user);
         $post->setPost_desc($post_desc);
         $post->setPost_image($post_image);
-        $id = $post->Save();
-        $feedback['post_id'] = $id;
+        $post->Save();
+
+        $post_tags_array = $post->saveTags($post_tags);
+
+        $feedback['post_tags'] = $post_tags_array;
         $feedback['post_date'] = date('Y-m-d');
         $feedback['post_image'] = $post->getPost_image();
         $feedback['post_user'] = $post_user;

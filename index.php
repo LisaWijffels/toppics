@@ -86,25 +86,22 @@ if ( isset($_GET['search']) ){
     <script>
         $("#buttondrop").on("click", function(e) {
             e.preventDefault();
+
+            var file = $('#post_image')[0].files[0];
             var post_desc = $(".post_desc").val();
             var post_tags = $(".post_tags").val();
             
             var form = new FormData();
-            var file = $('#post_image')[0].files[0];
             form.append("post_image", file);
             form.append("post_desc", post_desc);
+            form.append("post_tags", post_tags);
             
-            
-
             $.ajax({
                 type: "POST",
                 url: "ajax/addPost.ajax.php",
                 data: form,
                 contentType: false,
                 processData: false,
-                
-                
-                
             }).done(function( res ) {
                 console.log( "Data Saved: " + res.status );
                 if(res.status == "success") {
@@ -117,7 +114,7 @@ if ( isset($_GET['search']) ){
                         <img class="feed__postImg" src="post_images/ ${res.post_image}"></a>
                         <p class="feed__postDesc">${post_desc}</p>
                         <div class="feed__flex">  
-                            <p class="feed__postLikes">💗${res.post_id} likes</p>
+                            <p class="feed__postLikes">💗${"0"} likes</p>
                             <p class="feed__postDate">${res.post_date}</p>
                         </div>
                         
