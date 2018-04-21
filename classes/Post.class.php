@@ -11,12 +11,15 @@ include_once('Db.class.php');
                 private $post_date;
                 private $db;
 
-                public function __construct($db) {
-                $this->db = $db;
-                }
-        
                 public function getPost_id()
                 {
+                        $conn = Db::getInstance();
+                        $stm = $conn->prepare("SELECT post_id FROM posts WHERE username = :username");
+                        $stm->bindValue(":username", $post_user);
+                        $stm->execute();
+                        $user = $stm->fetch(PDO::FETCH_ASSOC);
+
+                        $this->post_user_id = $user['id'];
                         return $this->post_id;
                 }
 
@@ -47,9 +50,27 @@ include_once('Db.class.php');
         
                 public function setPost_image($post_image)
                 {
-                        $this->post_image = $post_image;
+                        function random_string($length) {
+
+                                $key = '';
+                                $keys = array_merge(range(0, 9), range('a', 'z'));
+                            
+                                for ($i = 0; $i < $length; $i++) {
+                                    $key .= $keys[array_rand($keys)];
+                                }
+                            
+                                return $key;
+                        }
+                            
+                        $save_path= dirname(__FILE__) . '\..\post_images\ ';
+                        $myname = random_string(10).$post_image['name'];
+                        move_uploaded_file($post_image['tmp_name'], $save_path.$myname);
+
+                        $this->post_image = $myname;
 
                         return $this;
+
+                        
                 }
 
         
@@ -72,9 +93,15 @@ include_once('Db.class.php');
                 }
 
 
-                public function setPost_user_id($post_user_id)
+                public function setPost_user_id($post_user)
                 {
-                        $this->post_user_id = $post_user_id;
+                        $conn = Db::getInstance();
+                        $stm = $conn->prepare("SELECT id, username FROM users WHERE username = :username");
+                        $stm->bindValue(":username", $post_user);
+                        $stm->execute();
+                        $user = $stm->fetch(PDO::FETCH_ASSOC);
+
+                        $this->post_user_id = $user['id'];
 
                         return $this;
                 }
@@ -92,16 +119,21 @@ include_once('Db.class.php');
                 }
 
                 public function Save() {
-                        $stm = $this->db->prepare("INSERT INTO posts (post_desc) VALUES (:post_desc)");
+                        $conn = Db::getInstance();
+                        $stm = $conn->prepare("INSERT INTO posts (post_desc, post_image, post_user_id, post_date) VALUES (:post_desc, :post_image, :post_user_id, now())");
                         $stm->bindValue(":post_desc", $this->post_desc);
+                        $stm->bindValue(":post_image", $this->post_image);
+                        $stm->bindValue(":post_user_id", $this->post_user_id);
                         $result = $stm->execute();
-                        //dat gaat die query in db uitvoeren en true terug sturen als gelukt en false als niet gelukt.
-                        return $result;
+                        $id = $conn->lastInsertId();
+                        return $id;
+                        
 
                 }
 
                 public function postDetails(){
-                        $stm = $this->db->prepare("SELECT * FROM posts WHERE post_id = :post_id");
+                        $conn = Db::getInstance();
+                        $stm = $conn->prepare("SELECT * FROM posts WHERE post_id = :post_id");
                         $stm->bindValue(":post_id", $this->post_id);
                         $stm->execute();
                         $result = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -109,7 +141,8 @@ include_once('Db.class.php');
                 }
 
                 public function postComments(){
-                        $stm = $this->db->prepare("SELECT * FROM comments, users WHERE post_id = :post_id AND comments.user_id = users.id");
+                        $conn = Db::getInstance();
+                        $stm = $conn->prepare("SELECT * FROM comments, users WHERE post_id = :post_id AND comments.user_id = users.id");
                         $stm->bindValue(":post_id", $this->post_id);
                         $stm->execute();
                         return $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -144,6 +177,8 @@ include_once('Db.class.php');
 
                         return $foundPosts;
                 }
+
+                
         }
 
 ?>

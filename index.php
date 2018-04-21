@@ -20,6 +20,7 @@ if ( isset($_GET['search']) ){
     
 }
 
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,9 +48,11 @@ if ( isset($_GET['search']) ){
     <main>
         <h1>DROP A TOP PIC</h1>
 
-        <form action="" method="post" class="formToppic">
+        <form action="" method="post" enctype="multipart/form-data" class="formToppic" id="postForm">
+            <input type="file" name="post_image" id="post_image"><br>
             <input class="inputfield post_desc" type="text" name="post_desc" placeholder="What's your topic about?"><br>
-            <!--<input class="button" id="buttonplus" type="file" value="+">!-->
+            <label for="post_tags">Fill in tags, separate them with ,</label><br>
+            <input class="inputfield post_tags" type="text" name="post_tags" placeholder="summer, beach, ..."><br>
             <input class="button postForm__Button" id="buttondrop" type="submit" value="Drop it like it's hot">
         </form>
     </main>    
@@ -60,15 +63,16 @@ if ( isset($_GET['search']) ){
 
                 <?php foreach ($posts as $p): ?>
                     <div class="feed__post">
-                    <p class="feed__postUser"><?php echo $p['username']?></p>
-                    <a href="details.php?post=<?php echo $p['post_id']; ?>"><img class="feed__postImg" src="<?php echo $p['post_image']; ?>"></a>
-                    <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
-                    <p class="feed__postTag"><?php echo $picture['tag_name']; ?></p>
-                    <div class="feed__flex">  
-                        <p class="feed__postLikes">💗<?php echo $p['post_likes']; ?> likes</p>
-                        <p class="feed__postDate"><?php echo $p['post_date']; ?></p>
+                        <p class="feed__postUser"><?php echo $p['username']?></p>
+                        <a href="details.php?post=<?php echo $p['post_id']; ?>">
+                        <img class="feed__postImg" src="<?php echo $p['post_image']; ?>"></a>
+                        <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
+                        <p class="feed__postTag"><?php echo $picture['tag_name']; ?></p>
+                        <div class="feed__flex">  
+                            <p class="feed__postLikes">💗<?php echo $p['post_likes']; ?> likes</p>
+                            <p class="feed__postDate"><?php echo $p['post_date']; ?></p>
+                        </div>
                     </div>
-                 </div>
                 <?php endforeach; ?>
         </div>
 
@@ -80,36 +84,55 @@ if ( isset($_GET['search']) ){
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
     <script>
-        $(".postForm__button").on("click", function(e) {
+        $("#buttondrop").on("click", function(e) {
+            e.preventDefault();
             var post_desc = $(".post_desc").val();
+            var post_tags = $(".post_tags").val();
+            
+            var form = new FormData();
+            var file = $('#post_image')[0].files[0];
+            form.append("post_image", file);
+            form.append("post_desc", post_desc);
             
             
-            /*var post_id = <?php echo $_GET['post_id']; ?>;*/
 
-            //start Ajax
             $.ajax({
-                //stuurt gevens naar ajax addPost file
                 type: "POST",
-                //Data brengen naar addPost
-                url: "ajax/addPost.php",
-                data: { post_desc: post_desc},
+                url: "ajax/addPost.ajax.php",
+                data: form,
+                contentType: false,
+                processData: false,
                 
-            }).done(function( res ) { //als ajax antwoord (echo) terugstuurt
-                console.log( "Data Saved: " + res );
-                if(res == post_desc) {
+                
+                
+            }).done(function( res ) {
+                console.log( "Data Saved: " + res.status );
+                if(res.status == "success") {
                     //append new post
-                    var newPost = `<div><strong class="feed__postUser">Dwayne johnson</strong><p class="feed__postText">${res}</p></div>`;
-                    $(".feed__post").append(newPost);
+                    console.log("Ajax was successfull");
+                    
+                    var newPost = `
+                    <div class="feed__post">
+                        <p class="feed__postUser">${res.post_user}</p>
+                        <img class="feed__postImg" src="post_images/ ${res.post_image}"></a>
+                        <p class="feed__postDesc">${post_desc}</p>
+                        <div class="feed__flex">  
+                            <p class="feed__postLikes">💗${res.post_id} likes</p>
+                            <p class="feed__postDate">${res.post_date}</p>
+                        </div>
+                        
+                    </div>`;
+                    $(".feed").append(newPost);
                     
                 } else {
                     console.log("Ajax not getting right value");
                 }
             }).fail(function(res)  {
-               console.log("Sorry. Ajax failed "+ res);
+               console.log("Sorry. Ajax failed ");
             }); 
             
-            //als je klinkt mag je pagina niet refreshen
-            e.preventDefault();
+            
+            
         });
     
     </script>
