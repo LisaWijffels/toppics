@@ -65,9 +65,9 @@ if ( isset($_GET['search']) ){
                     <div class="feed__post">
                         <p class="feed__postUser"><?php echo $p['username']?></p>
                         <a href="details.php?post=<?php echo $p['post_id']; ?>">
-                        <img class="feed__postImg" src="<?php echo $p['post_image']; ?>"></a>
+                        <img class="feed__postImg" src="post_images/ <?php echo $p['post_image']; ?>"></a>
                         <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
-                        <p class="feed__postTag"><?php echo $picture['tag_name']; ?></p>
+                        <p class="feed__postTag">Tags <?php echo $p['tag_name']; ?></p>
                         <div class="feed__flex">  
                             <p class="feed__postLikes">💗<?php echo $p['post_likes']; ?> likes</p>
                             <p class="feed__postDate"><?php echo $p['post_date']; ?></p>
