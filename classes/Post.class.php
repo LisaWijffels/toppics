@@ -61,10 +61,49 @@ include_once('Db.class.php');
                             
                                 return $key;
                         }
-                            
-                        $save_path= dirname(__FILE__) . '\..\post_images\ ';
+
+                        
+
                         $myname = random_string(10).$post_image['name'];
-                        move_uploaded_file($post_image['tmp_name'], $save_path.$myname);
+                        $thumb_size = 400;
+                        $img = file_get_contents( $post_image['tmp_name'] );
+                        $image = imagecreatefromstring( $img );
+
+                        $width = imagesx($image);
+                        $height = imagesy($image);
+
+                        $original_aspect = $width / $height;
+                        
+
+                        if ( $original_aspect >= 1 )
+                        {
+                        // If image is wider than thumbnail (in aspect ratio sense)
+                        $new_height = $thumb_size;
+                        $new_width = $width / ($height / $thumb_size);
+                        }
+                        else
+                        {
+                        // If the thumbnail is wider than the image
+                        $new_width = $thumb_size;
+                        $new_height = $height / ($width / $thumb_size);
+                        }
+
+                        $thumb = imagecreatetruecolor( $thumb_size, $thumb_size );
+
+                        // Resize and crop
+                        imagecopyresampled($thumb,
+                                        $image,
+                                        0 - ($new_width - $thumb_size) / 2, // Center the image horizontally
+                                        0 - ($new_height - $thumb_size) / 2, // Center the image vertically
+                                        0, 0,
+                                        $new_width, $new_height,
+                                        $width, $height);
+                        imagejpeg($thumb, $myname, 80);
+
+                        
+                        $save_path= dirname(__FILE__) . '\..\post_images\ ';
+                        rename($myname, $save_path . $myname);
+                        
 
                         $this->post_image = $myname;
 
