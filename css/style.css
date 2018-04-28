@@ -357,6 +357,32 @@ input[type="file"]{
     margin-left: 5px;
 }
 
+.feed__Comments
+{
+    display: flex;
+    flex-direction: row;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.feed__commentUser
+{
+    margin-top: 15px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.feed__line
+{
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: rgb(173, 173, 173);
+    margin-top: 15px;
+}
+
 @media (min-width: 40em)
 {
     nav 

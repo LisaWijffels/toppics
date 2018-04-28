@@ -72,6 +72,9 @@ if ( isset($_GET['search']) ){
                         <p class="feed__postComments">💬</p>
                         <p class="feed__postDate"><?php echo $postDetails[0]['post_date']; ?></p>
                     </div>
+                    <div class="newComment">
+                        <div class="feed__line"> </div>
+                    </div>
                     <div class="postForm">
                         <form action="" method="post" class="postForm__form">
                             <input type="text" placeholder="Add a comment" class="postForm__text" name="commentText">
@@ -80,12 +83,7 @@ if ( isset($_GET['search']) ){
                     </div>
                 </div>
             </div>
-            <?php foreach($postComments as $c): ?>
-                <div class="feed__postDesc">
-                    <p class="feed__postUser"><?php echo $c['username']; ?></p>
-                    <p class="feed__postDesc"><?php echo $c['text']; ?></p>
-                </div>
-            <?php endforeach; ?>
+
         <?php endif; ?>
     </main>
 
@@ -106,9 +104,12 @@ if ( isset($_GET['search']) ){
 
                 if( res.status == "success") {
                     // append new comment
-                    var newComment = `<div><strong class="post__commentUser">Some Wan</strong>
-                    <p class="post__commentText">${res.comment}</p></div>`;
-                    $(".post__comment").append(newcomment);
+                    var newComment = `
+                    <div class="feed__Comments">
+                    <p class="feed__commentUser"><?php echo $postDetails[0]['username']; ?></p>
+                    <p class="feed__Comment">${res.comment}</p></div>
+                    <div class="feed__line"> </div>`;
+                    $(".newComment").append(newComment);
                     $(".postForm__text").val("");
                 }
             });

@@ -36,10 +36,10 @@
 
         public function Save()
         {
-            $statement = $this->db->prepare("insert into comments (user_id, post_id, comment) values (:user_id, :post_id, :comment)");
+            $statement = $this->db->prepare("insert into comments (user_id, post_id, text) values (:user_id, :post_id, :text)");
             $statement->bindValue(":user_id", 1);
             $statement->bindValue(":post_id", $this->getPostID());
-            $statement->bindValue(":comment", $this->comment);
+            $statement->bindValue(":text", $this->comment);
 
            return $statement->execute();
         }
