@@ -6,11 +6,10 @@
         <a href="#" class="navItems">Friends</a>
         
         <div class="nav__right">
-            <a class="logout" href="logout.php">Hi <?php echo $_SESSION['username'] ?>, logout?</a>
             <form action="" method="get" id="searchNav">
                 <input type="text" name="search" placeholder="Search a toppic!">
             </form>
-
+            <a class="button__logout button" href="logout.php">Hi <?php echo $_SESSION['username'] ?>, logout?</a>
 
         </div>
         

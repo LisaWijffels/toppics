@@ -104,13 +104,25 @@ nav
     height:120px;
 }
 
-.logout{
+.button__logout{
     text-align:center;
     color:white;
+    background-color: #9FCCED;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 0.8em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    width:150px;
+    margin-top: -20px;
+    margin-bottom: 30px;
 }
+
 #navLogo
 {
-    max-width: 70%;
+    max-width: 50%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -121,7 +133,7 @@ nav
     text-decoration: none;
     color: white;
     padding: 10px;
-    font-size: 18px;
+    font-size: 21px;
     display: flex;
     justify-content: center;
 }
@@ -154,26 +166,12 @@ h1
     text-align: center;
 }
 
-#buttonplus
-{
-    padding-left: 95px;
-    padding-right: 95px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    font-size: 72px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    cursor:pointer;
-}
-
 #buttondrop
 {
     padding-left: 65px;
     padding-right: 65px;
     margin-top: 30px;
-    margin-bottom: 20px;
-    
+    margin-bottom: 20px; 
 }
 
 .feed
@@ -200,7 +198,9 @@ h1
     font-weight: bold;
     margin: 0px;
     padding: 2px;
-    
+    margin-top: 12px;
+    margin-left: 10px;
+    font-size: 18px;
 }
 
 .feed__postImg
@@ -214,11 +214,12 @@ h1
 
 .feed__postDesc
 {
-    font-size: 0.8em;
+    font-size: 0.9em;
     margin: 0px;
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 5px;
+    margin-top: 5px;
     color:grey;
 }
 
@@ -409,7 +410,11 @@ input[type="file"]{
 }
 
 .link__edit{
-    color:#0074B1;
+    text-decoration: none;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: 5px;
+    background-color: white;
 }
 
 .link__delete{
@@ -474,15 +479,30 @@ input[type="file"]{
 
     #navLogo 
     {
-        width: 60%;
+        width: 70%;
         max-width: 70%;
-        margin-left: 10px;
-        margin-right: 0px;
+        margin-left: 5px;
+        margin-right: -20px;
     }
 
     .navItems
     {
-       font-size: 11px;
+       font-size: 0.9em;
+    }
+
+    .nav__right
+    {
+        margin-top: 10px;
+    }
+
+    .button__logout
+    {
+       margin-bottom: 10px;
+    }
+
+    #searchNav 
+    {
+        margin-bottom: -10px;
     }
 
     .h2
@@ -497,17 +517,19 @@ input[type="file"]{
     }
 
     .editProfileButton
-{
-    padding-left: 80px;
-    padding-right: 80px;
-}
+    {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
 
     .feed
     {
         display: grid;
         grid-template-columns: 50% 50%;
         grid-template-rows: 50% 50%;
+        justify-self: center;
         min-width: 200px;
+        
     }
 
 }

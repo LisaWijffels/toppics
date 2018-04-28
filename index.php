@@ -54,7 +54,7 @@ if ( isset($_GET['search']) ){
                 <?php foreach ($posts as $p): ?>
                     <div class="feed__post">
                         
-                        <div class="flexrow flex_between"><p class="feed__postUser"><?php echo $p['username']?></p><?php if($p['username'] == $_SESSION['username']): ?><a class="link__edit" href="editpost.php?post=<?php echo $p['post_id']; ?>">Edit post</a><?php endif; ?></div>
+                        <div class="flexrow flex_between"><p class="feed__postUser"><?php echo $p['username']?></p><?php if($p['username'] == $_SESSION['username']): ?><a class="link__edit button" href="editpost.php?post=<?php echo $p['post_id']; ?>">✏️</a><?php endif; ?></div>
                         <a href="details.php?post=<?php echo $p['post_id']; ?>">
                         <img class="feed__postImg" src="post_images/ <?php echo $p['post_image']; ?>"></a>
                         <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
