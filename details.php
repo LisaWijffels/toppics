@@ -16,6 +16,8 @@ if ( !empty($_GET) ){
     $post->setPost_id($postId);
     
     $postDetails = $post->postDetails();
+    $postTags = $post->postTags();
+    var_dump($postTags);
     $postComments = $post->postComments();
     
 } else {
@@ -38,7 +40,7 @@ if ( isset($_GET['search']) ){
     <link rel="stylesheet" href="css/style.css">
     <title>Top Pics</title>
 </head>
-<body background="img/background2.png">
+<body>
 
     <nav>
         <a href="index.php" id="aLogo"><img id="navLogo" src="img/logo2.png" alt="logo"></a>
@@ -57,10 +59,14 @@ if ( isset($_GET['search']) ){
     <?php if(!isset($error) ): ?>
         <div class=feed>
             <div class="feed__post">
-                <p class="feed__postUser"><?php echo $p[0]['username']?></p>
-                <img class="feed__postImg" src="<?php echo $p[0]['post_image']; ?>">
+                <p class="feed__postUser"><?php echo $postDetails[0]['username']?></p>
+                <img class="feed__postImg" src="post_images/ <?php echo $postDetails[0]['post_image']; ?>">
                 <p class="feed__postDesc"><?php echo $postDetails[0]['post_desc']; ?></p>
-                <p class="feed__postTag"><?php echo $p[0]['tag_name']; ?></p>
+                <p class="feed__postTag feed__postDesc">Tags: 
+                    <?php foreach($postTags as $t): ?>
+                        <?php echo $t['tag_name']; ?>
+                    <?php endforeach; ?>
+                </p>
                 <div class="feed__flex">  
                     <p class="feed__postLikes">💗<?php echo $postDetails[0]['post_likes']; ?> likes</p>
                     <p class="feed__postDate"><?php echo $postDetails[0]['post_date']; ?></p>

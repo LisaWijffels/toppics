@@ -24,9 +24,9 @@ $userInfo = $user->getValues();
 
 // Wijzig profielfoto
 if(isset($_POST["btnprofilePicture"]) ){
-    if($_FILES['profilePicture']['name']){
+    if($_FILES['post_image']['name']){
         
-        $user_picture = $_FILES['profilePicture'];
+        $user_picture = $_FILES['post_image'];
         $user->setUser_picture($user_picture);
         $user->editPicture();
         header("Refresh:0");
@@ -72,7 +72,7 @@ if(isset($_POST["btnPassword"]) ){
     <link rel="stylesheet" href="css/style.css">
     <title>Top Pics</title>
 </head>
-<body background="img/background2.png">
+<body>
 
     <nav>
         <a href="index.php" id="aLogo"><img id="navLogo" src="img/logo2.png" alt="logo"></a>
@@ -95,15 +95,20 @@ if(isset($_POST["btnPassword"]) ){
         <?php endif; ?>
             <div>
                 <h3>Profielfoto</h3>
-                <img class="profile__img" src="user_images/ <?php echo $userInfo['user_picture'] ?>"><br>
+                <div id="posted_image" style='background-image:url("user_images/ <?php echo $userInfo['user_picture'] ?>")'></div>
+                
                 <div id="formEditPic" class="hidden">
                     <form method="post" enctype="multipart/form-data">
-                        <input class="profile__form inputfield" type="file" name="profilePicture"><br>
+                        <label for="post_image" class="file_upload">Upload an image</label>
+                        <input type="file" name="post_image" id="post_image"><br>
+
                         <input class="profile__form button" type="submit" name="btnprofilePicture" value="Bevestig">
+
+                        
                     </form>
                 </div>
                 <div class="editProfileButton">
-                    <a href="#" class="btnedit editPic visible">Wijzig profielfoto</a>
+                    <a href="#" id="editPic" class="btnedit">Wijzig profielfoto</a>
                 </div>
             </div>
             <div>
@@ -116,7 +121,7 @@ if(isset($_POST["btnPassword"]) ){
                     </form>
                 </div>
                 <div class="editProfileButton">
-                    <a href="#" class="btnedit editProfileText visible">Wijzig biografie</a>
+                    <a href="#" id="editProfileText" class="btnedit">Wijzig biografie</a>
                 </div>      
             </div>
             <div>
@@ -130,7 +135,7 @@ if(isset($_POST["btnPassword"]) ){
                     </form>
                 </div>
                 <div class="editProfileButton">
-                <a href="#" class="btnedit editEmail visible">Wijzig email</a>
+                <a href="#" id="editEmail" class="btnedit">Wijzig email</a>
                 </div>
             </div>
 
@@ -151,7 +156,7 @@ if(isset($_POST["btnPassword"]) ){
                     </form>
                 </div>
                 <div class="editProfileButton">
-                <a href="#" class="btnedit editPassword visible">Wijzig wachtwoord</a>
+                <a href="#" id="editPassword" class="btnedit">Wijzig wachtwoord</a>
                 </div>
             </div>
 

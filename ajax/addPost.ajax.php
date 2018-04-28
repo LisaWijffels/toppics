@@ -20,9 +20,12 @@
         $post->setPost_image($post_image);
         $post->Save();
 
-        $post_tags_array = $post->saveTags($post_tags);
+        if($post_tags != ""){
+            $post_tags_array = $post->saveTags($post_tags);
+        }
+        
 
-        $feedback['post_tags'] = $post_tags_array;
+        
         $feedback['post_date'] = date('Y-m-d');
         $feedback['post_image'] = $post->getPost_image();
         $feedback['post_user'] = $post_user;
