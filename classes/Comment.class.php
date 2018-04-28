@@ -47,7 +47,8 @@
         public function getAll()
         {
             $db = Db::getInstance();
-            $statement = $this->db->prepare("select text from comments");
+            $statement = $this->db->prepare("select text from comments where post_id = :postID");
+            $statement->bindValue(":postID", $this->getPostID());
             $statement->execute();
 
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
