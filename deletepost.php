@@ -64,11 +64,11 @@ if(isset($_POST["noDelete"]) ){
                 <p>Are you sure you want to delete this post?</p>
                 <div class="flexrow flex_justify_center">
                     <form method="post">
-                        <input type="submit" value="No" name="noDelete">
+                        <input type="submit" value="Cancel" name="noDelete" class="button btn__delete">
                     </form>
 
                     <form method="post">
-                        <input type="submit" value="Yes" name="yesDelete">
+                        <input type="submit" value="Delete my post" name="yesDelete" class="button btn__delete margin_left">
                     </form>
                     
                 </div>

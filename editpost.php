@@ -50,12 +50,12 @@ if(isset ($_SESSION['username']) && $_SESSION['username'] == $postDetails[0]['us
         </div>
         <div id="postEditBlock">
             <div>
-                <h3>Beschrijving</h3>
+                <h3>Description</h3>
                 <p id="valueDesc" class="visible"><?php echo $postDetails[0]['post_desc']; ?></p>
                 <div id="formEditDesc" class="hidden">
                     <form method="post">
                         <input class="inputfield" type="text" name="postDesc" value="<?php echo $postDetails[0]['post_desc'] ?>"><br>
-                        <input class="button" type="submit" name="btnPostDesc" value="Bevestig">
+                        <input class="button" type="submit" name="btnPostDesc" value="Confirm">
                     </form>
                 </div>
                 <div>
@@ -68,7 +68,7 @@ if(isset ($_SESSION['username']) && $_SESSION['username'] == $postDetails[0]['us
                     <?php foreach($postTags as $t): ?>
                         <div class="flexrow flex_between">
                             <?php echo $t['tag_name']; ?>
-                            <a href="#" class="delete_tag" data-tag-id="<?php echo $t['id']; ?>">Delete</a>
+                            <a href="#" class="delete_tag link__delete" data-tag-id="<?php echo $t['id']; ?>">Delete</a>
                         </div>
                     <?php endforeach; ?>
                 </p>
@@ -86,7 +86,7 @@ if(isset ($_SESSION['username']) && $_SESSION['username'] == $postDetails[0]['us
     
     </main>
     
-    <a href="deletepost.php?post=<?php echo $postDetails[0]['post_id']; ?>">Delete post</a>
+    <a class="center button btn__delete" id="btnDeletePost" href="deletepost.php?post=<?php echo $postDetails[0]['post_id']; ?>">Delete post</a>
     <?php endif; ?>
     
 

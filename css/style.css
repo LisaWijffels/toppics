@@ -6,6 +6,10 @@ body
     margin:0;
 }
 
+main{
+    padding-top:20px;
+}
+
 .hidden{
     display:none;
 }
@@ -59,6 +63,20 @@ body
     border-style: none;
     cursor:pointer;
     margin-bottom: 10px;
+    text-decoration:none;
+}
+
+.btn__delete{
+    background-color:red;
+}
+
+#btnDeletePost{
+    margin-top:30px;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+    width:90px;
+    text-align:center;
 }
 
 #registerlink
@@ -325,14 +343,19 @@ input[type="file"]{
 }
 
 #posted_image{
-    width:400px;
-    height:400px;
+    width:200px;
+    height:200px;
     background-image:url(../img/default-user-photo.png);
     background-size:cover;
     margin-left:auto;
     margin-right:auto;
     margin-bottom:30px;
     background-position:center;
+}
+
+.post_image_size{
+    width:400px;
+    height:400px;
 }
 
 
@@ -374,6 +397,18 @@ input[type="file"]{
 
 .text-align-center{
     text-align: center;
+}
+
+.link__edit{
+    color:#0074B1;
+}
+
+.link__delete{
+    color:red;
+}
+
+.margin_left{
+    margin-left:10px;
 }
 
 @media (min-width: 30em)
