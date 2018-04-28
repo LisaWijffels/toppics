@@ -166,7 +166,7 @@ include_once('Db.class.php');
 
                         $conn = Db::getInstance();
                         foreach ($tags as $t){
-                                $stm = $conn->prepare("INSERT INTO tags (post_id, tag_name) VALUES (:post_id, :tag_name)");
+                                $stm = $conn->prepare("INSERT INTO tags (post_id_link, tag_name) VALUES (:post_id, :tag_name)");
                                 $stm->bindValue(":post_id", $this->post_id);
                                 $stm->bindValue(":tag_name", $t);
                                 $result = $stm->execute();
@@ -188,7 +188,7 @@ include_once('Db.class.php');
 
                 public function postTags(){
                         $conn = Db::getInstance();
-                        $stm = $conn->prepare("SELECT `post_id`, `post_id_link`, `tag_name` FROM posts, tags WHERE post_id = :post_id AND tags.post_id_link = posts.post_id");
+                        $stm = $conn->prepare("SELECT `post_id`, `post_id_link`, `tag_name`, `id` FROM posts, tags WHERE post_id = :post_id AND tags.post_id_link = posts.post_id");
                         $stm->bindValue(":post_id", $this->post_id);
                         $stm->execute();
                         return $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -229,6 +229,25 @@ include_once('Db.class.php');
                         }
 
                         return $foundPosts;
+                }
+
+                public function editDesc(){
+                        $conn = Db::getInstance();
+                        $stm = $conn->prepare("UPDATE posts SET post_desc = :post_desc WHERE post_id = :post_id");
+                        $stm->bindParam(":post_id", $this->post_id);
+                        $stm->bindParam(":post_desc", $this->post_desc);
+                        $result = $stm->execute();
+                        return $result;
+                }
+
+                public function deletePost(){
+                        $conn = Db::getInstance();
+                        $stm = $conn->prepare("DELETE FROM posts WHERE post_id = :id");
+                        $stm->bindValue(":id", $this->post_id);
+                        $result = $stm->execute();
+
+                        return $result;
+
                 }
 
                 

@@ -1,12 +1,6 @@
 <?php
 session_start();
 
-if(isset ($_SESSION['username'])){
-    echo "logged user is ".$_SESSION['username'];
-} else {
-    header('Location: login.php');
-}
-
 include_once("classes/Post.class.php");
 
 if ( !empty($_GET) ){
@@ -17,7 +11,6 @@ if ( !empty($_GET) ){
     
     $postDetails = $post->postDetails();
     $postTags = $post->postTags();
-    var_dump($postTags);
     $postComments = $post->postComments();
     
 } else {
@@ -28,7 +21,11 @@ if ( isset($_GET['search']) ){
     $search = $_GET['search'];
     header('Location: index.php?search='.$search);
 }
-
+if(isset ($_SESSION['username']) && $_SESSION['username'] == $postDetails[0]['username'] ){
+    
+} else {
+    header('Location: login.php');
+}
 
 
 ?><!DOCTYPE html>
@@ -43,36 +40,58 @@ if ( isset($_GET['search']) ){
 <body>
 
     <?php include_once("nav.inc.php"); ?>
-
-    <main>
     <?php if(!isset($error) ): ?>
-        <div class=feed>
-            <div class="feed__post">
-                <p class="feed__postUser"><?php echo $postDetails[0]['username']?></p>
-                <img class="feed__postImg" src="post_images/ <?php echo $postDetails[0]['post_image']; ?>">
-                <p class="feed__postDesc"><?php echo $postDetails[0]['post_desc']; ?></p>
-                <p class="feed__postTag feed__postDesc">Tags: 
+    <main class="flexrow">
+    
+        
+
+        <div id="post_id" data-id="<?php echo $postId ?>">
+            <img class="feed__postImg" src="post_images/ <?php echo $postDetails[0]['post_image']; ?>">
+        </div>
+        <div id="postEditBlock">
+            <div>
+                <h3>Beschrijving</h3>
+                <p id="valueDesc" class="visible"><?php echo $postDetails[0]['post_desc']; ?></p>
+                <div id="formEditDesc" class="hidden">
+                    <form method="post">
+                        <input class="inputfield" type="text" name="postDesc" value="<?php echo $postDetails[0]['post_desc'] ?>"><br>
+                        <input class="button" type="submit" name="btnPostDesc" value="Bevestig">
+                    </form>
+                </div>
+                <div>
+                    <a href="#" id="editPostDesc" class="button">Edit description</a>
+                </div>    
+            </div>
+            <div>
+                <h3>Tags</h3>
+                <p id="taglist">
                     <?php foreach($postTags as $t): ?>
-                        <?php echo $t['tag_name']; ?>
+                        <div class="flexrow flex_between">
+                            <?php echo $t['tag_name']; ?>
+                            <a href="#" class="delete_tag" data-tag-id="<?php echo $t['id']; ?>">Delete</a>
+                        </div>
                     <?php endforeach; ?>
                 </p>
-                <div class="feed__flex">  
-                    <p class="feed__postLikes">💗<?php echo $postDetails[0]['post_likes']; ?> likes</p>
-                    <p class="feed__postDate"><?php echo $postDetails[0]['post_date']; ?></p>
-                </div>
+                
+                <form method="post">
+                    <div class="flexrow flex_between flex_align_center">
+                        <input type="text" name="addTag" id="addTag" class="taginput" placeholder="type a tag">
+                        <input type="submit" value="Voeg tag toe" class="button" id="btnAddTag">
+                    </div>  
+                </form>
             </div>
+                 
         </div>
-        <?php foreach($postComments as $c): ?>
-        <div class="feed__postDesc">
-            <p class="feed__postUser"><?php echo $c['username']; ?></p>
-            <p class="feed__postDesc"><?php echo $c['text']; ?></p>
-        </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
+        
+    
     </main>
+    
+    <a href="deletepost.php?post=<?php echo $postDetails[0]['post_id']; ?>">Delete post</a>
+    <?php endif; ?>
+    
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
+<script src="script/editPost.js"></script>
     
 </body>
 </html>

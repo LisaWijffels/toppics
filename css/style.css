@@ -53,11 +53,12 @@ body
     padding: 5px;
     padding-left: 95px;
     padding-right: 95px;
-    margin-top: 20px;
+    margin-top: 10px;
     color: white;
     background-color: #4584C2;
     border-style: none;
     cursor:pointer;
+    margin-bottom: 10px;
 }
 
 #registerlink
@@ -252,16 +253,6 @@ h1
     padding-bottom: 20px;
 }
 
-.profile__img
-{
-    max-width: 100%;
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 .profile__form
 {
@@ -342,6 +333,47 @@ input[type="file"]{
     margin-right:auto;
     margin-bottom:30px;
     background-position:center;
+}
+
+
+.flexrow{
+    display:flex;
+    justify-content: space-around;
+}
+
+.flex_between{
+    justify-content: space-between;
+}
+
+.flex_justify_center{
+    justify-content: center;
+}
+
+#postEditBlock{
+    width: 40%;
+    
+}
+
+.taginput{
+    border-radius: 15px;
+    opacity: 0.8;
+    height:25px;
+    border-style: none;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.flex_align_center{
+    align-items: center;
+}
+
+.center{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.text-align-center{
+    text-align: center;
 }
 
 @media (min-width: 30em)
