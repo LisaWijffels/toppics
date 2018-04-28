@@ -51,46 +51,49 @@ if ( isset($_GET['search']) ){
 
         <form action="" method="get" id="searchNav">
             <input type="text" name="search" placeholder="Search a toppic!">
-            
         </form>
     </nav>
 
     <main>
-    <?php if(!isset($error) ): ?>
-        <div class=feed>
-            <div class="feed__post">
-                <p class="feed__postUser"><?php echo $postDetails[0]['username']?></p>
-                <img class="feed__postImg" src="post_images/ <?php echo $postDetails[0]['post_image']; ?>">
-                <p class="feed__postDesc"><?php echo $postDetails[0]['post_desc']; ?></p>
-                <p class="feed__postTag feed__postDesc">Tags: 
-                    <?php foreach($postTags as $t): ?>
-                        <?php echo $t['tag_name']; ?>
-                    <?php endforeach; ?>
-                </p>
-                <div class="feed__flex">  
-                    <p class="feed__postLikes">💗<?php echo $postDetails[0]['post_likes']; ?> likes</p>
-                    <p class="feed__postComments">💬</p>
-                    <p class="feed__postDate"><?php echo $postDetails[0]['post_date']; ?></p>
-                </div>
+        <?php if(!isset($error) ): ?>
+            <div class=feed>
+                <div class="feed__post">
+                    <p class="feed__postUser"><?php echo $postDetails[0]['username']?></p>
+                    <img class="feed__postImg" src="post_images/ <?php echo $postDetails[0]['post_image']; ?>">
+                    <p class="feed__postDesc"><?php echo $postDetails[0]['post_desc']; ?></p>
+                    <p class="feed__postTag feed__postDesc">Tags: 
+                        <?php foreach($postTags as $t): ?>
+                            <?php echo $t['tag_name']; ?>
+                        <?php endforeach; ?>
+                    </p>
+                    <div class="feed__flex">  
+                        <p class="feed__postLikes">💗<?php echo $postDetails[0]['post_likes']; ?> likes</p>
+                        <p class="feed__postComments">💬</p>
+                        <p class="feed__postDate"><?php echo $postDetails[0]['post_date']; ?></p>
+                    </div>
                     <div class="postForm">
                         <form action="" method="post" class="postForm__form">
                             <input type="text" placeholder="Add a comment" class="postForm__text" name="commentText">
-                            <input type="submit" value="Post" class="postForm__button">
+                            <input type="submit" value="Post" class="postForm__button button">
                         </form>
                     </div>
+                </div>
             </div>
-        </div>
             <?php foreach($postComments as $c): ?>
-             <div class="feed__postDesc">
-                <p class="feed__postUser"><?php echo $c['username']; ?></p>
-                <p class="feed__postDesc"><?php echo $c['text']; ?></p>
-             </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
+                <div class="feed__postDesc">
+                    <p class="feed__postUser"><?php echo $c['username']; ?></p>
+                    <p class="feed__postDesc"><?php echo $c['text']; ?></p>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </main>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(".postForm__button").on("click", function(e){
+            var comment = $(".postForm__text").val();
+            var postID = <?php echo $_GET['id']; ?>;
+        });
+    </script>
 </body>
 </html>
