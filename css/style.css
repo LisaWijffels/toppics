@@ -189,7 +189,7 @@ h1
     margin-left: 15px;
     margin-right: 15px;
     margin-top: 20px;
-    max-width: 300px;
+    max-width: 350px;
     min-width: 200px;
 }
 
@@ -527,9 +527,13 @@ input[type="file"]{
         display: grid;
         grid-template-columns: 50% 50%;
         grid-template-rows: 50% 50%;
-        justify-self: center;
         min-width: 200px;
-        
+    }
+
+    .feed__post
+    {
+        display: grid;
+        justify-self: center;
     }
 
 }
@@ -542,6 +546,11 @@ input[type="file"]{
     }
 
     #searchNav
+    {
+        margin-right: 40px;
+    }
+
+    .button__logout
     {
         margin-right: 40px;
     }

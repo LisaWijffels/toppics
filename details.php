@@ -50,8 +50,6 @@ $c = new Comment($db);
 
 $allComments = $c->getAll();
 
-var_dump($allComments);
-
 
 ?><!DOCTYPE html>
 <html lang="en">
