@@ -140,8 +140,6 @@
             $stm->bindParam(":username", $this->username);
             $stm->bindParam(":user_text", $this->usertext);
             $result = $stm->execute();
-
-            
         }
 
         public function editEmail(){

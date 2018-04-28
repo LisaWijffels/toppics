@@ -31,18 +31,7 @@ if ( isset($_GET['search']) ){
 </head>
 <body>
 
-    <nav>
-        <a href="index.php" id="aLogo"><img id="navLogo" src="img/logo2.png" alt="logo"></a>
-        <a href="index.php" class="navItems">Home</a>
-        <a href="profile.php" class="navItems">Profile</a>
-        <a href="#" class="navItems">Discover</a>
-        <a href="#" class="navItems">Friends</a>
-
-        <form action="" method="get" id="searchNav">
-            <input type="text" name="search" placeholder="Search a toppic!">
-            
-        </form>
-    </nav>
+    <?php include_once("nav.inc.php"); ?>
 
     <main>
         <h1>DROP A TOP PIC</h1>
@@ -50,7 +39,7 @@ if ( isset($_GET['search']) ){
         <form action="" method="post" enctype="multipart/form-data" class="formToppic" id="postForm">
             <label for="post_image" class="file_upload">Upload an image</label>
             <input type="file" name="post_image" id="post_image"><br>
-            <div id="posted_image" class="hidden"></div>
+            <div id="posted_image" class="hidden post_image_size"></div>
             <input class="inputfield post_desc" type="text" name="post_desc" placeholder="What's your topic about?"><br>
             <label for="post_tags">Fill in tags, separate them with ,</label><br>
             <input class="inputfield post_tags" type="text" name="post_tags" placeholder="summer, beach, ..."><br>
@@ -64,7 +53,8 @@ if ( isset($_GET['search']) ){
 
                 <?php foreach ($posts as $p): ?>
                     <div class="feed__post">
-                        <p class="feed__postUser"><?php echo $p['username']?></p>
+                        
+                        <div class="flexrow flex_between"><p class="feed__postUser"><?php echo $p['username']?></p><?php if($p['username'] == $_SESSION['username']): ?><a class="link__edit" href="editpost.php?post=<?php echo $p['post_id']; ?>">Edit post</a><?php endif; ?></div>
                         <a href="details.php?post=<?php echo $p['post_id']; ?>">
                         <img class="feed__postImg" src="post_images/ <?php echo $p['post_image']; ?>"></a>
                         <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>

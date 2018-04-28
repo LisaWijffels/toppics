@@ -70,10 +70,10 @@ $("#editPic").on("click", function(e){
     console.log("check");
 });
 
-$(".editPassword").on("click", function(e){
+$("#editPassword").on("click", function(e){
     e.preventDefault();
     $("#formEditPassword").toggleClass('hidden visible');
-    $(".editPassword").addClass('hidden');
+    $("#editPassword").hide();
     console.log("check");
 });
 

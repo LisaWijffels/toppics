@@ -74,17 +74,7 @@ if(isset($_POST["btnPassword"]) ){
 </head>
 <body>
 
-    <nav>
-        <a href="index.php" id="aLogo"><img id="navLogo" src="img/logo2.png" alt="logo"></a>
-        <a href="index.php" class="navItems">Home</a>
-        <a href="#" class="navItems">Profile</a>
-        <a href="#" class="navItems">Discover</a>
-        <a href="#" class="navItems">Friends</a>
-
-        <form action="" method="get" id="searchNav">
-            <input type="text" name="search" value="search">
-        </form>
-    </nav>
+    <?php include_once("nav.inc.php"); ?>
 
 
     <main>
@@ -94,7 +84,7 @@ if(isset($_POST["btnPassword"]) ){
             <?php echo $error ?>
         <?php endif; ?>
             <div>
-                <h3>Profielfoto</h3>
+                <h3>Profile picture</h3>
                 <div id="posted_image" style='background-image:url("user_images/ <?php echo $userInfo['user_picture'] ?>")'></div>
                 
                 <div id="formEditPic" class="hidden">
@@ -102,26 +92,26 @@ if(isset($_POST["btnPassword"]) ){
                         <label for="post_image" class="file_upload">Upload an image</label>
                         <input type="file" name="post_image" id="post_image"><br>
 
-                        <input class="profile__form button" type="submit" name="btnprofilePicture" value="Bevestig">
+                        <input class="profile__form button" type="submit" name="btnprofilePicture" value="Confirm">
 
                         
                     </form>
                 </div>
                 <div class="editProfileButton">
-                    <a href="#" id="editPic" class="btnedit">Wijzig profielfoto</a>
+                    <a href="#" id="editPic" class="btnedit">Edit profiel picture</a>
                 </div>
             </div>
             <div>
-                <h3>Biografie</h3>
+                <h3>Biography</h3>
                 <p id="valueEditText" class="visible"><?php echo $userInfo['user_text']; ?></p>
                 <div id="formEditText" class="hidden">
                     <form method="post">
                         <input class="profile__form inputfield" type="text" name="profileText" value="<?php echo $userInfo['user_text'] ?>"><br>
-                        <input class="profile__form button" type="submit" name="btnprofileText" value="Bevestig">
+                        <input class="profile__form button" type="submit" name="btnprofileText" value="Confirm">
                     </form>
                 </div>
                 <div class="editProfileButton">
-                    <a href="#" id="editProfileText" class="btnedit">Wijzig biografie</a>
+                    <a href="#" id="editProfileText" class="btnedit">Edit biography</a>
                 </div>      
             </div>
             <div>
@@ -131,32 +121,32 @@ if(isset($_POST["btnPassword"]) ){
                 <div id="formEditEmail" class="hidden">
                     <form method="post">
                         <input class="profile__form inputfield" type="text" name="email" value="<?php echo $userInfo['email'] ?>"><br>
-                        <input class="profile__form button" type="submit" name="btnEmail" value="Bevestig">
+                        <input class="profile__form button" type="submit" name="btnEmail" value="Confirm">
                     </form>
                 </div>
                 <div class="editProfileButton">
-                <a href="#" id="editEmail" class="btnedit">Wijzig email</a>
+                <a href="#" id="editEmail" class="btnedit">Edit email</a>
                 </div>
             </div>
 
             <div>
-            <h3>Wachtwoord</h3>
+            
                 
                 <div id="formEditPassword" class="hidden">
                     <form method="post">
-                        <label for="passord" class="formEdit__label">Huidig wachtwoord</label><br>
+                        <label for="passord" class="formEdit__label">Current password</label><br>
                         <input class="profile__form inputfield" type="password" name="password"><br>
 
-                        <label for="passord" class="formEdit__label">Nieuw wachtwoord</label><br>
+                        <label for="passord" class="formEdit__label">New password</label><br>
                         <input class="profile__form inputfield" type="password" name="password"><br>
 
-                        <label for="passord" class="formEdit__label">Bevestig nieuw wachtwoord</label><br>
+                        <label for="passord" class="formEdit__label">Confirm new password</label><br>
                         <input class="profile__form inputfield" type="password" name="password" ><br>
-                        <input class="profile__form button" type="submit" name="btnPassword" value="Bevestig">
+                        <input class="profile__form button" type="submit" name="btnPassword" value="Confirm">
                     </form>
                 </div>
                 <div class="editProfileButton">
-                <a href="#" id="editPassword" class="btnedit">Wijzig wachtwoord</a>
+                <a href="#" id="editPassword" class="btnedit">Edit password</a>
                 </div>
             </div>
 
