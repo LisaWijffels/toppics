@@ -29,6 +29,28 @@ if ( isset($_GET['search']) ){
     header('Location: index.php?search='.$search);
 }
 
+include_once("classes/Db.class.php");
+include_once("classes/Comment.class.php");
+$c = new Comment($db);
+		if(isset($_POST['postForm__button']))
+		{
+			try
+			{
+				$c->setcomment($comment);
+                $c->setPostId($postID);
+				$c->Save();
+	
+				$response['status'] = "success";
+			}
+			catch(Exception $e)
+			{
+				$response['status'] = "error";
+			}
+		}
+
+$allComments = $c->getAll();
+
+var_dump($allComments);
 
 
 ?><!DOCTYPE html>
@@ -72,9 +94,21 @@ if ( isset($_GET['search']) ){
                         <p class="feed__postComments">💬</p>
                         <p class="feed__postDate"><?php echo $postDetails[0]['post_date']; ?></p>
                     </div>
-                    <div class="newComment">
-                        <div class="feed__line"> </div>
-                    </div>
+                
+                        <div class="newComment">
+                            <div class="feed__line"> </div>
+                            <?php if(count($allComments) > 0): ?>
+                            <?php foreach($allComments as $comment): ?>
+                            <div class="feed__Comments">
+                                <p class="feed__commentUser"><?php echo $postDetails[0]['username']; ?></p>
+                                <p class="feed__Comment"><?php echo $comment["text"]; ?></p>
+                            </div>
+                            <div class="feed__line"> </div>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
+                        </div>
+                    
+                    
                     <div class="postForm">
                         <form action="" method="post" class="postForm__form">
                             <input type="text" placeholder="Add a comment" class="postForm__text" name="commentText">
@@ -110,6 +144,7 @@ if ( isset($_GET['search']) ){
                     <p class="feed__Comment">${res.comment}</p></div>
                     <div class="feed__line"> </div>`;
                     $(".newComment").append(newComment);
+                    $(".feed__Comments").slideDown();
                     $(".postForm__text").val("");
                 }
             });

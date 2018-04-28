@@ -44,6 +44,16 @@
            return $statement->execute();
         }
 
+        public function getAll()
+        {
+            $db = Db::getInstance();
+            $statement = $this->db->prepare("select text from comments");
+            $statement->execute();
+
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return($result);
+        }
+
     } 
 
 ?>
