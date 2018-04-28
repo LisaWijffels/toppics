@@ -1,6 +1,7 @@
 body
 {
     font-family: "Roboto", sans-serif;
+    background: linear-gradient(30deg, #9FCCED, #1989DD);
 }
 
 .hidden{
