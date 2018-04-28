@@ -181,7 +181,8 @@ h1
     margin-top: 10px;
     min-width: 200px;
     display: flex;
-    align-self: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .feed__post
