@@ -71,6 +71,7 @@ if ( isset($_GET['search']) ){
                         
                         <div class="feed__flex">  
                             <p class="feed__postLikes">💗<?php echo $p['post_likes']; ?> likes</p>
+                            <a href="details.php?post=<?php echo $p['post_id']; ?>" class="feed__postComments">💬</a>
                             <p class="feed__postDate"><?php echo $p['post_date']; ?></p>
                         </div>
                     </div>

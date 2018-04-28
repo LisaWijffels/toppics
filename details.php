@@ -69,6 +69,7 @@ if ( isset($_GET['search']) ){
                 </p>
                 <div class="feed__flex">  
                     <p class="feed__postLikes">💗<?php echo $postDetails[0]['post_likes']; ?> likes</p>
+                    <p class="feed__postComments">💬</p>
                     <p class="feed__postDate"><?php echo $postDetails[0]['post_date']; ?></p>
                 </div>
             </div>
