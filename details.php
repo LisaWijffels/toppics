@@ -59,7 +59,8 @@ if ( isset($_GET['search']) ){
             <div class=feed>
                 <div class="feed__post">
                     <p class="feed__postUser"><?php echo $postDetails[0]['username']?></p>
-                    <img class="feed__postImg" src="post_images/ <?php echo $postDetails[0]['post_image']; ?>">
+                    <a href="details.php?post=<?php echo $postDetails[0]['post_id']; ?>" class="post__id" data-id="<?php echo $postDetails[0]['post_id']; ?>">
+                    <img class="feed__postImg" src="post_images/ <?php echo $postDetails[0]['post_image']; ?>"></a>
                     <p class="feed__postDesc"><?php echo $postDetails[0]['post_desc']; ?></p>
                     <p class="feed__postTag feed__postDesc">Tags: 
                         <?php foreach($postTags as $t): ?>
@@ -88,11 +89,31 @@ if ( isset($_GET['search']) ){
         <?php endif; ?>
     </main>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         $(".postForm__button").on("click", function(e){
-            var comment = $(".postForm__text").val();
-            var postID = <?php echo $_GET['id']; ?>;
+            let comment = $(".postForm__text").val();
+            let postID = $(".post__id").attr("data-id");
+            console.log(postID);
+
+            // to database
+            $.ajax({
+                 method: "POST",
+                 url: "ajax/addComment.php",
+                 data: { comment: comment, postID: postID }
+            })
+            .done(function( res ) {
+
+                if( res.status == "success") {
+                    // append new comment
+                    var newComment = `<div><strong class="post__commentUser">Some Wan</strong>
+                    <p class="post__commentText">${res.comment}</p></div>`;
+                    $(".post__comment").append(newcomment);
+                    $(".postForm__text").val("");
+                }
+            });
+
+            e.preventDefault();
         });
     </script>
 </body>
