@@ -2,6 +2,8 @@ body
 {
     font-family: "Roboto", sans-serif;
     background-color:#d4ebf2;
+    padding:0;
+    margin:0;
 }
 
 .hidden{
@@ -29,7 +31,7 @@ body
 
 .label
 {
-    color: white;
+    color: #4584C2;
     font-style: italic;
     text-align: left;
 }
@@ -76,6 +78,17 @@ nav
     padding: 5px;
 }
 
+.nav__right{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:120px;
+}
+
+.logout{
+    text-align:center;
+    color:white;
+}
 #navLogo
 {
     max-width: 70%;
@@ -96,11 +109,9 @@ nav
 
 #searchNav
 {
-    display: flex;
-    justify-content: center;
-    opacity: 0.5;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    display:flex;
+    flex-grow:2;
+    justify-content:center;
 }
 
 #searchNav input
@@ -109,6 +120,8 @@ nav
     border-style: none;
     color: black;
     text-align: center;
+    height:20px;
+    align-self:center;
 }
 
 h1

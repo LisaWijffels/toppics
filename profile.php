@@ -74,17 +74,7 @@ if(isset($_POST["btnPassword"]) ){
 </head>
 <body>
 
-    <nav>
-        <a href="index.php" id="aLogo"><img id="navLogo" src="img/logo2.png" alt="logo"></a>
-        <a href="index.php" class="navItems">Home</a>
-        <a href="#" class="navItems">Profile</a>
-        <a href="#" class="navItems">Discover</a>
-        <a href="#" class="navItems">Friends</a>
-
-        <form action="" method="get" id="searchNav">
-            <input type="text" name="search" value="search">
-        </form>
-    </nav>
+    <?php include_once("nav.inc.php"); ?>
 
 
     <main>

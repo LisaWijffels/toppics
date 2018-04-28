@@ -31,18 +31,7 @@ if ( isset($_GET['search']) ){
 </head>
 <body>
 
-    <nav>
-        <a href="index.php" id="aLogo"><img id="navLogo" src="img/logo2.png" alt="logo"></a>
-        <a href="index.php" class="navItems">Home</a>
-        <a href="profile.php" class="navItems">Profile</a>
-        <a href="#" class="navItems">Discover</a>
-        <a href="#" class="navItems">Friends</a>
-
-        <form action="" method="get" id="searchNav">
-            <input type="text" name="search" placeholder="Search a toppic!">
-            
-        </form>
-    </nav>
+    <?php include_once("nav.inc.php"); ?>
 
     <main>
         <h1>DROP A TOP PIC</h1>
@@ -64,6 +53,7 @@ if ( isset($_GET['search']) ){
 
                 <?php foreach ($posts as $p): ?>
                     <div class="feed__post">
+                        <?php if($p['username'] == $_SESSION['username']): ?><a href="editpost.php?post=<?php echo $p['post_id']; ?>">Edit post</a><?php endif; ?>
                         <p class="feed__postUser"><?php echo $p['username']?></p>
                         <a href="details.php?post=<?php echo $p['post_id']; ?>">
                         <img class="feed__postImg" src="post_images/ <?php echo $p['post_image']; ?>"></a>
