@@ -72,13 +72,19 @@ if ( isset($_GET['search']) ){
                     <p class="feed__postComments">💬</p>
                     <p class="feed__postDate"><?php echo $postDetails[0]['post_date']; ?></p>
                 </div>
+                    <div class="postForm">
+                        <form action="" method="post" class="postForm__form">
+                            <input type="text" placeholder="Add a comment" class="postForm__text" name="commentText">
+                            <input type="submit" value="Post" class="postForm__button">
+                        </form>
+                    </div>
             </div>
         </div>
-        <?php foreach($postComments as $c): ?>
-        <div class="feed__postDesc">
-            <p class="feed__postUser"><?php echo $c['username']; ?></p>
-            <p class="feed__postDesc"><?php echo $c['text']; ?></p>
-        </div>
+            <?php foreach($postComments as $c): ?>
+             <div class="feed__postDesc">
+                <p class="feed__postUser"><?php echo $c['username']; ?></p>
+                <p class="feed__postDesc"><?php echo $c['text']; ?></p>
+             </div>
         <?php endforeach; ?>
     <?php endif; ?>
     </main>
