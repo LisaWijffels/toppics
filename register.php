@@ -42,7 +42,7 @@ if ( !empty($_POST) ) {
     <link rel="stylesheet" href="css/style.css">
     <title>Top Pics</title>
 </head>
-<body background="img/background2.png">
+<body>
     <img src="img/logo2.png" alt="logo" id="logo">
 
     <?php if(isset($error) ): ?>

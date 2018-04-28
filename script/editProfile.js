@@ -1,13 +1,14 @@
-$(".editProfileText").on("click", function(e){
+$("#editProfileText").on("click", function(e){
     e.preventDefault();
+    
     $("#formEditText").toggleClass('hidden visible');
     $("#valueEditText").toggleClass('visible hidden');
-    $(".editProfileText").removeClass("visible").addClass("hidden");
+    $("#editProfileText").hide();
     
 });
 
 $("[name='btnprofileText']").on("click", function(e) {
-    console.log("Clicked btnprofileText");
+    
     var profile_text = $("[name='profileText']").val();
     
     $.ajax({
@@ -19,6 +20,7 @@ $("[name='btnprofileText']").on("click", function(e) {
         console.log("Data Saved: "+ res);
         $("#valueEditText").toggleClass('hidden visible');
         $("#formEditText").toggleClass('visible hidden');
+        $("#editProfileText").show();
         $("#valueEditText").html(profile_text);
         
     }).fail(function(res)  {
@@ -29,12 +31,12 @@ $("[name='btnprofileText']").on("click", function(e) {
     
 });
 
-$(".editEmail").on("click", function(e){
+$("#editEmail").on("click", function(e){
     e.preventDefault();
     $("#formEditEmail").toggleClass('hidden visible');
     $("#valueEditEmail").toggleClass('visible hidden');
-    $(".editEmail").addClass("hidden");
-    console.log("check");
+    $("#editEmail").hide();
+    
 });
 
 $("[name='btnEmail']").on("click", function(e) {
@@ -50,6 +52,7 @@ $("[name='btnEmail']").on("click", function(e) {
         $("#valueEditEmail").toggleClass('hidden visible');
         $("#formEditEmail").toggleClass('visible hidden');
         $("#valueEditEmail").html(profile_email);
+        $("#editEmail").show();
         
     }).fail(function(res)  {
        console.log("Sorry. Ajax failed");
@@ -60,10 +63,10 @@ $("[name='btnEmail']").on("click", function(e) {
 });
 
 
-$(".editPic").on("click", function(e){
+$("#editPic").on("click", function(e){
     e.preventDefault();
     $("#formEditPic").toggleClass('hidden visible');
-    $(".editPic").removeClass("visible").addClass("hidden");
+    $("#editPic").hide();
     console.log("check");
 });
 
@@ -72,4 +75,25 @@ $(".editPassword").on("click", function(e){
     $("#formEditPassword").toggleClass('hidden visible');
     $(".editPassword").addClass('hidden');
     console.log("check");
+});
+
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+        var image = e.target.result;
+        $('#posted_image').css('background-image', 'url('+image+')');
+        
+    }
+
+    reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#post_image").change(function() {
+    console.log("file changed");
+    
+    readURL(this);
 });

@@ -1,6 +1,7 @@
 body
 {
     font-family: "Roboto", sans-serif;
+    background-color:#d4ebf2;
 }
 
 .hidden{
@@ -36,7 +37,7 @@ body
 .inputfield
 {
    border-radius: 15px;
-   opacity: 0.5;
+   opacity: 0.8;
    padding: 5px;
    padding-left: 30px;
    padding-right: 30px;
@@ -51,9 +52,10 @@ body
     padding-left: 95px;
     padding-right: 95px;
     margin-top: 20px;
-    color: #4584C2;
-    background-color: white;
+    color: white;
+    background-color: #4584C2;
     border-style: none;
+    cursor:pointer;
 }
 
 #registerlink
@@ -139,6 +141,7 @@ h1
     padding-right: 65px;
     margin-top: 30px;
     margin-bottom: 20px;
+    
 }
 
 .feed
@@ -215,6 +218,9 @@ h1
     text-align: center;
     margin-top: 20px;
     cursor: pointer;
+    width:200px;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 /* profile.php */
@@ -290,6 +296,39 @@ h1
 {
     color: grey;
 
+}
+
+input[type="file"]{
+    display:none; 
+}
+
+.file_upload{
+    cursor:pointer;
+    background-color: #0074B1;
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
+    text-decoration: none;
+    padding: 5px;
+    margin-top: 30px;
+    
+    width:200px;
+}
+
+#posted_image{
+    width:400px;
+    height:400px;
+    background-image:url(../img/default-user-photo.png);
+    background-size:cover;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:30px;
+    background-position:center;
 }
 
 @media (min-width: 30em)

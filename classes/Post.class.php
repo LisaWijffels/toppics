@@ -62,8 +62,6 @@ include_once('Db.class.php');
                                 return $key;
                         }
 
-                        
-
                         $myname = random_string(10).$post_image['name'];
                         $thumb_size = 400;
                         $img = file_get_contents( $post_image['tmp_name'] );
@@ -74,18 +72,14 @@ include_once('Db.class.php');
 
                         $original_aspect = $width / $height;
                         
-
-                        if ( $original_aspect >= 1 )
-                        {
-                        // If image is wider than thumbnail (in aspect ratio sense)
-                        $new_height = $thumb_size;
-                        $new_width = $width / ($height / $thumb_size);
-                        }
-                        else
-                        {
-                        // If the thumbnail is wider than the image
-                        $new_width = $thumb_size;
-                        $new_height = $height / ($width / $thumb_size);
+                        if ( $original_aspect >= 1 ){
+                                // If image is wider than thumbnail (in aspect ratio sense)
+                                $new_height = $thumb_size;
+                                $new_width = $width / ($height / $thumb_size);
+                        }else{
+                                // If the thumbnail is wider than the image
+                                $new_width = $thumb_size;
+                                $new_height = $height / ($width / $thumb_size);
                         }
 
                         $thumb = imagecreatetruecolor( $thumb_size, $thumb_size );
@@ -104,9 +98,7 @@ include_once('Db.class.php');
                         $save_path= dirname(__FILE__) . '\..\post_images\ ';
                         rename($myname, $save_path . $myname);
                         
-
                         $this->post_image = $myname;
-
                         return $this;
 
                         
@@ -187,11 +179,19 @@ include_once('Db.class.php');
 
                 public function postDetails(){
                         $conn = Db::getInstance();
-                        $stm = $conn->prepare("SELECT * FROM posts WHERE post_id = :post_id");
+                        $stm = $conn->prepare("SELECT `post_id`, `post_desc`, `post_image`, `post_likes`, `post_user_id`, `post_date`, `username`, `id` FROM posts, users WHERE posts.post_id = :post_id AND posts.post_user_id = users.id");
                         $stm->bindValue(":post_id", $this->post_id);
                         $stm->execute();
                         $result = $stm->fetchAll(PDO::FETCH_ASSOC);
                         return $result;
+                }
+
+                public function postTags(){
+                        $conn = Db::getInstance();
+                        $stm = $conn->prepare("SELECT `post_id`, `post_id_link`, `tag_name` FROM posts, tags WHERE post_id = :post_id AND tags.post_id_link = posts.post_id");
+                        $stm->bindValue(":post_id", $this->post_id);
+                        $stm->execute();
+                        return $stm->fetchAll(PDO::FETCH_ASSOC);
                 }
 
                 public function postComments(){
@@ -206,8 +206,7 @@ include_once('Db.class.php');
                 public static function ShowPosts(){
 
                         $conn = Db::getInstance();
-                        $statement = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username, tag_name FROM posts, users, tags 
-                                        WHERE posts.post_user_id = users.id AND tags.post_id = posts.post_id ORDER BY post_date desc limit 20");
+                        $statement = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username FROM posts, users WHERE posts.post_user_id = users.id ORDER BY post_date desc limit 20");
                         $statement->execute();
 
                         return $statement->fetchAll(PDO::FETCH_ASSOC);
