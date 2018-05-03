@@ -48,8 +48,7 @@ include_once('Db.class.php');
                 }
 
         
-                public function setPost_image($post_image)
-                {
+                public function setPost_image($post_image){
                         function random_string($length) {
 
                                 $key = '';
@@ -100,8 +99,6 @@ include_once('Db.class.php');
                         
                         $this->post_image = $myname;
                         return $this;
-
-                        
                 }
 
         
@@ -118,14 +115,12 @@ include_once('Db.class.php');
                         return $this;
                 }
 
-                public function getPost_user_id()
-                {
+                public function getPost_user_id(){
                         return $this->post_user_id;
                 }
 
 
-                public function setPost_user_id($post_user)
-                {
+                public function setPost_user_id($post_user){
                         $conn = Db::getInstance();
                         $stm = $conn->prepare("SELECT id, username FROM users WHERE username = :username");
                         $stm->bindValue(":username", $post_user);
@@ -142,8 +137,7 @@ include_once('Db.class.php');
                         return $this->post_date;
                 }
 
-                public function setPost_date($post_date)
-                {
+                public function setPost_date($post_date){
                         $this->post_date = $post_date;
 
                         return $this;
@@ -233,8 +227,6 @@ include_once('Db.class.php');
                                 if(strpos(strtolower($p['post_desc']), strtolower($search)) !== false || strpos(strtolower($p['tag_name']), strtolower($search)) !== false){
                                     $foundPosts[] = $p;
                                 }
-
-                                
                         }
 
                         return $foundPosts;
@@ -256,7 +248,6 @@ include_once('Db.class.php');
                         $result = $stm->execute();
 
                         return $result;
-
                 }
 
                 
