@@ -156,16 +156,14 @@ if ( isset($_GET['search']) ){
                 var newError = `<div class="error"><p>${$e}</p></div>`;
                 $("main").prepend(newError);
             }
-
-            
-            
-            
-            
-            
-            
-            
             
         });
+
+        $(".feed__postLikes").on("click", function(e) {
+            e.preventDefault();
+
+            console.log("like clicked");
+        };
     
     </script>
 </body>
