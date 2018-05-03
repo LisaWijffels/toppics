@@ -250,6 +250,16 @@ include_once('Db.class.php');
 
                 }
 
+                public function Likes()
+                {
+                        $conn = Db::getInstance();
+                        $stmt = $conn->prepare("UPDATE posts SET post_likes = :post_likes WHERE post_id = :post_id"); 
+                        $stmt->bindParam(":post_id", $this->post_id);
+                        $stmt->bindParam(":post_likes", $this->post_likes);
+                        $result = $stmt->execute();
+                        return $result;
+                }
+
                 
         }
 

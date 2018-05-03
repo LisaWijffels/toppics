@@ -55,12 +55,12 @@ if ( isset($_GET['search']) ){
                     <div class="feed__post">
                         
                         <div class="flexrow flex_between"><p class="feed__postUser"><?php echo $p['username']?></p><?php if($p['username'] == $_SESSION['username']): ?><a class="link__edit button" href="editpost.php?post=<?php echo $p['post_id']; ?>">✏️</a><?php endif; ?></div>
-                        <a href="details.php?post=<?php echo $p['post_id']; ?>">
+                        <a href="details.php?post=<?php echo $p['post_id']; ?>" class="post__id" data-id="<?php echo $p['post_id']; ?>">
                         <img class="feed__postImg" src="post_images/ <?php echo $p['post_image']; ?>"></a>
                         <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
                         
                         <div class="feed__flex">  
-                            <a class="feed__postLikes">💗<?php echo $p['post_likes']; ?> likes</a>
+                            <p class="feed__postLikes" data-id="<?php echo $p['post_id']; ?>" >💗<span class="postLikes" data-id="<?php echo $p['post_id']; ?>"><?php echo $p['post_likes']; ?></span> likes</p>
                             <a href="details.php?post=<?php echo $p['post_id']; ?>" class="feed__postComments">💬</a>
                             <p class="feed__postDate"><?php echo $p['post_date']; ?></p>
                         </div>
@@ -82,7 +82,6 @@ if ( isset($_GET['search']) ){
     });
 </script>
     
-
 
 </body>
 </html>

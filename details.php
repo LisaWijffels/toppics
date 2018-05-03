@@ -111,11 +111,12 @@ $allComments = $c->getAll();
     </main>
 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="script/likePost.js"></script>
     <script>
         $(".postForm__button").on("click", function(e){
             let comment = $(".postForm__text").val();
             let postID = $(".post__id").attr("data-id");
-            console.log(postID);
+            //console.log(postID);
 
             // to database
             $.ajax({
