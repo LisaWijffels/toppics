@@ -6,19 +6,36 @@ include_once("../classes/Post.class.php");
     if (!empty($_POST)) {
         try
 		{
-            $likes = $_POST['likes'];
+            $post_likes = $_POST['likes'];
             $postID = $_POST['postID'];
+            $likeUnlike = $_POST['likeUnlike'];
 
             $db = Db::getInstance();
             $l = new Post($db);
-            $l->Likes($likes);
             $l->setPost_id($postID);
-            $l->Save();
+            
 
-            $lupdate = $likes + 1;
+            if($likeUnlike == "like")
+            {
+                $lupdate = $post_likes + 1;
+                $response['status'] = 'success';
+                $response['likes'] = $lupdate;
+                $response['likeUnlike'] = 'unlike';
+                $l->Likes($post_likes);
 
-            $response['status'] = 'success';
-            $response['likes'] = $lupdate;
+                
+            }
+            else if($likeUnlike == "unlike") 
+            {
+                $lupdate = $post_likes -1;
+                $response['status'] = 'success';
+                $response['likes'] = $lupdate;
+                $response['likeUnlike'] = 'like';
+                $l->Likes($post_likes);
+                
+            }
+
+            
         
         }
 

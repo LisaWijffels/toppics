@@ -60,7 +60,10 @@ if ( isset($_GET['search']) ){
                         <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
                         
                         <div class="feed__flex">  
-                            <p class="feed__postLikes" data-id="<?php echo $p['post_id']; ?>" >💗<span class="postLikes" data-id="<?php echo $p['post_id']; ?>"><?php echo $p['post_likes']; ?></span> likes</p>
+                            <p class="feed__postLikes" data-like="like" data-id="<?php echo $p['post_id']; ?>" >
+                            💗<span class="postLikes">
+                            <?php echo $p['post_likes']; ?></span> likes</p>
+
                             <a href="details.php?post=<?php echo $p['post_id']; ?>" class="feed__postComments">💬</a>
                             <p class="feed__postDate"><?php echo $p['post_date']; ?></p>
                         </div>
