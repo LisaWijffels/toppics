@@ -6,7 +6,7 @@ include_once("../classes/Post.class.php");
     if (!empty($_POST)) {
         try
 		{
-            $post_likes = $_POST['likes'];
+            $likesUpdate = $_POST['likes'];
             $postID = $_POST['postID'];
             $likeUnlike = $_POST['likeUnlike'];
 
@@ -17,9 +17,9 @@ include_once("../classes/Post.class.php");
 
             if($likeUnlike == "like")
             {
-                $lupdate = $post_likes + 1;
+                $post_likes = $likesUpdate + 1;
                 $response['status'] = 'success';
-                $response['likes'] = $lupdate;
+                $response['likes'] = $post_likes;
                 $response['likeUnlike'] = 'unlike';
                 $l->Likes($post_likes);
 
@@ -27,15 +27,14 @@ include_once("../classes/Post.class.php");
             }
             else if($likeUnlike == "unlike") 
             {
-                $lupdate = $post_likes -1;
+                $post_likes = $likesUpdate -1;
                 $response['status'] = 'success';
-                $response['likes'] = $lupdate;
+                $response['likes'] = $post_likes;
                 $response['likeUnlike'] = 'like';
                 $l->Likes($post_likes);
                 
             }
 
-            
         
         }
 
