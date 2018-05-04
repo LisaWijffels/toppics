@@ -1,23 +1,23 @@
 $(".feed__postLikes").on("click", function(e) {
-    let likes = $(".postLikes").html();
-    let postID = $(".post__id").attr("data-id");
+    let thisPost = $(this);
+    let thisPostSpan = $(this).children("span");
+    let likes = thisPostSpan.html();
+    let postID = thisPost.attr("data-id");
 
     console.log(likes);
     console.log(postID);
 
-   $.ajax({
-        method: "POST",
+    $.ajax({
+        type: "POST",
         url: "ajax/addLike.php",
-        data: { likes: likes, postID: postID }
-   })
-   .done(function( res ) {
+        data: { likes : likes, postID : postID },
 
-    if( res.status == "success") {
+    }).done(function(res){
         
-    }
-});
+        let like = thisPostSpan.html(res.likes);
 
+    }).fail(function(res){
+        console.log("ajax fail");
+    });
 
-
-    e.preventDefault();
 });

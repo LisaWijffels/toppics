@@ -12,8 +12,14 @@ include_once("../classes/Post.class.php");
             $db = Db::getInstance();
             $l = new Post($db);
             $l->Likes($likes);
-            $l->setPostId($postID);
+            $l->setPost_id($postID);
             $l->Save();
+
+            $lupdate = $likes + 1;
+
+            $response['status'] = 'success';
+            $response['likes'] = $lupdate;
+        
         }
 
         catch(Exception $e)
