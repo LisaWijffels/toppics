@@ -21,10 +21,13 @@ if ( isset($_GET['search']) ){
     $search = $_GET['search'];
     header('Location: index.php?search='.$search);
 }
-if(isset ($_SESSION['username']) && $_SESSION['username'] == $postDetails[0]['username'] ){
-    
-} else {
+
+if(!isset($_SESSION['username']) ){
     header('Location: login.php');
+}
+
+if($_SESSION['username'] != $postDetails[0]['username']){
+    $myPost = false;
 }
 
 
@@ -41,6 +44,7 @@ if(isset ($_SESSION['username']) && $_SESSION['username'] == $postDetails[0]['us
 
     <?php include_once("nav.inc.php"); ?>
     <?php if(!isset($error) ): ?>
+    <?php if(!isset($myPost) ): ?>
     <main class="flexrow">
     
         
@@ -87,6 +91,9 @@ if(isset ($_SESSION['username']) && $_SESSION['username'] == $postDetails[0]['us
     </main>
     
     <a class="center button btn__delete" id="btnDeletePost" href="deletepost.php?post=<?php echo $postDetails[0]['post_id']; ?>">Delete post</a>
+    <?php else: ?>
+        <p> You are not authorized to edit this post.</p>
+    <?php endif; ?>
     <?php endif; ?>
     
 

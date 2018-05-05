@@ -1,9 +1,7 @@
 <?php
 session_start();
 
-if(isset ($_SESSION['username'])){
-    echo "logged user is ".$_SESSION['username'];
-} else {
+if(!isset ($_SESSION['username'])){
     header('Location: login.php');
 }
 
@@ -19,7 +17,7 @@ if ( !empty($_GET) ){
     
     $postDetails = $post->postDetails();
     $postTags = $post->postTags();
-    var_dump($postTags);
+    
     $postComments = $post->postComments();
     
 } else {
@@ -46,7 +44,9 @@ try{
 
 
 
-?><!DOCTYPE html>
+?>
+<?php include_once("helpers/colorPalette.php"); ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -62,7 +62,7 @@ try{
 
     <main>
         <?php if(!isset($error) ): ?>
-            <div class=feed>
+            <div class="feed">
                 <div class="feed__post">
                     <p class="feed__postUser"><?php echo $postDetails[0]['username']?></p>
                     <a href="details.php?post=<?php echo $postDetails[0]['post_id']; ?>" class="post__id" data-id="<?php echo $postDetails[0]['post_id']; ?>">
@@ -102,7 +102,14 @@ try{
                         </form>
                     </div>
                 </div>
+                <div id="colors">
+
+                    <?php foreach($palette as $p):?>
+                    <div class="colorBlock" style="background:#<?php echo $p ?>"> </div>
+                    <?php endforeach;?>
+                </div>
             </div>
+            
 
         <?php endif; ?>
     </main>

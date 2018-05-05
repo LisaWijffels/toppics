@@ -480,6 +480,12 @@ input[type="file"]{
     opacity: 0.2;
 }
 
+.colorBlock{
+    display:inline-block;
+    width:50px;
+    height:20px;
+}
+
 @media (min-width: 40em)
 {
     nav 
