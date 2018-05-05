@@ -19,6 +19,8 @@ if ( isset($_GET['search']) ){
     
 }
 
+include_once("datetime.php");
+
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -65,7 +67,11 @@ if ( isset($_GET['search']) ){
                             <?php echo $p['post_likes']; ?></span> likes</p>
 
                             <a href="details.php?post=<?php echo $p['post_id']; ?>" class="feed__postComments">💬</a>
-                            <p class="feed__postDate"><?php echo $p['post_date']; ?></p>
+
+                            <?php $timeago=get_timeago(strtotime($p['post_date'])); ?>
+                            <p class="feed__postDate"><?php echo $timeago; ?></p>
+
+                            
                         </div>
                     </div>
                 <?php endforeach; ?>
