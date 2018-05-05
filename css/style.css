@@ -418,6 +418,14 @@ input[type="file"]{
     background-color: white;
 }
 
+.link__block{
+    text-decoration: none;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: 5px;
+    background-color: white;
+}
+
 .link__delete{
     color:red;
 }
@@ -466,6 +474,10 @@ input[type="file"]{
     height: 1px;
     background-color: rgb(173, 173, 173);
     margin-top: 5px;
+}
+
+.blocked{
+    opacity: 0.2;
 }
 
 @media (min-width: 40em)

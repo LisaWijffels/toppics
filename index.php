@@ -1,8 +1,9 @@
 <?php
+include_once("classes/Block.class.php");
 session_start();
 
 if(isset ($_SESSION['username'])){
-    echo "logged user is ".$_SESSION['username'];
+    //echo "logged user is ".$_SESSION['username'];
 } else {
     header('Location: login.php');
 }
@@ -19,7 +20,19 @@ if ( isset($_GET['search']) ){
     
 }
 
+<<<<<<< HEAD
 include_once("datetime.php");
+=======
+$blocked = new Block();
+$blocked->setUser_id($_SESSION['username']);
+$checkBlock = $blocked->checkBlock();
+$blockArray = [];
+foreach($checkBlock as $b){
+    array_push($blockArray, $b["post_id"]);
+}
+
+
+>>>>>>> mybranch
 
 
 ?><!DOCTYPE html>
@@ -56,8 +69,19 @@ include_once("datetime.php");
                 <?php foreach ($posts as $p): ?>
                     <div class="feed__post" data-id="<?php echo $p['post_id'] ?>">
                         
+<<<<<<< HEAD
                         <div class="flexrow flex_between"><p class="feed__postUser"><?php echo $p['username']?></p><?php if($p['username'] == $_SESSION['username']): ?><a class="link__edit button" href="editpost.php?post=<?php echo $p['post_id']; ?>">✏️</a><?php endif; ?></div>
                         <a href="details.php?post=<?php echo $p['post_id']; ?>" class="post__id" data-id="<?php echo $p['post_id']; ?>">
+=======
+                        <div class="flexrow flex_between">
+                            <p class="feed__postUser"><?php echo $p['username']?></p>
+                            <?php if($p['username'] == $_SESSION['username']): ?>
+                                <a class="link__edit button" href="editpost.php?post=<?php echo $p['post_id']; ?>">✏️</a>
+                            <?php endif; ?>
+                            <a class="link__block button <?php if(in_array($p["post_id"], $blockArray)): ?>blocked<?php endif; ?>" href="#" data-id="<?php echo $p['post_id'] ?>">⛔</a>
+                        </div>
+                        <a href="details.php?post=<?php echo $p['post_id']; ?>">
+>>>>>>> mybranch
                         <img class="feed__postImg" src="post_images/ <?php echo $p['post_image']; ?>"></a>
                         <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
                         
@@ -84,6 +108,7 @@ include_once("datetime.php");
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="script/createPost.js"></script>
+<<<<<<< HEAD
 <script src="script/likePost.js"></script>
 <script>
     $('.show_more').on("click", function(){
@@ -124,8 +149,38 @@ include_once("datetime.php");
         }).fail(function(res)  {
             console.log("Sorry. Ajax failed");
             
+=======
+<script src="script/showMore.js"></script>
+<script>
+    $(".link__block").on("click", function(e){
+        
+        e.preventDefault();
+        var clicked = this;
+        var post_id = $(this).attr("data-id");
+        var blocked = "no";
+        
+        if($(this).hasClass("blocked") == false){
+            blocked = "no";
+            console.log("Not blocked yet");
+        } else {
+            blocked = "yes";
+            console.log("Blocked already");
+        }
+
+        $.ajax({
+            method: "POST",
+            url: "ajax/blockPost.ajax.php",
+            data: { post_id: post_id, blocked: blocked },
+        }).done(function( res ) {
+            if(res.result == 1){
+                clicked.style.opacity = 0.2;
+            }
+            console.log("Removed ="+res.removed);
+            console.log("Count ="+res.count);
+>>>>>>> mybranch
         });
     });
+    
 
     
 </script>

@@ -8,6 +8,8 @@ if(isset ($_SESSION['username'])){
 }
 
 include_once("classes/Post.class.php");
+include_once("classes/Db.class.php");
+include_once("classes/Comment.class.php");
 
 if ( !empty($_GET) ){
     $postId = $_GET['post'];
@@ -29,26 +31,19 @@ if ( isset($_GET['search']) ){
     header('Location: index.php?search='.$search);
 }
 
-include_once("classes/Db.class.php");
-include_once("classes/Comment.class.php");
-$c = new Comment($db);
-		if(isset($_POST['postForm__button']))
-		{
-			try
-			{
-				$c->setcomment($comment);
-                $c->setPostId($postID);
-				$c->Save();
-	
-				$response['status'] = "success";
-			}
-			catch(Exception $e)
-			{
-				$response['status'] = "error";
-			}
-		}
+if(isset($_POST['postForm__button'])){
+    $c = new Comment($db);
+	$c->setcomment($comment);
+    $c->setPostId($postID);
+	$c->Save();
+}
 
-$allComments = $c->getAll();
+try{
+    $allComments = Comment::getAll($postId);
+} catch(Exception $e){
+    $error_noComments = $e->getMessage();
+}
+
 
 
 ?><!DOCTYPE html>
@@ -80,13 +75,15 @@ $allComments = $c->getAll();
                     </p>
                     <div class="feed__flex">  
                         <p class="feed__postLikes">💗<?php echo $postDetails[0]['post_likes']; ?> likes</p>
-                        <p class="feed__postComments">💬</p>
+                        
                         <p class="feed__postDate"><?php echo $postDetails[0]['post_date']; ?></p>
                     </div>
                 
                         <div class="newComment">
                             <div class="feed__line"> </div>
-                            <?php if(count($allComments) > 0): ?>
+                            <?php if(isset($error_noComments)): ?>
+                            <?php echo $error_noComments ?>
+                            <?php else: ?>
                             <?php foreach($allComments as $comment): ?>
                             <div class="feed__Comments">
                                 <p class="feed__commentUser"><?php echo $postDetails[0]['username']; ?></p>
@@ -130,7 +127,7 @@ $allComments = $c->getAll();
                     // append new comment
                     var newComment = `
                     <div class="feed__Comments">
-                    <p class="feed__commentUser"><?php echo $postDetails[0]['username']; ?></p>
+                    <p class="feed__commentUser">${res.user}</p>
                     <p class="feed__Comment">${res.comment}</p></div>
                     <div class="feed__line"> </div>`;
                     $(".newComment").append(newComment);
