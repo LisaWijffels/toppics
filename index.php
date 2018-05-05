@@ -66,14 +66,15 @@ foreach($checkBlock as $b){
                 <?php foreach ($posts as $p): ?>
                     <div class="feed__post" data-id="<?php echo $p['post_id'] ?>">
                         
+
                         <div class="flexrow flex_between">
-                            <p class="feed__postUser"><?php echo $p['username']?></p>
+                        <a href="user.php?user=<?php echo $p['username']; ?>" class="feed__postUser"><?php echo $p['username']?></a>
                             <?php if($p['username'] == $_SESSION['username']): ?>
                                 <a class="link__edit button" href="editpost.php?post=<?php echo $p['post_id']; ?>">✏️</a>
                             <?php endif; ?>
                             <a class="link__block button <?php if(in_array($p["post_id"], $blockArray)): ?>blocked<?php endif; ?>" href="#" data-id="<?php echo $p['post_id'] ?>">⛔</a>
                         </div>
-                        <a href="details.php?post=<?php echo $p['post_id']; ?>">
+                        <a href="details.php?post=<?php echo $p['post_id']; ?>" class="post__id" data-id="<?php echo $p['post_id']; ?>">
                         <img class="feed__postImg" src="post_images/ <?php echo $p['post_image']; ?>"></a>
                         <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
                         
@@ -102,7 +103,9 @@ foreach($checkBlock as $b){
 <script src="script/createPost.js"></script>
 <script src="script/showMore.js"></script>
 <script src="script/likePost.js"></script>
+    
 <script>
+
     $(".link__block").on("click", function(e){
         
         e.preventDefault();

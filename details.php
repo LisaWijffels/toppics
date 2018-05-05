@@ -5,6 +5,8 @@ if(!isset ($_SESSION['username'])){
     header('Location: login.php');
 }
 
+include_once("datetime.php");
+
 include_once("classes/Post.class.php");
 include_once("classes/Db.class.php");
 include_once("classes/Comment.class.php");
