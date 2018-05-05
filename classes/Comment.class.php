@@ -6,6 +6,7 @@ class Comment {
         private $comment;
         private $postID;
         private $db;
+        private $user_id;
 
         public function getComment()
         {
@@ -31,12 +32,29 @@ class Comment {
                 return $this;
         }
 
-        public function Save()
+        public function getUser_id()
+        {
+                return $this->user_id;
+        }
+
+        public function setUser_id($user_id)
         {
             $db = Db::getInstance();
-            $statement = $db->prepare("insert into comments (user_id, post_id, text) values (:user_id, :post_id, :text)");
-            $statement->bindValue(":user_id", 1);
-            $statement->bindValue(":post_id", $this->getPostID());
+            $stm = $db->prepare("SELECT id, username FROM users WHERE username = :username");
+            $stm->bindValue(":username", $user_id);
+            $stm->execute();
+            $user = $stm->fetch(PDO::FETCH_ASSOC);
+
+            $this->user_id = $user['id'];
+
+            return $this;
+        }
+
+        public function Save(){
+            $db = Db::getInstance();
+            $statement = $db->prepare("INSERT INTO comments (user_id, post_id, text) VALUES (:user_id, :post_id, :text)");
+            $statement->bindValue(":user_id", $this->user_id);
+            $statement->bindValue(":post_id", $this->postID);
             $statement->bindValue(":text", $this->comment);
 
            return $statement->execute();
@@ -56,6 +74,8 @@ class Comment {
             
         }
 
+
+        
     } 
 
 ?>

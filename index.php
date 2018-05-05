@@ -1,8 +1,9 @@
 <?php
+include_once("classes/Block.class.php");
 session_start();
 
 if(isset ($_SESSION['username'])){
-    echo "logged user is ".$_SESSION['username'];
+    //echo "logged user is ".$_SESSION['username'];
 } else {
     header('Location: login.php');
 }
@@ -18,6 +19,16 @@ if ( isset($_GET['search']) ){
     $posts = Post::ShowPosts();
     
 }
+
+$blocked = new Block();
+$blocked->setUser_id($_SESSION['username']);
+$checkBlock = $blocked->checkBlock();
+$blockArray = [];
+foreach($checkBlock as $b){
+    array_push($blockArray, $b["post_id"]);
+}
+
+
 
 
 ?><!DOCTYPE html>
@@ -59,7 +70,7 @@ if ( isset($_GET['search']) ){
                             <?php if($p['username'] == $_SESSION['username']): ?>
                                 <a class="link__edit button" href="editpost.php?post=<?php echo $p['post_id']; ?>">✏️</a>
                             <?php endif; ?>
-                            <a class="link__block button" href="#">⛔</a>
+                            <a class="link__block button <?php if(in_array($p["post_id"], $blockArray)): ?>blocked<?php endif; ?>" href="#" data-id="<?php echo $p['post_id'] ?>">⛔</a>
                         </div>
                         <a href="details.php?post=<?php echo $p['post_id']; ?>">
                         <img class="feed__postImg" src="post_images/ <?php echo $p['post_image']; ?>"></a>
@@ -83,8 +94,32 @@ if ( isset($_GET['search']) ){
 <script src="script/createPost.js"></script>
 <script src="script/showMore.js"></script>
 <script>
-    $(".link_block").on("click", function(){
-        console.log("BLOCKED");
+    $(".link__block").on("click", function(e){
+        
+        e.preventDefault();
+        var clicked = this;
+        var post_id = $(this).attr("data-id");
+        var blocked = "no";
+        
+        if($(this).hasClass("blocked") == false){
+            blocked = "no";
+            console.log("Not blocked yet");
+        } else {
+            blocked = "yes";
+            console.log("Blocked already");
+        }
+
+        $.ajax({
+            method: "POST",
+            url: "ajax/blockPost.ajax.php",
+            data: { post_id: post_id, blocked: blocked },
+        }).done(function( res ) {
+            if(res.result == 1){
+                clicked.style.opacity = 0.2;
+            }
+            console.log("Removed ="+res.removed);
+            console.log("Count ="+res.count);
+        });
     });
     
 

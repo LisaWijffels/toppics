@@ -13,7 +13,7 @@ $('.show_more').on("click", function(){
         
         for(var i = 0; i < res.length; i++) {
             $divPost = $(`<div class="feed__post" data-id="`+res[i]['post_id']+`">`);
-            $content = $(`<div class="flexrow flex_between"><p class="feed__postUser"><?php echo $p['username']?></p><?php if($p['username'] == $_SESSION['username']): ?><a class="link__edit button" href="editpost.php?post=<?php echo $p['post_id']; ?>">✏️</a><?php endif; ?></div>
+            $content = $(`<div class="flexrow flex_between"><p class="feed__postUser"><?php echo $p['username']?></p><?php if($p['username'] == $_SESSION['username']): ?><a class="link__edit button" href="editpost.php?post=<?php echo $p['post_id']; ?>">✏️</a><?php endif; ?><a class="link__block button" href="#" data-id="<?php echo $p['post_id'] ?>" >⛔</a></div>
                     <a href="details.php?post=`+res[i]['post_id']+`">
                     <img class="feed__postImg" src="post_images/ `+res[i]['post_image']+`"></a>
                     <p class="feed__postDesc">`+res[i]['post_desc']+`</p>

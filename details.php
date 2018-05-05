@@ -126,7 +126,7 @@ try{
                     // append new comment
                     var newComment = `
                     <div class="feed__Comments">
-                    <p class="feed__commentUser"><?php echo $postDetails[0]['username']; ?></p>
+                    <p class="feed__commentUser">${res.user}</p>
                     <p class="feed__Comment">${res.comment}</p></div>
                     <div class="feed__line"> </div>`;
                     $(".newComment").append(newComment);
