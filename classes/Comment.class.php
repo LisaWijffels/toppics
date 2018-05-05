@@ -60,17 +60,10 @@ class Comment {
            return $statement->execute();
         }
 
-<<<<<<< HEAD
-        public function getAll()
-        {
-            $statement = $this->db->prepare("select text from comments where post_id = :postID");
-            $statement->bindValue(":postID", $this->getPostID());
-=======
         public static function getAll($postId){
             $db = Db::getInstance();
             $statement = $db->prepare("SELECT text FROM comments WHERE post_id = :postID");
             $statement->bindValue(":postID", $postId );
->>>>>>> mybranch
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             if(empty($result)){
