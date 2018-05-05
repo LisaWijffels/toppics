@@ -48,8 +48,7 @@ include_once('Db.class.php');
                 }
 
         
-                public function setPost_image($post_image)
-                {
+                public function setPost_image($post_image){
                         function random_string($length) {
 
                                 $key = '';
@@ -100,8 +99,6 @@ include_once('Db.class.php');
                         
                         $this->post_image = $myname;
                         return $this;
-
-                        
                 }
 
         
@@ -118,14 +115,12 @@ include_once('Db.class.php');
                         return $this;
                 }
 
-                public function getPost_user_id()
-                {
+                public function getPost_user_id(){
                         return $this->post_user_id;
                 }
 
 
-                public function setPost_user_id($post_user)
-                {
+                public function setPost_user_id($post_user){
                         $conn = Db::getInstance();
                         $stm = $conn->prepare("SELECT id, username FROM users WHERE username = :username");
                         $stm->bindValue(":username", $post_user);
@@ -142,8 +137,7 @@ include_once('Db.class.php');
                         return $this->post_date;
                 }
 
-                public function setPost_date($post_date)
-                {
+                public function setPost_date($post_date){
                         $this->post_date = $post_date;
 
                         return $this;
@@ -206,10 +200,19 @@ include_once('Db.class.php');
                 public static function ShowPosts(){
 
                         $conn = Db::getInstance();
-                        $statement = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username FROM posts, users WHERE posts.post_user_id = users.id ORDER BY post_date desc limit 20");
+                        $statement = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username FROM posts, users WHERE posts.post_user_id = users.id ORDER BY post_date desc limit 2");
                         $statement->execute();
 
                         return $statement->fetchAll(PDO::FETCH_ASSOC);
+                }
+
+                public static function LoadMore($lastId){
+                        $conn = Db::getInstance();
+                        $stm = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username FROM posts, users WHERE posts.post_user_id = users.id AND posts.post_id < :lastId ORDER BY post_date desc limit 2");
+                        $stm->bindValue(":lastId", $lastId);
+                        $stm->execute();
+
+                        return $stm->fetchAll(PDO::FETCH_ASSOC);
                 }
 
                 public static function searchPosts($search){
@@ -224,8 +227,6 @@ include_once('Db.class.php');
                                 if(strpos(strtolower($p['post_desc']), strtolower($search)) !== false || strpos(strtolower($p['tag_name']), strtolower($search)) !== false){
                                     $foundPosts[] = $p;
                                 }
-
-                                
                         }
 
                         return $foundPosts;
@@ -247,7 +248,6 @@ include_once('Db.class.php');
                         $result = $stm->execute();
 
                         return $result;
-
                 }
 
                 public function Likes($post_likes)
@@ -261,6 +261,8 @@ include_once('Db.class.php');
                 }
 
                 
+                
+
                 
         }
 
