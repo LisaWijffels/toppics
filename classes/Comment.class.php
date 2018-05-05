@@ -1,14 +1,11 @@
 <?php
 
-    class Comment {
+include_once('Db.class.php');
+
+class Comment {
         private $comment;
         private $postID;
         private $db;
-
-        public function __construct($db)
-        {
-            $this->db = $db;
-        }
 
         public function getComment()
         {
@@ -36,7 +33,8 @@
 
         public function Save()
         {
-            $statement = $this->db->prepare("insert into comments (user_id, post_id, text) values (:user_id, :post_id, :text)");
+            $db = Db::getInstance();
+            $statement = $db->prepare("insert into comments (user_id, post_id, text) values (:user_id, :post_id, :text)");
             $statement->bindValue(":user_id", 1);
             $statement->bindValue(":post_id", $this->getPostID());
             $statement->bindValue(":text", $this->comment);
@@ -44,15 +42,18 @@
            return $statement->execute();
         }
 
-        public function getAll()
-        {
+        public static function getAll($postId){
             $db = Db::getInstance();
-            $statement = $this->db->prepare("select text from comments where post_id = :postID");
-            $statement->bindValue(":postID", $this->getPostID());
+            $statement = $db->prepare("SELECT text FROM comments WHERE post_id = :postID");
+            $statement->bindValue(":postID", $postId );
             $statement->execute();
-
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return($result);
+            if(empty($result)){
+                throw new Exception("There are no comments yet. Write one!");
+            } else {
+                return($result);
+            }
+            
         }
 
     } 
