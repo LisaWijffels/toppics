@@ -1,6 +1,7 @@
 <?php
 
 include_once("../classes/Block.class.php");
+include_once("../classes/Post.class.php");
 session_start();
 
 if( !empty($_POST) ){
@@ -17,8 +18,16 @@ if( !empty($_POST) ){
         $feedback['removed'] = $blocked->Remove();
     } else {
         $feedback['result'] = $blocked->Save();
-        $feedback['count'] = $blocked ->Count();
-        
+        $count = $blocked ->Count();
+        if($count >= 3){
+            $feedback['count'] = "Count exceeded";
+            $post = new Post();
+            $post->setPost_id($post_id);
+            $feedback['deleted'] = $post->deletePost();
+
+        } else {
+            $feedback['count'] = $count;
+        }
     }
     
     header('Content-Type: application/json');

@@ -101,20 +101,21 @@ foreach($checkBlock as $b){
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="script/createPost.js"></script>
 <script src="script/showMore.js"></script>
+<script src="script/likePost.js"></script>
 <script>
     $(".link__block").on("click", function(e){
         
         e.preventDefault();
-        var clicked = this;
+        var clicked = $(this);
         var post_id = $(this).attr("data-id");
         var blocked = "no";
         
         if($(this).hasClass("blocked") == false){
             blocked = "no";
-            console.log("Not blocked yet");
+            
         } else {
             blocked = "yes";
-            console.log("Blocked already");
+            
         }
 
         $.ajax({
@@ -123,10 +124,12 @@ foreach($checkBlock as $b){
             data: { post_id: post_id, blocked: blocked },
         }).done(function( res ) {
             if(res.result == 1){
-                clicked.style.opacity = 0.2;
+                clicked.addClass("blocked");
             }
-            console.log("Removed ="+res.removed);
-            console.log("Count ="+res.count);
+            if(res.removed == 1){
+                clicked.removeClass("blocked");
+            }
+            
         });
     });
     
