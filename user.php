@@ -24,8 +24,6 @@ if ( !empty($_GET) ){
 
     $Userposts = User::showUserPosts($username);
     
-    var_dump($username);
-    
 } else {
     $error = true;
 }
