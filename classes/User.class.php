@@ -1,5 +1,9 @@
 <?php 
+
+include_once("Post.class.php");
+
     class User {
+
         private $email;
         private $password;
         private $username;
@@ -11,13 +15,11 @@
             $this->db = $db;
         }
 
-         
         public function getUsername()
         {
                 return $this->username;
         }
 
-    
         public function setUsername($username)
         {
             if( empty($username) ){
@@ -25,9 +27,7 @@
             }
             
             $this->username = $username;
-            return $this;
-    
-            
+            return $this;   
         }
         
         public function getPassword(){
@@ -189,6 +189,18 @@
             $stm->bindParam(":username", $this->username);
             $stm->bindParam(":user_picture", $myname);
             $stm->execute();
+        }
+
+        public function showUserPosts($username)
+        {
+            $conn = Db::getInstance();
+            $stmt = $conn->prepare("SELECT id, username, user_text, post_id, post_desc, post_image, post_likes, post_user_id, post_date 
+            FROM `users`, `posts` WHERE users.id = posts.post_user_id AND username = :username");
+            $stmt->bindParam(":username", $username);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $result;
         }
     }
 

@@ -7,6 +7,8 @@ if(isset ($_SESSION['username'])){
     header('Location: login.php');
 }
 
+include_once("datetime.php");
+
 include_once("classes/Post.class.php");
 
 if ( !empty($_GET) ){
