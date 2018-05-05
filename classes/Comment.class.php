@@ -46,7 +46,6 @@
 
         public function getAll()
         {
-            $db = Db::getInstance();
             $statement = $this->db->prepare("select text from comments where post_id = :postID");
             $statement->bindValue(":postID", $this->getPostID());
             $statement->execute();

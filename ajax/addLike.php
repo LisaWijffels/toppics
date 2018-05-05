@@ -3,9 +3,13 @@
 include_once("../classes/Db.class.php");
 include_once("../classes/Post.class.php");
 
-    if (!empty($_POST)) {
-        try
-		{
+    if (!empty($_POST)) 
+    {
+
+        session_start();
+        $loggeduser = $_SESSION['username'];
+
+    
             $likesUpdate = $_POST['likes'];
             $postID = $_POST['postID'];
             $likeUnlike = $_POST['likeUnlike'];
@@ -34,14 +38,6 @@ include_once("../classes/Post.class.php");
                 $l->Likes($post_likes);
                 
             }
-
-        
-        }
-
-        catch(Exception $e)
-		{
-			$response['status'] = 'error';
-		}
 
         header('Content-Type: application/json');
         echo json_encode( $response );
