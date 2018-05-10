@@ -9,6 +9,7 @@ include_once('Db.class.php');
                 private $post_likes;
                 private $post_user_id;
                 private $post_date;
+                private $user_id;
                 private $db;
 
                 public function getPost_id()
@@ -45,6 +46,19 @@ include_once('Db.class.php');
                 public function getPost_image()
                 {
                         return $this->post_image;
+                }
+
+                public function getUser_id()
+                {
+                        return $this->user_id;
+                }
+
+                
+                public function setUser_id($user_id)
+                {
+                        $this->user_id = $user_id;
+
+                        return $this;
                 }
 
         
@@ -253,14 +267,26 @@ include_once('Db.class.php');
                 public function Likes($post_likes)
                 {
                         $conn = Db::getInstance();
-                        $stmt = $conn->prepare("UPDATE posts SET post_likes = :post_likes WHERE post_id = :post_id"); 
+                        $stmt = $conn->prepare("UPDATE liketable SET like_id = :post_likes WHERE post_id = :post_id"); 
                         $stmt->bindParam(":post_id", $this->post_id);
                         $stmt->bindParam(":post_likes", $post_likes);
                         $result = $stmt->execute();
                         return $result;
                 }
 
+                public function checkLike(){
+
+                        $db = Db::getInstance();
+                        $stmt = $db->prepare("SELECT * FROM liketable WHERE user_id = :user_id");
+                        $stmt->bindValue(":user_id", $this->user_id);
+                        $stmt->execute();
                 
+                        return $stmt->fetchAll();
+                }
+
+                
+                
+
                 
 
                 

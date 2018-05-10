@@ -49,7 +49,7 @@ if ( !empty($_POST) ) {
         <?php echo $error ?>
     <?php endif; ?>
 
-    <form action="" method="post" class="formlogin">
+    	<form action="" method="post" class="formlogin">
 
         <label class="label" for="username">Username</label><br>
         <input class="inputfield" type="text" name="username"><br>
