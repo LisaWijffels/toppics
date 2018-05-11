@@ -8,7 +8,7 @@ session_start();
 // Enkel deze pagina tonen als er een user ingelogged is
 if(isset ($_SESSION['username']) ){
     $loggeduser = $_SESSION['username'];
-    echo "logged user is ".$loggeduser;
+    
 } else {
     header('Location: login.php');
 }
@@ -81,11 +81,17 @@ if(isset($_POST["btnPassword"]) ){
     <h2 class="h2">Profiel bewerken</h2>
         <div class="profile">
         <?php if(isset($error) ): ?>
-            <?php echo $error ?>
+            <div class="errorMessage"><p><?php echo $error ?></p></div>
         <?php endif; ?>
             <div>
                 <h3>Profile picture</h3>
-                <div id="posted_image" style='background-image:url("user_images/ <?php echo $userInfo['user_picture'] ?>")'></div>
+                <div id="posted_image" style='background-image:url("<?php if($userInfo['user_picture'] ==""){
+                    echo "default-user-photo.png";
+                } else {
+                    echo "user_images/ ".$userInfo['user_picture'];
+                }
+                    
+                ?>")'></div>
                 
                 <div id="formEditPic" class="hidden">
                     <form method="post" enctype="multipart/form-data">
@@ -120,7 +126,7 @@ if(isset($_POST["btnPassword"]) ){
                 
                 <div id="formEditEmail" class="hidden">
                     <form method="post">
-                        <input class="profile__form inputfield" type="text" name="email" value="<?php echo $userInfo['email'] ?>"><br>
+                        <input class="profile__form inputfield" type="email" name="email" value="<?php echo $userInfo['email'] ?>"><br>
                         <input class="profile__form button" type="submit" name="btnEmail" value="Confirm">
                     </form>
                 </div>
@@ -134,14 +140,14 @@ if(isset($_POST["btnPassword"]) ){
                 
                 <div id="formEditPassword" class="hidden">
                     <form method="post">
-                        <label for="passord" class="formEdit__label">Current password</label><br>
+                        <label for="password" class="formEdit__label">Current password</label><br>
                         <input class="profile__form inputfield" type="password" name="password"><br>
 
-                        <label for="passord" class="formEdit__label">New password</label><br>
-                        <input class="profile__form inputfield" type="password" name="password"><br>
+                        <label for="password_new" class="formEdit__label">New password</label><br>
+                        <input class="profile__form inputfield" type="password" name="password_new"><br>
 
-                        <label for="passord" class="formEdit__label">Confirm new password</label><br>
-                        <input class="profile__form inputfield" type="password" name="password" ><br>
+                        <label for="password_confirmation" class="formEdit__label">Confirm new password</label><br>
+                        <input class="profile__form inputfield" type="password" name="password_confirmation" ><br>
                         <input class="profile__form button" type="submit" name="btnPassword" value="Confirm">
                     </form>
                 </div>

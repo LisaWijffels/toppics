@@ -31,11 +31,11 @@ if ( !empty($_POST) ) {
 <body>
     <img src="img/logo2.png" alt="logo" id="logo">
     <?php if(isset($error) ): ?>
-        <?php echo $error ?>
+        <div class="errorMessage"><p><?php echo $error ?></p></div>
     <?php endif; ?>
     <form action="" method="post" class="formlogin">
         <label class="label" for="username">Username</label><br>
-        <input class="inputfield" type="text" name="username"><br>
+        <input class="inputfield" type="text" name="username" value="<?php if(isset($_POST['username'])) { echo $_POST['username']; } ?>"><br>
         <label class="label" for="password">Password</label><br>
         <input class="inputfield" type="password" name="password"><br>
         <input class="button" type="submit" value="Login">

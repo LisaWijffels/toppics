@@ -107,8 +107,11 @@ include_once('Db.class.php');
                                         $width, $height);
                         imagejpeg($thumb, $myname, 80);
 
-                        
-                        $save_path= dirname(__FILE__) . '\..\post_images\ ';
+                        if(!defined('__ROOT__')){
+                                define('__ROOT__', dirname(dirname(__FILE__)));
+                        }
+                            
+                        $save_path= __ROOT__.'/post_images/ ';
                         rename($myname, $save_path . $myname);
                         
                         $this->post_image = $myname;
@@ -222,7 +225,7 @@ include_once('Db.class.php');
 
                 public static function LoadMore($lastId){
                         $conn = Db::getInstance();
-                        $stm = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username FROM posts, users WHERE posts.post_user_id = users.id AND posts.post_id < :lastId ORDER BY post_date desc limit 20");
+                        $stm = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username FROM posts, users WHERE posts.post_user_id = users.id AND posts.post_id < :lastId ORDER BY post_date desc limit 2");
                         $stm->bindValue(":lastId", $lastId);
                         $stm->execute();
 

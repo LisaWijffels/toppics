@@ -19,6 +19,18 @@ main{
     display:block;
 }
 
+.errorMessage{
+    border-radius: 15px;
+    padding: 5px 15px 5px 15px;
+    margin-top: 10px;
+    color: white;
+    background-color:#B73636;
+    margin-bottom: 10px;
+    width: 300px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
 #logo
 {
     display: block;
@@ -284,6 +296,10 @@ h1
     padding-bottom: 20px;
 }
 
+#formEditPassword{
+    margin-bottom:20px;
+}
+
 
 .profile__form
 {
@@ -358,7 +374,7 @@ input[type="file"]{
 #posted_image{
     width:200px;
     height:200px;
-    background-image:url(../img/default-user-photo.png);
+    
     background-size:cover;
     margin-left:auto;
     margin-right:auto;

@@ -15,7 +15,12 @@ function readURL(input) {
 
 $("#post_image").change(function () {
     console.log("file changed");
-    $('#posted_image').toggleClass('hidden visible');
+    if($('#posted_image').hasClass( "visible" )){
+
+    } else {
+        $('#posted_image').toggleClass('hidden visible');
+    }
+    
     readURL(this);
 });
 
@@ -65,6 +70,8 @@ $("#buttondrop").on("click", function (e) {
                             
                         </div>`;
                 $(".feed").prepend(newPost);
+                $('#postForm')[0].reset();
+                $('#posted_image').toggleClass('visible hidden');
 
             } else {
                 console.log("Ajax not getting right value");
@@ -75,7 +82,7 @@ $("#buttondrop").on("click", function (e) {
         });
 
     } catch ($e) {
-        var newError = `<div class="error"><p>${$e}</p></div>`;
+        var newError = `<div class="errorMessage"><p>${$e}</p></div>`;
         $("main").prepend(newError);
     }
 });

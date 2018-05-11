@@ -180,8 +180,12 @@ include_once("Post.class.php");
             
                 return $key;
             }
+            if(!defined('__ROOT__')){
+                define('__ROOT__', dirname(dirname(__FILE__)));
+            }
             
-            $save_path= dirname(__FILE__) . '\..\user_images\ ';
+            $save_path= __ROOT__.'/user_images/ ';
+            
             $myname = random_string(10).$this->user_picture['name'];
             move_uploaded_file($this->user_picture['tmp_name'], $save_path.$myname);
 

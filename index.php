@@ -1,5 +1,7 @@
 <?php
 include_once("classes/Block.class.php");
+include_once("datetime.php");
+
 session_start();
 
 if(isset ($_SESSION['username'])){
@@ -20,7 +22,7 @@ if ( isset($_GET['search']) ){
     
 }
 
-include_once("datetime.php");
+
 $blocked = new Block();
 $blocked->setUser_id($_SESSION['username']);
 $checkBlock = $blocked->checkBlock();

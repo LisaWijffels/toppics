@@ -29,7 +29,7 @@
 
         private function passwordsAreEqual(){
             if( $this->password !== $this->passwordConfirmation ) {
-                throw new Exception("Password must be equal.");
+                throw new Exception("Passwords must be equal.");
             }
             
             return true;
