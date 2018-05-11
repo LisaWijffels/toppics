@@ -28,7 +28,18 @@ if ( !empty($_GET) ){
     $error = true;
 }
 
-
+try{
+    $userfollow = new Follow();
+    $username = $_GET['user'];
+    $loggeduser = $_SESSION['username'];
+    $userfollow->setUsername($username);
+    $userfollow->setLoggeduser($loggeduser);
+    $userfollow->CheckFollow();
+}
+catch(Exception $e)
+{
+    $errorF = $e->getMessage();
+}
 
 
 ?><!DOCTYPE html>
@@ -44,6 +55,14 @@ if ( !empty($_GET) ){
 
     <?php include_once("nav.inc.php"); ?>
 
+    <div class="userFollow">
+        <p class="followed"> </p>
+
+        <?php if(!isset($errorF)): ?>
+            <input type="text" value="+ follow" class="follow button">  
+        <?php endif; ?>
+    </div>
+
 <div class="postList">
 
 <div class=feed>
@@ -51,7 +70,7 @@ if ( !empty($_GET) ){
         <?php foreach ($Userposts as $u): ?>
             <div class="feed__post" data-id="<?php echo $u[0]['post_id'] ?>">
                 
-                <div class="flexrow flex_between"><a href="user.php?user=<?php echo $p['username']; ?>" class="feed__postUser"><?php echo $u['username']?>
+                <div class="flexrow flex_between"><a href="user.php?user=<?php echo $p['username']; ?>" data-id="<?php echo $u['id']; ?>" class="feed__postUser"><?php echo $u['username']?>
                 </a><?php if($u['username'] == $_SESSION['username']): ?>
                 <a class="link__edit button" href="editpost.php?post=<?php echo $u[0]['post_id']; ?>">✏️</a><?php endif; ?></div>
                 <a href="details.php?post=<?php echo $u[0]['post_id']; ?>" class="post__id" data-id="<?php echo $u[0]['post_id']; ?>">
@@ -75,7 +94,7 @@ if ( !empty($_GET) ){
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<script src="script/follow.js"></script>
 
 </body>
 </html>

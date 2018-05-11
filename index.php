@@ -73,7 +73,7 @@ foreach($checkBlock as $b){
                         
 
                         <div class="flexrow flex_between">
-                        <a href="user.php?user=<?php echo $p['username']; ?>" class="feed__postUser"><?php echo $p['username']?></a>
+                        <a href="user.php?user=<?php echo $p['username']; ?>" data-id="<?php echo $u['id']; ?>" class="feed__postUser"><?php echo $p['username']?></a>
                             <?php if($p['username'] == $_SESSION['username']): ?>
                                 <a class="link__edit button" href="editpost.php?post=<?php echo $p['post_id']; ?>">✏️</a>
                             <?php endif; ?>

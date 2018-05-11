@@ -504,6 +504,25 @@ input[type="file"]{
     height:20px;
 }
 
+/* follow */
+
+.follow
+{
+    text-transform: uppercase;
+    padding: 10px;
+    width: 120px;
+    text-align: center;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.followed
+{
+    margin-left: 20px;
+    color: white;
+    font-weight: bold;
+}
+
 @media (min-width: 40em)
 {
     nav 
