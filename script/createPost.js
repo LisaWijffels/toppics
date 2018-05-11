@@ -59,16 +59,28 @@ $("#buttondrop").on("click", function (e) {
                 console.log("Ajax was successfull");
 
                 var newPost = `
-                        <div class="feed__post">
-                            <p class="feed__postUser">${res.post_user}</p>
-                            <img class="feed__postImg" src="post_images/ ${res.post_image}"></a>
-                            <p class="feed__postDesc">${post_desc}</p>
-                            <div class="feed__flex">  
-                                <p class="feed__postLikes">💗${"0"} likes</p>
-                                <p class="feed__postDate">${res.post_date}</p>
-                            </div>
+                        <div class="feed__post" data-id="${res.post_id}">
+                            <div class="flexrow flex_between">
+                                <a href="user.php?user=${res.post_user}" class="feed__postUser">${res.post_user}</a>
                             
-                        </div>`;
+                            <a class="link__block button" href="#" data-id="${res.post_id}">⛔</a>
+                        </div>
+                        <a href="details.php?post=${res.post_id}" class="post__id" data-id="${res.post_id}">
+                        <img class="feed__postImg" src="post_images/ ${res.post_image}"></a>
+                        <p class="feed__postDesc">${res.post_desc}</p>
+                        
+                        <div class="feed__flex">  
+                            <p class="feed__postLikes" data-like="like" data-id="${res.post_id}" >
+                            💗<span class="postLikes">0</span> likes</p>
+
+                            <a href="details.php?post=${res.post_id}" class="feed__postComments">💬</a>
+
+                            
+                            <p class="feed__postDate">Just now</p>
+
+                            
+                        </div>
+                    </div>`;
                 $(".feed").prepend(newPost);
                 $('#postForm')[0].reset();
                 $('#posted_image').toggleClass('visible hidden');

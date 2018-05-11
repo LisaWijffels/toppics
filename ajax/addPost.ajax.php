@@ -12,10 +12,12 @@
         $post_image = $_FILES['post_image'];
         $post_desc = $_POST['post_desc'];
         $post_user = $_SESSION['username'];
+        
         $post_tags = $_POST['post_tags'];
         
         
         $post->setPost_user_id($post_user);
+        $post->setPost_user($post_user);
         $post->setPost_desc($post_desc);
         $post->setPost_image($post_image);
         $post->Save();
@@ -24,10 +26,10 @@
             $tagsArray = $post->saveTags($post_tags);
             $feedback['tags'] = $tagsArray;
         }
-        
 
+        $feedback['post_desc'] = $post_desc;
         
-        $feedback['post_date'] = date('Y-m-d');
+        $feedback['post_id'] = $post->getPost_id();
         $feedback['post_image'] = $post->getPost_image();
         $feedback['post_user'] = $post_user;
         $feedback['status'] = "success";

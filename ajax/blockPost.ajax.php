@@ -23,7 +23,7 @@ if( !empty($_POST) ){
             $feedback['count'] = "Count exceeded";
             $post = new Post();
             $post->setPost_id($post_id);
-            $feedback['deleted'] = $post->deletePost();
+            $feedback['deleted'] = $post->hidePost();
 
         } else {
             $feedback['count'] = $count;

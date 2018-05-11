@@ -134,6 +134,11 @@ foreach($checkBlock as $b){
             if(res.removed == 1){
                 clicked.removeClass("blocked");
             }
+
+            if(res.deleted != undefined){
+                
+                $('.feed__post[data-id='+post_id+']').fadeOut()
+            }
             
         });
     });

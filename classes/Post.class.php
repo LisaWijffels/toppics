@@ -9,18 +9,12 @@ include_once('Db.class.php');
                 private $post_likes;
                 private $post_user_id;
                 private $post_date;
-                private $user_id;
+                private $post_user;
                 private $db;
 
                 public function getPost_id()
                 {
-                        $conn = Db::getInstance();
-                        $stm = $conn->prepare("SELECT post_id FROM posts WHERE username = :username");
-                        $stm->bindValue(":username", $post_user);
-                        $stm->execute();
-                        $user = $stm->fetch(PDO::FETCH_ASSOC);
-
-                        $this->post_user_id = $user['id'];
+                        
                         return $this->post_id;
                 }
 
@@ -48,20 +42,20 @@ include_once('Db.class.php');
                         return $this->post_image;
                 }
 
-                public function getUser_id()
+                public function getPost_user()
                 {
-                        return $this->user_id;
+                                return $this->post_user;
                 }
 
                 
-                public function setUser_id($user_id)
+                public function setPost_user($post_user)
                 {
-                        $this->user_id = $user_id;
+                                $this->post_user = $post_user;
 
-                        return $this;
+                                return $this;
                 }
 
-        
+                        
                 public function setPost_image($post_image){
                         function random_string($length) {
 
@@ -143,7 +137,7 @@ include_once('Db.class.php');
                         $stm->bindValue(":username", $post_user);
                         $stm->execute();
                         $user = $stm->fetch(PDO::FETCH_ASSOC);
-
+                        
                         $this->post_user_id = $user['id'];
 
                         return $this;
@@ -218,7 +212,7 @@ include_once('Db.class.php');
                 public static function ShowPosts(){
 
                         $conn = Db::getInstance();
-                        $statement = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username FROM posts, users WHERE posts.post_user_id = users.id ORDER BY post_date desc limit 2");
+                        $statement = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username FROM posts, users WHERE posts.post_user_id = users.id  AND posts.active = 1 ORDER BY post_date desc limit 2");
                         $statement->execute();
 
                         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -226,7 +220,7 @@ include_once('Db.class.php');
 
                 public static function LoadMore($lastId){
                         $conn = Db::getInstance();
-                        $stm = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username FROM posts, users WHERE posts.post_user_id = users.id AND posts.post_id < :lastId ORDER BY post_date desc limit 2");
+                        $stm = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username FROM posts, users WHERE posts.post_user_id = users.id  AND posts.active = 1 AND posts.post_id < :lastId ORDER BY post_date desc limit 2");
                         $stm->bindValue(":lastId", $lastId);
                         $stm->execute();
 
@@ -235,11 +229,11 @@ include_once('Db.class.php');
 
                 public static function searchPosts($search){
                         $conn = Db::getInstance();
-                        $stm = $conn->prepare("SELECT * FROM posts, users WHERE posts.post_user_id = users.id");
+                        $stm = $conn->prepare("SELECT * FROM posts, users WHERE posts.post_user_id = users.id AND posts.active = 1;");
                         $stm->execute();
                         $posts = $stm->fetchAll();
                         
-                        $stb = $conn->prepare("SELECT * FROM posts, tags, users WHERE posts.post_id = tags.post_id_link AND posts.post_user_id = users.id");
+                        $stb = $conn->prepare("SELECT * FROM posts, tags, users WHERE posts.post_id = tags.post_id_link AND posts.post_user_id = users.id AND posts.active = 1");
                         $stb->execute();
                         $tags = $stb->fetchAll();
 
@@ -277,6 +271,15 @@ include_once('Db.class.php');
                         return $result;
                 }
 
+                public function hidePost(){
+                        $conn = Db::getInstance();
+                        $stm = $conn->prepare("UPDATE posts SET active = 0 WHERE post_id = :id");
+                        $stm->bindValue(":id", $this->post_id);
+                        $result = $stm->execute();
+
+                        return $result;
+                }
+
                 public function Likes($post_likes)
                 {
                         $conn = Db::getInstance();
@@ -291,7 +294,7 @@ include_once('Db.class.php');
 
                         $db = Db::getInstance();
                         $stmt = $db->prepare("SELECT * FROM liketable WHERE user_id = :user_id");
-                        $stmt->bindValue(":user_id", $this->user_id);
+                        $stmt->bindValue(":user_id", $this->post_user_id);
                         $stmt->execute();
                 
                         return $stmt->fetchAll();
@@ -302,6 +305,9 @@ include_once('Db.class.php');
 
                 
 
+                
+
+                
                 
         }
 
