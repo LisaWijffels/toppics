@@ -16,7 +16,7 @@ $('.show_more').on("click", function(){
             if(res.user == res.posts[i]['username']){
                 console.log("SAME USER");
                 $content = $(`<div class="flexrow flex_between">
-            <p class="feed__postUser">${res.posts[i]['username']}</p>
+            <a href="user.php?user=${res.posts[i]['username']}" data-id="${res.posts[i]['id']}" class="feed__postUser">${res.posts[i]['username']}</a>
             <a class="link__edit button" href="editpost.php?post=${res.posts[i]['post_id']}">✏️</a>
             <a class="link__block button" href="#" data-id="${res.posts[i]['post_id']}" >⛔</a></div>
             <a href="details.php?post=${res.posts[i]['post_id']}">
@@ -31,7 +31,7 @@ $('.show_more').on("click", function(){
             } else {
                 console.log("OTHER USER");
                 $content = $(`<div class="flexrow flex_between">
-            <p class="feed__postUser">${res.posts[i]['username']}</p>
+            <a href="user.php?user=${res.posts[i]['username']}" data-id="${res.posts[i]['id']}" class="feed__postUser">${res.posts[i]['username']}</a>
             
             <a class="link__block button" href="#" data-id="${res.posts[i]['post_id']}" >⛔</a></div>
             <a href="details.php?post=${res.posts[i]['post_id']}">
