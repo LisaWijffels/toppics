@@ -72,6 +72,31 @@ include_once("Db.class.php");
             }
         }
 
+        public static function ShowFollowedPosts(){
+
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT * FROM posts, users, follow 
+            WHERE posts.post_user_id = users.id AND users.id in (post_user_id = follow.users_id, follower_id)
+            ORDER BY post_date desc limit 10");
+            $statement->execute();
+
+            return $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        }
+
+        public function LoadMoreFollowPosts($lastId){
+            $conn = Db::getInstance();
+            $stm = $conn->prepare("SELECT * FROM posts, users, follow 
+            WHERE posts.post_user_id = users.id AND users.id in (post_user_id = users_id, follower_id) AND posts.post_id < :lastId 
+            ORDER BY post_date desc limit 10");
+            $stm->bindValue(":lastId", $lastId);
+            //$stm->bindValue(":follower_id", $this->loggeduser);
+            $stm->execute();
+
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+
         
     }     
 ?>

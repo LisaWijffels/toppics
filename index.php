@@ -21,8 +21,7 @@ if ( isset($_GET['search']) ){
     $posts = Post::searchPosts($search);
         
 } else {
-    $posts = Post::ShowPosts();
-    
+    $posts = Follow::ShowFollowedPosts();    
 }
 
 
@@ -100,7 +99,7 @@ foreach($checkBlock as $b){
         </div>
 
         <div class="show_more_main">
-            <span class="show_more button">Show more</span>
+            <span class="show_more_follow button">Show more</span>
         </div>
     </div>
 

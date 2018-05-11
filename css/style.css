@@ -523,6 +523,17 @@ input[type="file"]{
     font-weight: bold;
 }
 
+.show_more_follow
+{
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    cursor: pointer;
+    width:200px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
 @media (min-width: 40em)
 {
     nav 

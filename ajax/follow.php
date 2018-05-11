@@ -3,6 +3,7 @@
 include_once("../classes/Db.class.php");
 include_once("../classes/User.class.php");
 include_once("../classes/Follow.class.php");
+
 session_start();
        
             $username = $_POST['user'];
