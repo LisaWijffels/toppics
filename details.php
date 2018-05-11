@@ -1,4 +1,9 @@
 <?php
+
+spl_autoload_register(function($class) {
+    include_once("classes/" . $class . ".class.php");
+});
+
 session_start();
 
 if(!isset ($_SESSION['username'])){
@@ -7,9 +12,6 @@ if(!isset ($_SESSION['username'])){
 
 include_once("datetime.php");
 
-include_once("classes/Post.class.php");
-include_once("classes/Db.class.php");
-include_once("classes/Comment.class.php");
 
 if ( !empty($_GET) ){
     $postId = $_GET['post'];

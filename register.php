@@ -1,6 +1,9 @@
 <?php
-include_once("classes/Db.class.php");
-include_once("classes/User.class.php");
+
+spl_autoload_register(function($class) {
+    include_once("classes/" . $class . ".class.php");
+});
+
 include_once("helpers/Security.class.php");
     
 if ( !empty($_POST) ) {

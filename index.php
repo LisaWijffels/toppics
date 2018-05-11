@@ -1,7 +1,10 @@
 <?php
-include_once("classes/Block.class.php");
+
+spl_autoload_register(function($class) {
+    include_once("classes/" . $class . ".class.php");
+});
+
 include_once("datetime.php");
-include_once("classes/Post.class.php");
 
 session_start();
 

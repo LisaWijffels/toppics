@@ -1,3 +1,19 @@
+<?php
+
+spl_autoload_register(function($class) {
+    include_once("classes/" . $class . ".class.php");
+});
+
+include_once("datetime.php");
+
+session_start();
+
+if(isset ($_SESSION['username'])){
+    //echo "logged user is ".$_SESSION['username'];
+} else {
+    header('Location: login.php');
+}
+
 if ( isset($_GET['search']) ){
     $search = $_GET['search'];
     $posts = Post::searchPosts($search);

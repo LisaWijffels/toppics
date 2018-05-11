@@ -1,7 +1,9 @@
 <?php
 session_start();
 
-include_once("classes/Post.class.php");
+spl_autoload_register(function($class) {
+    include_once("classes/" . $class . ".class.php");
+});
 
 if ( !empty($_GET) ){
     $postId = $_GET['post'];
