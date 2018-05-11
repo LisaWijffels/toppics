@@ -176,6 +176,7 @@ include_once('Db.class.php');
                         $tags = explode("," ,$tagsNoSpace);
 
                         $conn = Db::getInstance();
+
                         foreach ($tags as $t){
                                 $stm = $conn->prepare("INSERT INTO tags (post_id_link, tag_name) VALUES (:post_id, :tag_name)");
                                 $stm->bindValue(":post_id", $this->post_id);
@@ -234,16 +235,25 @@ include_once('Db.class.php');
 
                 public static function searchPosts($search){
                         $conn = Db::getInstance();
-                        $stm = $conn->prepare("SELECT * FROM posts, tags WHERE tags.post_id = posts.post_id");
-                        
+                        $stm = $conn->prepare("SELECT * FROM posts, users WHERE posts.post_user_id = users.id");
                         $stm->execute();
-                        $posts = $stm->fetchAll(PDO::FETCH_ASSOC);
+                        $posts = $stm->fetchAll();
+                        
+                        $stb = $conn->prepare("SELECT * FROM posts, tags, users WHERE posts.post_id = tags.post_id_link AND posts.post_user_id = users.id");
+                        $stb->execute();
+                        $tags = $stb->fetchAll();
 
                         $foundPosts = [];
                         foreach($posts as $p){
-                                if(strpos(strtolower($p['post_desc']), strtolower($search)) !== false || strpos(strtolower($p['tag_name']), strtolower($search)) !== false){
-                                    $foundPosts[] = $p;
+                                if(strpos(strtolower($p['post_desc']), strtolower($search)) !== false){
+                                        $foundPosts[$p['post_id']] = $p;
                                 }
+                        }
+                        foreach($tags as $t){
+                                if(strpos(strtolower($t['tag_name']), strtolower($search)) !== false){
+                                        $foundPosts[$t['post_id']] = $t;
+                                }
+
                         }
 
                         return $foundPosts;

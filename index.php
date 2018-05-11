@@ -1,6 +1,7 @@
 <?php
 include_once("classes/Block.class.php");
 include_once("datetime.php");
+include_once("classes/Post.class.php");
 
 session_start();
 
@@ -10,13 +11,12 @@ if(isset ($_SESSION['username'])){
     header('Location: login.php');
 }
 
-include_once("classes/Post.class.php");
+
 
 if ( isset($_GET['search']) ){
     $search = $_GET['search'];
     $posts = Post::searchPosts($search);
-    echo $search;
-    
+        
 } else {
     $posts = Post::ShowPosts();
     

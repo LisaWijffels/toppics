@@ -21,7 +21,8 @@
         $post->Save();
 
         if($post_tags != ""){
-            $post_tags_array = $post->saveTags($post_tags);
+            $tagsArray = $post->saveTags($post_tags);
+            $feedback['tags'] = $tagsArray;
         }
         
 
