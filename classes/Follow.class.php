@@ -76,7 +76,7 @@ include_once("Db.class.php");
 
             $conn = Db::getInstance();
             $statement = $conn->prepare("SELECT * FROM posts, users, follow 
-            WHERE posts.post_user_id = users.id AND users.id in (post_user_id = follow.users_id, follower_id)
+            WHERE posts.post_user_id = users.id AND users.id in (follow.users_id, follower_id)
             ORDER BY post_date desc limit 10");
             $statement->execute();
 
