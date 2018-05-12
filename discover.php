@@ -17,6 +17,7 @@ if(isset ($_SESSION['username'])){
 if ( isset($_GET['search']) ){
     $search = $_GET['search'];
     $posts = Post::searchPosts($search);
+    var_dump($posts);
         
 } else {
     $posts = Post::ShowPosts();
@@ -57,7 +58,7 @@ foreach($checkBlock as $b){
                         
 
                         <div class="flexrow flex_between">
-                        <a href="user.php?user=<?php echo $p['username']; ?>" data-id="<?php echo $u['id']; ?>" class="feed__postUser"><?php echo $p['username']?></a>
+                        <a href="user.php?user=<?php echo $p['username']; ?>" data-id="<?php echo $p['id']; ?>" class="feed__postUser"><?php echo $p['username']?></a>
                             <?php if($p['username'] == $_SESSION['username']): ?>
                                 <a class="link__edit button" href="editpost.php?post=<?php echo $p['post_id']; ?>">✏️</a>
                             <?php endif; ?>
@@ -92,7 +93,7 @@ foreach($checkBlock as $b){
 <script src="script/createPost.js"></script>
 <script src="script/showMore.js"></script>
 <script src="script/likePost.js"></script>
-<script src="script/getLocation.js"></script>
+
     
 <script>
 

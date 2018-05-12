@@ -264,6 +264,10 @@ include_once('Db.class.php');
                         $stb->execute();
                         $tags = $stb->fetchAll();
 
+                        $stl = $conn->prepare("SELECT * FROM posts, users, locations WHERE posts.post_id = locations.location_post_id AND posts.post_user_id = users.id AND posts.active = 1");
+                        $stl->execute();
+                        $locations = $stl->fetchAll();
+
                         $foundPosts = [];
                         foreach($posts as $p){
                                 if(strpos(strtolower($p['post_desc']), strtolower($search)) !== false){
@@ -276,6 +280,15 @@ include_once('Db.class.php');
                                 }
 
                         }
+
+                        foreach($locations as $l){
+                                if(strpos(strtolower($l['location_name']), strtolower($search)) !== false){
+                                        $foundPosts[$l['post_id']] = $l;
+                                }
+
+                        }
+
+                        
 
                         return $foundPosts;
                 }

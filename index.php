@@ -18,7 +18,7 @@ if(isset ($_SESSION['username'])){
 
 if ( isset($_GET['search']) ){
     $search = $_GET['search'];
-    $posts = Post::searchPosts($search);
+    $followposts = Post::searchPosts($search);
         
 } else {
 
