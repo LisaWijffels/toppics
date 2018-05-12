@@ -23,6 +23,8 @@ if ( !empty($_GET) ){
     $postTags = $post->postTags();
     
     $postComments = $post->postComments();
+
+    $postLocation = $post->postLocation();
     
 } else {
     $error = true;
@@ -69,6 +71,11 @@ try{
             <div class="feed">
                 <div class="feed__post">
                     <p class="feed__postUser"><?php echo $postDetails[0]['username']?></p>
+                    <?php foreach($postLocation as $l): ?>
+                            <div>
+                                <p> 🌍<span id="post_location"><?php echo $l['location_name'] ?></span></p>
+                            </div>
+                        <?php endforeach; ?>
                     <a href="details.php?post=<?php echo $postDetails[0]['post_id']; ?>" class="post__id" data-id="<?php echo $postDetails[0]['post_id']; ?>">
                     <img class="feed__postImg" src="post_images/ <?php echo $postDetails[0]['post_image']; ?>"></a>
                     <p class="feed__postDesc"><?php echo $postDetails[0]['post_desc']; ?></p>
@@ -80,7 +87,8 @@ try{
                     <div class="feed__flex">  
                         <p class="feed__postLikes">💗<?php echo $postDetails[0]['post_likes']; ?> likes</p>
                         
-                        <p class="feed__postDate"><?php echo $postDetails[0]['post_date']; ?></p>
+                        <?php $timeago=get_timeago(strtotime($postDetails[0]['post_date'])); ?>
+                            <p class="feed__postDate"><?php echo $timeago; ?></p>
                     </div>
                 
                         <div class="newComment">

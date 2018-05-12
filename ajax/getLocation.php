@@ -1,5 +1,7 @@
 <?php
 
+include_once("../classes/Post.class.php");
+
 //if latitude and longitude are submitted
 if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     //send request and receive json data by latitude and longitude
@@ -7,13 +9,21 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     $json = @file_get_contents($url);
     $data = json_decode($json);
     $status = $data->status;
+
+    
     
     //if request status is successful
     if($status == "OK"){
         //get address from json data
         $location = $data->results[0]->formatted_address;
+
+        //save
+        $postID = $_POST['postID'];
+        $post_location = new Post();
+        $post_location->SaveLocation($location);
+
     }else{
-        $location =  'poop';
+        $location =  'no location found';
     }
     
     //return address to ajax 

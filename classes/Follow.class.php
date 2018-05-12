@@ -74,16 +74,6 @@ include_once("Db.class.php");
             }
         }
 
-        /*public function UserFollowId($loggeduser)
-        {
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT users_id FROM follow WHERE follower_id = :loggeduser");
-            $statement->bindValue(":loggeduser", $this->loggeduser);
-            $statement->execute();
-
-            return $ID = $statement->fetchAll(PDO::FETCH_ASSOC);
-        }*/
-
         public function ShowFollowedPosts($loggeduser){
 
             $conn = Db::getInstance();
@@ -95,7 +85,7 @@ include_once("Db.class.php");
             foreach($ID as $id){
                         
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM posts, users, follow WHERE posts.post_user_id = users.id 
+            $statement = $conn->prepare("SELECT * FROM posts, users, follow, locations WHERE posts.post_user_id = users.id 
             AND follower_id = :loggeduser AND users_id = :id AND users.id in (follower_id, users_id)
             ORDER BY post_date desc limit 5");
             $statement->bindValue(":loggeduser", $this->loggeduser);
@@ -117,7 +107,7 @@ include_once("Db.class.php");
             foreach($ID as $id){
 
             $conn = Db::getInstance();
-            $stmt = $conn->prepare("SELECT * FROM posts, users, follow 
+            $stmt = $conn->prepare("SELECT * FROM posts, users, follow, locations 
             WHERE posts.post_user_id = users.id AND follower_id = :loggeduser AND users_id = :id 
             AND users.id in (follower_id, users_id) AND posts.post_id < :lastId 
             ORDER BY post_date desc limit 5");

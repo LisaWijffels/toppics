@@ -11,6 +11,7 @@ include_once('Db.class.php');
                 private $post_date;
                 private $post_user;
                 private $db;
+                private $location;
 
                 public function getPost_id()
                 {
@@ -154,6 +155,22 @@ include_once('Db.class.php');
                         return $this;
                 }
 
+                public function getLocation()
+                {
+                        return $this->location;
+                }
+
+                public function SaveLocation($location)
+                {
+                        $conn = Db::getInstance();
+                        $stm = $conn->prepare("INSERT INTO locations (post_location, location_post_id) VALUES (:post_id, :location_post_id)");
+                        $stm->bindValue(":post_location", $location);
+                        $stm->bindValue(":post_id", $this->post_id);
+                        $result = $stm->execute();
+        
+                        return $result;
+                }
+
                 public function Save() {
                         $conn = Db::getInstance();
                         $stm = $conn->prepare("INSERT INTO posts (post_desc, post_image, post_user_id, post_date) VALUES (:post_desc, :post_image, :post_user_id, now())");
@@ -200,6 +217,14 @@ include_once('Db.class.php');
                         return $stm->fetchAll(PDO::FETCH_ASSOC);
                 }
 
+                public function postLocation(){
+                        $conn = Db::getInstance();
+                        $stm = $conn->prepare("SELECT `post_id`, `location_post_id`, `location_name`, `id` FROM posts, locations WHERE post_id = :post_id AND locations.location_post_id = posts.post_id");
+                        $stm->bindValue(":post_id", $this->post_id);
+                        $stm->execute();
+                        return $stm->fetchAll(PDO::FETCH_ASSOC);
+                }
+
                 public function postComments(){
                         $conn = Db::getInstance();
                         $stm = $conn->prepare("SELECT * FROM comments, users WHERE post_id = :post_id AND comments.user_id = users.id");
@@ -212,7 +237,7 @@ include_once('Db.class.php');
                 public static function ShowPosts(){
 
                         $conn = Db::getInstance();
-                        $statement = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username FROM posts, users WHERE posts.post_user_id = users.id  
+                        $statement = $conn->prepare("SELECT * FROM posts, users WHERE posts.post_user_id = users.id  
                         AND posts.active = 1 ORDER BY post_date desc limit 20");
                         $statement->execute();
 
@@ -221,8 +246,8 @@ include_once('Db.class.php');
 
                 public static function LoadMore($lastId){
                         $conn = Db::getInstance();
-                        $stm = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username 
-                        FROM posts, users WHERE posts.post_user_id = users.id  AND posts.active = 1 AND posts.post_id < :lastId ORDER BY post_date desc limit 20");
+                        $stm = $conn->prepare("SELECT * FROM posts, users WHERE posts.post_user_id = users.id 
+                        AND posts.active = 1 AND posts.post_id < :lastId ORDER BY post_date desc limit 20");
                         $stm->bindValue(":lastId", $lastId);
                         $stm->execute();
 
@@ -302,14 +327,6 @@ include_once('Db.class.php');
                         return $stmt->fetchAll();
                 }
 
-                
-                
-
-                
-
-                
-
-                
                 
         }
 
