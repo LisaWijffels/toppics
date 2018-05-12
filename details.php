@@ -120,6 +120,9 @@ try{
 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    <script src="script/likePost.js"></script>
+   <script src="script/getLocation.js"></script>
+
+
     <script>
         $(".postForm__button").on("click", function(e){
             let comment = $(".postForm__text").val();

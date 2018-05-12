@@ -92,6 +92,7 @@ foreach($checkBlock as $b){
 <script src="script/createPost.js"></script>
 <script src="script/showMore.js"></script>
 <script src="script/likePost.js"></script>
+<script src="script/getLocation.js"></script>
     
 <script>
 
