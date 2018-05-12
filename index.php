@@ -52,12 +52,13 @@ foreach($checkBlock as $b){
 <body>
 
     <?php include_once("nav.inc.php"); ?>
-
+    <div class="errorMessage hidden"></div>
     <main>
         <h1>DROP A TOP PIC</h1>
 
         <form action="" method="post" enctype="multipart/form-data" class="formToppic" id="postForm">
             <label for="post_image" class="file_upload">Upload an image</label>
+            <input type="hidden" name="MAX_FILE_SIZE" value="10000" />
             <input type="file" name="post_image" id="post_image"><br>
             <div id="posted_image" class="hidden post_image_size"></div>
             <input class="inputfield post_desc" type="text" name="post_desc" placeholder="What's your topic about?"><br>
@@ -75,10 +76,17 @@ foreach($checkBlock as $b){
                     <div class="feed__post" data-id="<?php echo $f['post_id'] ?>">
                         
 
+<<<<<<< HEAD
                         <div class="flexrow flex_between">
                         <a href="user.php?user=<?php echo $f['username']; ?>" data-id="<?php echo $f['id']; ?>" class="feed__postUser"><?php echo $f['username']?></a>
                             <?php if($f['username'] == $_SESSION['username']): ?>
                                 <a class="link__edit button" href="editpost.php?post=<?php echo $f['post_id']; ?>">✏️</a>
+=======
+                        <div class="flexrow flex_between flex_align_center">
+                        <a href="user.php?user=<?php echo $p['username']; ?>" data-id="<?php echo $u['id']; ?>" class="feed__postUser"><?php echo $p['username']?></a>
+                            <?php if($p['username'] == $_SESSION['username']): ?>
+                                <a class="link__edit button" href="editpost.php?post=<?php echo $p['post_id']; ?>">✏️</a>
+>>>>>>> mybranch
                             <?php endif; ?>
                             <a class="link__block button <?php if(in_array($f["post_id"], $blockArray)): ?>blocked<?php endif; ?>" href="#" data-id="<?php echo $f['post_id'] ?>">⛔</a>
                         </div>

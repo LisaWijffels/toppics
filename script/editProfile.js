@@ -84,6 +84,7 @@ function readURL(input) {
 
     reader.onload = function(e) {
         var image = e.target.result;
+        
         $('#posted_image').css('background-image', 'url('+image+')');
         
     }
@@ -96,4 +97,5 @@ $("#post_image").change(function() {
     console.log("file changed");
     
     readURL(this);
+    
 });

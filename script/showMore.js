@@ -15,7 +15,7 @@ $('.show_more').on("click", function(){
         for(var i = 0; i < res.posts.length; i++) {
             if(res.user == res.posts[i]['username']){
                 console.log("SAME USER");
-                $content = $(`<div class="flexrow flex_between">
+                $content = $(`<div class="flexrow flex_between flex_align_center">
             <a href="user.php?user=${res.posts[i]['username']}" data-id="${res.posts[i]['id']}" class="feed__postUser">${res.posts[i]['username']}</a>
             <a class="link__edit button" href="editpost.php?post=${res.posts[i]['post_id']}">✏️</a>
             <a class="link__block button" href="#" data-id="${res.posts[i]['post_id']}" >⛔</a></div>
@@ -30,7 +30,7 @@ $('.show_more').on("click", function(){
 
             } else {
                 console.log("OTHER USER");
-                $content = $(`<div class="flexrow flex_between">
+                $content = $(`<div class="flexrow flex_between flex_align_center">
             <a href="user.php?user=${res.posts[i]['username']}" data-id="${res.posts[i]['id']}" class="feed__postUser">${res.posts[i]['username']}</a>
             
             <a class="link__block button" href="#" data-id="${res.posts[i]['post_id']}" >⛔</a></div>
@@ -75,7 +75,7 @@ $('.show_more_follow').on("click", function(){
         for(var i = 0; i < res.posts.length; i++) {
             if(res.user == res.posts[i]['username']){
                 console.log("SAME USER");
-                $content = $(`<div class="flexrow flex_between">
+                $content = $(`<div class="flexrow flex_between flex_align_center">
             <a href="user.php?user=${res.posts[i]['username']}" data-id="${res.posts[i]['id']}" class="feed__postUser">${res.posts[i]['username']}</a>
             <a class="link__edit button" href="editpost.php?post=${res.posts[i]['post_id']}">✏️</a>
             <a class="link__block button" href="#" data-id="${res.posts[i]['post_id']}" >⛔</a></div>
@@ -90,7 +90,7 @@ $('.show_more_follow').on("click", function(){
 
             } else {
                 console.log("OTHER USER");
-                $content = $(`<div class="flexrow flex_between">
+                $content = $(`<div class="flexrow flex_between flex_align_center">
             <a href="user.php?user=${res.posts[i]['username']}" data-id="${res.posts[i]['id']}" class="feed__postUser">${res.posts[i]['username']}</a>
             
             <a class="link__block button" href="#" data-id="${res.posts[i]['post_id']}" >⛔</a></div>

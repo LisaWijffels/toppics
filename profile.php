@@ -79,10 +79,11 @@ if(isset($_POST["btnPassword"]) ){
 
     <?php include_once("nav.inc.php"); ?>
 
-
+    
     <main>
     <h2 class="h2">Profiel bewerken</h2>
         <div class="profile">
+        <div class="errorMessage hidden"></div>
         <?php if(isset($error) ): ?>
             <div class="errorMessage"><p><?php echo $error ?></p></div>
         <?php endif; ?>

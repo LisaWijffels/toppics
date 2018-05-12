@@ -47,7 +47,7 @@ if($_SESSION['username'] != $postDetails[0]['username']){
     <?php include_once("nav.inc.php"); ?>
     <?php if(!isset($error) ): ?>
     <?php if(!isset($myPost) ): ?>
-    <main class="flexrow">
+    <main id="mainEditPost">
     
         
 
@@ -80,7 +80,7 @@ if($_SESSION['username'] != $postDetails[0]['username']){
                 </p>
                 
                 <form method="post">
-                    <div class="flexrow flex_between flex_align_center">
+                    <div class="flexrow flex_between flex_align_center addTag">
                         <input type="text" name="addTag" id="addTag" class="taginput" placeholder="type a tag">
                         <input type="submit" value="Voeg tag toe" class="button" id="btnAddTag">
                     </div>  
