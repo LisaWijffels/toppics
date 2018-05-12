@@ -163,7 +163,7 @@ include_once('Db.class.php');
                 public function SaveLocation($location)
                 {
                         $conn = Db::getInstance();
-                        $stm = $conn->prepare("INSERT INTO locations (post_location, location_post_id) VALUES (:post_id, :location_post_id)");
+                        $stm = $conn->prepare("INSERT INTO locations (location_name, location_post_id) VALUES (:post_location, :post_id +1)");
                         $stm->bindValue(":post_location", $location);
                         $stm->bindValue(":post_id", $this->post_id);
                         $result = $stm->execute();

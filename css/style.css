@@ -504,6 +504,11 @@ input[type="file"]{
     height:20px;
 }
 
+.locationpost
+{
+    margin-left: 10px;
+}
+
 /* follow */
 
 .follow

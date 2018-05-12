@@ -73,7 +73,7 @@ try{
                     <p class="feed__postUser"><?php echo $postDetails[0]['username']?></p>
                     <?php foreach($postLocation as $l): ?>
                             <div>
-                                <p> 🌍<span id="post_location"><?php echo $l['location_name'] ?></span></p>
+                                <p class="locationpost"> 🌍<span class="post_location"><?php echo $l['location_name'] ?></span></p>
                             </div>
                         <?php endforeach; ?>
                     <a href="details.php?post=<?php echo $postDetails[0]['post_id']; ?>" class="post__id" data-id="<?php echo $postDetails[0]['post_id']; ?>">
@@ -128,9 +128,9 @@ try{
 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    <script src="script/likePost.js"></script>
-   <script src="script/getLocation.js"></script>
-
-
+   <script src="script/getPostLocation.js"></script>
+   
+   
     <script>
         $(".postForm__button").on("click", function(e){
             let comment = $(".postForm__text").val();

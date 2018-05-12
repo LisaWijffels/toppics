@@ -61,7 +61,7 @@ foreach($checkBlock as $b){
             <input type="file" name="post_image" id="post_image"><br>
             <div id="posted_image" class="hidden post_image_size"></div>
             <div>
-                <p> 🌍<span id="location"></span></p>
+                <p><span id="location"></span></p>
             </div>
             <input class="inputfield post_desc" type="text" name="post_desc" placeholder="What's your topic about?"><br>
             <label for="post_tags">Fill in tags, separate them with ,</label><br>
@@ -114,7 +114,9 @@ foreach($checkBlock as $b){
 <script src="script/createPost.js"></script>
 <script src="script/showMore.js"></script>
 <script src="script/likePost.js"></script>
-<script src="script/getLocation.js"></script>
+<script src="script/getPostLocation.js"></script>
+
+
     
 <script>
 

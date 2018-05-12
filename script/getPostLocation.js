@@ -1,4 +1,5 @@
-$(document).ready(function(){
+$("#buttondrop").on("click", function (e) {
+    e.preventDefault();
 
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(showLocation);
@@ -8,18 +9,24 @@ $(document).ready(function(){
 
 });
 
+
 function showLocation(position){
-    console.log("showlocation");
+    console.log("showlocationpost");
+
+    var postid = $(".post__id").attr("data-id");
+
+    console.log(postid);
 
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
+
     $.ajax({
         type:'POST',
-        url:'ajax/getLocation.php',
-        data:'latitude='+latitude+'&longitude='+longitude,
+        url:'ajax/getPostLocation.php',
+        data:'latitude='+latitude+'&longitude='+longitude+'&postid='+postid,
         success:function(msg){
             if(msg){
-                $("#location").html(msg);
+                $("#location").html(" 🌍 "+ msg);
                 
             }else{
                 $("#location").html('Not Available');

@@ -17,16 +17,28 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
         $location = $data->results[0]->formatted_address;
 
         //save
-        $post_location = new Post();
-        $post_location->SaveLocation($location);
+       $postId = $_POST['postid'];
+       $db = Db::getInstance();
+       $post_location = new Post($db);
+       $post_location->setPost_id($postId);
+       $post_location->SaveLocation($location);
 
     }else{
         $location = 'no location found';
+        
+         //save
+       $postId = $_POST['postid'];
+       $db = Db::getInstance();
+       $post_location = new Post($db);
+       $post_location->setPost_id($postId);
+       $post_location->SaveLocation($location);
     }
     
     //return address to ajax 
     header('Content-Type: application/json');
     echo json_encode($location);
+
+       
     
 }
 ?>
