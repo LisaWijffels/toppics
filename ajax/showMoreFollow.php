@@ -6,10 +6,11 @@ include_once("../classes/Follow.class.php");
 session_start();
     if( !empty($_POST) ){
         $lastId = $_POST['lastId'];
+        $loggeduser = $_SESSION['username'];
 
         $showposts = new Follow();
-
-        $response['posts'] = $showposts->LoadMoreFollowPosts($lastId);
+        $showposts->setLoggeduser($loggeduser);
+        $response['posts'] = $showposts->LoadMoreFollowPosts($lastId, $loggeduser);
         $response['user'] = $_SESSION['username'];
 
         $response['status'] = "success";

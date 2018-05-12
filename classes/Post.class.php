@@ -212,7 +212,8 @@ include_once('Db.class.php');
                 public static function ShowPosts(){
 
                         $conn = Db::getInstance();
-                        $statement = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username FROM posts, users WHERE posts.post_user_id = users.id  AND posts.active = 1 ORDER BY post_date desc limit 2");
+                        $statement = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username FROM posts, users WHERE posts.post_user_id = users.id  
+                        AND posts.active = 1 ORDER BY post_date desc limit 20");
                         $statement->execute();
 
                         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -220,7 +221,8 @@ include_once('Db.class.php');
 
                 public static function LoadMore($lastId){
                         $conn = Db::getInstance();
-                        $stm = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username FROM posts, users WHERE posts.post_user_id = users.id  AND posts.active = 1 AND posts.post_id < :lastId ORDER BY post_date desc limit 2");
+                        $stm = $conn->prepare("SELECT posts.post_id, post_desc, post_image, post_likes, post_date, username 
+                        FROM posts, users WHERE posts.post_user_id = users.id  AND posts.active = 1 AND posts.post_id < :lastId ORDER BY post_date desc limit 20");
                         $stm->bindValue(":lastId", $lastId);
                         $stm->execute();
 
