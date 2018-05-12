@@ -15,11 +15,25 @@ function readURL(input) {
 
 $("#post_image").change(function () {
     console.log("file changed");
-    if($('#posted_image').hasClass( "visible" )){
-
+    var file = $('#post_image')[0].files[0];
+    var filesize = file.size;
+    console.log(filesize);
+    if(filesize > 1000000){
+        var newError = `<p>File size is too big, please pick a picture smaller than 1MB.</p>`;
+        
+        $(".errorMessage").fadeIn();
+        $(".errorMessage").append(newError);
     } else {
-        $('#posted_image').toggleClass('hidden visible');
+        if($('#posted_image').hasClass( "visible" )){
+
+        } else {
+            $('#posted_image').toggleClass('hidden visible');
+        }
+
+        $(".errorMessage").empty();
+        $(".errorMessage").hide();
     }
+    
     
     readURL(this);
 });
@@ -28,6 +42,7 @@ $("#buttondrop").on("click", function (e) {
     e.preventDefault();
 
     var file = $('#post_image')[0].files[0];
+    
     var post_desc = $(".post_desc").val();
 
     try {
@@ -38,6 +53,15 @@ $("#buttondrop").on("click", function (e) {
         if (post_desc == "") {
             throw "Please enter a description.";
         }
+
+        var filesize = file.size;
+
+        if (filesize > 1000000){
+            throw "File size is too big, please pick a picture smaller than 1MB.";
+        }
+
+        $(".errorMessage").empty();
+        $(".errorMessage").fadeOut();
 
         var post_tags = $(".post_tags").val();
 
@@ -94,8 +118,9 @@ $("#buttondrop").on("click", function (e) {
         });
 
     } catch ($e) {
-        var newError = `<div class="errorMessage"><p>${$e}</p></div>`;
-        $("main").prepend(newError);
+        var newError = `<p>${$e}</p>`;
+        $(".errorMessage").fadeIn();
+        $(".errorMessage").append(newError);
     }
 });
 
