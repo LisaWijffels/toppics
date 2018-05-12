@@ -12,6 +12,7 @@ include_once('Db.class.php');
                 private $post_user;
                 private $db;
                 private $location;
+                private $loggeduser;
 
                 public function getPost_id()
                 {
@@ -54,6 +55,25 @@ include_once('Db.class.php');
                                 $this->post_user = $post_user;
 
                                 return $this;
+                }
+
+                public function getLoggeduser()
+                {
+                        return $this->loggeduser;
+                }
+
+
+                public function setLoggeduser($loggeduser)
+                {
+                        $db = Db::getInstance();
+                        $stmt = $db->prepare("SELECT id, username FROM users WHERE username = :username");
+                        $stmt->bindValue(":username", $loggeduser);
+                        $stmt->execute();
+                        $loggeduserID = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                        $this->loggeduser = $loggeduserID['id'];
+
+                        return $this;
                 }
 
                         
@@ -234,21 +254,23 @@ include_once('Db.class.php');
                         
                 }
 
-                public static function ShowPosts(){
+                public function ShowPosts(){
 
                         $conn = Db::getInstance();
-                        $statement = $conn->prepare("SELECT * FROM posts, users WHERE posts.post_user_id = users.id  
+                        $statement = $conn->prepare("SELECT * FROM posts, users WHERE NOT post_user_id = :loggeduser AND posts.post_user_id = users.id  
                         AND posts.active = 1 ORDER BY post_date desc limit 20");
+                        $statement->bindValue(":loggeduser", $this->loggeduser);
                         $statement->execute();
 
                         return $statement->fetchAll(PDO::FETCH_ASSOC);
                 }
 
-                public static function LoadMore($lastId){
+                public function LoadMore($lastId){
                         $conn = Db::getInstance();
-                        $stm = $conn->prepare("SELECT * FROM posts, users WHERE posts.post_user_id = users.id 
+                        $stm = $conn->prepare("SELECT * FROM posts, users WHERE NOT post_user_id = :loggeduser AND posts.post_user_id = users.id 
                         AND posts.active = 1 AND posts.post_id < :lastId ORDER BY post_date desc limit 20");
                         $stm->bindValue(":lastId", $lastId);
+                        $stm->bindValue(":loggeduser", $this->loggeduser);
                         $stm->execute();
 
                         return $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -318,6 +340,32 @@ include_once('Db.class.php');
                         $result = $stm->execute();
 
                         return $result;
+                }
+
+                public function CheckOwnPosts()
+                {
+                        $conn = Db::getInstance();
+                        $stmt = $conn->prepare("SELECT * FROM posts WHERE post_user_id = :loggeduser");
+                        $stmt->bindValue(":loggeduser", $this->loggeduser);
+                        $stmt->execute();
+
+                        $rows = $stmt->rowCount();
+
+                        if($rows > 0 ){
+                                throw new Exception("you don't have any posts yet");
+                        }
+                }
+
+                public function ShowOwnPosts()
+                {
+                        $conn = Db::getInstance();
+                        $statement = $conn->prepare("SELECT * FROM posts, users WHERE posts.post_user_id = users.id 
+                        AND post_user_id = :loggeduser
+                        AND posts.active = 1 ORDER BY post_date desc limit 20");
+                        $statement->bindValue(":loggeduser", $this->loggeduser);
+                        $statement->execute();
+
+                        return $statement->fetchAll(PDO::FETCH_ASSOC);
                 }
 
                 public function Likes($post_likes)

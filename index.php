@@ -37,7 +37,33 @@ foreach($checkBlock as $b){
     array_push($blockArray, $b["post_id"]);
 }
 
+try{
+    $checkfollowers = new Follow();
+    $loggeduser = $_SESSION['username'];
+    $checkfollowers->setLoggeduser($loggeduser);
+    $checkfollowers->CheckFollower();
 
+}
+catch(Exception $e)
+{
+    $error = $e->getMessage();
+}
+
+try{
+    $checkown = new Post();
+    $loggeduser = $_SESSION['username'];
+    $checkown->setLoggeduser($loggeduser);
+    $ownposts = $checkown->CheckOwnPosts();
+}
+catch(Exception $e)
+{
+    $errorC = $e->getMessage();
+}
+
+$showOwn = new Post();
+$loggeduser = $_SESSION['username'];
+$showOwn->setLoggeduser($loggeduser);
+$showOwnPosts = $showOwn->ShowOwnPosts();
 
 
 ?><!DOCTYPE html>
@@ -71,9 +97,47 @@ foreach($checkBlock as $b){
         </form>
     </main>    
 
+    <div class="friendsFollow">
+        <?php if( !isset($error) ): ?>
+            <h1>Hey, you don't follow any friends yet!</h3>
+            <h3>Go and <a href="discover.php">discover</a> new toppics</h4>
+        <?php endif; ?>
+    </div>
+
     <div class="postList">
 
         <div class=feed>
+
+                <?php if(isset($errorC)): ?>
+                    <?php foreach ($showOwnPosts as $o): ?>
+                    <div class="feed__post" data-id="<?php echo $o['post_id'] ?>">
+                        
+
+                        <div class="flexrow flex_between flex_align_center">
+                        <a href="user.php?user=<?php echo $o['username']; ?>" data-id="<?php echo $o['id']; ?>" class="feed__postUser"><?php echo $o['username']?></a>
+                            <?php if($o['username'] == $_SESSION['username']): ?>
+                                <a class="link__edit button" href="editpost.php?post=<?php echo $o['post_id']; ?>">✏️</a>
+                            <?php endif; ?>
+                            <a class="link__block button <?php if(in_array($o["post_id"], $blockArray)): ?>blocked<?php endif; ?>" href="#" data-id="<?php echo $o['post_id'] ?>">⛔</a>
+                        </div>
+                        <a href="details.php?post=<?php echo $o['post_id']; ?>" class="post__id" data-id="<?php echo $o['post_id']; ?>">
+                        <img class="feed__postImg" src="post_images/ <?php echo $o['post_image']; ?>"></a>
+                        <p class="feed__postDesc"><?php echo $o['post_desc']; ?></p>
+                        
+                        <div class="feed__flex">  
+                            <p class="feed__postLikes" data-like="like" data-id="<?php echo $o['post_id']; ?>" >
+                            💗<span class="postLikes">
+                            <?php echo $o['post_likes']; ?></span> likes</p>
+
+                            <a href="details.php?post=<?php echo $o['post_id']; ?>" class="feed__postComments">💬</a>
+
+                            <?php $timeago=get_timeago(strtotime($o['post_date'])); ?>
+                            <p class="feed__postDate"><?php echo $timeago; ?></p>
+   
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
 
                 <?php foreach ($followposts as $f): ?>
                     <div class="feed__post" data-id="<?php echo $f['post_id'] ?>">

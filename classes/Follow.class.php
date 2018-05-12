@@ -74,6 +74,20 @@ include_once("Db.class.php");
             }
         }
 
+        public function CheckFollower()
+        {
+            $conn = Db::getInstance();
+            $stmt = $conn->prepare("SELECT * FROM follow WHERE follower_id = :loggeduser");
+            $stmt->bindValue(":loggeduser", $this->loggeduser);
+            $stmt->execute();
+
+            $rows = $stmt->rowCount();
+
+                if($rows > 0 ){
+                    throw new Exception("you don't follow anyone yet");
+                }
+        }
+
         public function ShowFollowedPosts($loggeduser){
 
             $conn = Db::getInstance();
@@ -85,14 +99,14 @@ include_once("Db.class.php");
             foreach($ID as $id){
                         
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM posts, users, follow WHERE posts.post_user_id = users.id 
+            $statement = $conn->prepare("SELECT * FROM posts, users, follow WHERE NOT post_user_id = :loggeduser AND posts.post_user_id = users.id 
             AND follower_id = :loggeduser AND users_id = :id AND users.id in (follower_id, users_id)
             ORDER BY post_date desc limit 5");
             $statement->bindValue(":loggeduser", $this->loggeduser);
             $statement->bindValue(":id", $id['users_id']);
             $statement->execute();
             }
-            
+
             return $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         }
 
@@ -108,7 +122,7 @@ include_once("Db.class.php");
 
             $conn = Db::getInstance();
             $stmt = $conn->prepare("SELECT * FROM posts, users, follow, locations 
-            WHERE posts.post_user_id = users.id AND follower_id = :loggeduser AND users_id = :id 
+            WHERE NOT post_user_id = :loggeduser AND posts.post_user_id = users.id AND follower_id = :loggeduser AND users_id = :id 
             AND users.id in (follower_id, users_id) AND posts.post_id < :lastId 
             ORDER BY post_date desc limit 5");
             $stmt->bindValue(":lastId", $lastId);

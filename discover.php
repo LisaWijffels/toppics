@@ -20,8 +20,10 @@ if ( isset($_GET['search']) ){
     var_dump($posts);
         
 } else {
-    $posts = Post::ShowPosts();
-    
+    $getposts = new Post();
+    $loggeduser = $_SESSION['username'];
+    $getposts->setLoggeduser($loggeduser);
+    $posts = $getposts->ShowPosts();    
 }
 
 
