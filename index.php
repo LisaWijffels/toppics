@@ -76,17 +76,10 @@ foreach($checkBlock as $b){
                     <div class="feed__post" data-id="<?php echo $f['post_id'] ?>">
                         
 
-<<<<<<< HEAD
-                        <div class="flexrow flex_between">
-                        <a href="user.php?user=<?php echo $f['username']; ?>" data-id="<?php echo $f['id']; ?>" class="feed__postUser"><?php echo $f['username']?></a>
+                        <div class="flexrow flex_between flex_align_center">
+                        <a href="user.php?user=<?php echo $f['username']; ?>" data-id="<?php echo $u['id']; ?>" class="feed__postUser"><?php echo $f['username']?></a>
                             <?php if($f['username'] == $_SESSION['username']): ?>
                                 <a class="link__edit button" href="editpost.php?post=<?php echo $f['post_id']; ?>">✏️</a>
-=======
-                        <div class="flexrow flex_between flex_align_center">
-                        <a href="user.php?user=<?php echo $p['username']; ?>" data-id="<?php echo $u['id']; ?>" class="feed__postUser"><?php echo $p['username']?></a>
-                            <?php if($p['username'] == $_SESSION['username']): ?>
-                                <a class="link__edit button" href="editpost.php?post=<?php echo $p['post_id']; ?>">✏️</a>
->>>>>>> mybranch
                             <?php endif; ?>
                             <a class="link__block button <?php if(in_array($f["post_id"], $blockArray)): ?>blocked<?php endif; ?>" href="#" data-id="<?php echo $f['post_id'] ?>">⛔</a>
                         </div>
