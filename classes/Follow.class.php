@@ -85,7 +85,7 @@ include_once("Db.class.php");
             foreach($ID as $id){
                         
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM posts, users, follow, locations WHERE posts.post_user_id = users.id 
+            $statement = $conn->prepare("SELECT * FROM posts, users, follow WHERE posts.post_user_id = users.id 
             AND follower_id = :loggeduser AND users_id = :id AND users.id in (follower_id, users_id)
             ORDER BY post_date desc limit 5");
             $statement->bindValue(":loggeduser", $this->loggeduser);

@@ -23,6 +23,7 @@ if ( isset($_GET['search']) ){
     
 }
 
+
 $blocked = new Block();
 $blocked->setUser_id($_SESSION['username']);
 $checkBlock = $blocked->checkBlock();
@@ -31,7 +32,7 @@ foreach($checkBlock as $b){
     array_push($blockArray, $b["post_id"]);
 }
 
-    
+
 
 
 ?><!DOCTYPE html>

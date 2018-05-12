@@ -11,19 +11,17 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     $status = $data->status;
 
     
-    
     //if request status is successful
     if($status == "OK"){
         //get address from json data
         $location = $data->results[0]->formatted_address;
 
         //save
-        $postID = $_POST['postID'];
         $post_location = new Post();
         $post_location->SaveLocation($location);
 
     }else{
-        $location =  'no location found';
+        $location = 'no location found';
     }
     
     //return address to ajax 
