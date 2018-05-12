@@ -68,8 +68,8 @@ try{
 
     <main>
         <?php if(!isset($error) ): ?>
-            <div class="feed">
-                <div class="feed__post">
+            <div>
+                <div class="feed__post" id="feedDetail">
                     <p class="feed__postUser"><?php echo $postDetails[0]['username']?></p>
                     <?php foreach($postLocation as $l): ?>
                             <div>
@@ -94,7 +94,7 @@ try{
                         <div class="newComment">
                             <div class="feed__line"> </div>
                             <?php if(isset($error_noComments)): ?>
-                            <?php echo $error_noComments ?>
+                            <p id="noComment"><?php echo $error_noComments ?></p>
                             <?php else: ?>
                             <?php foreach($allComments as $comment): ?>
                             <div class="feed__Comments">
@@ -108,18 +108,19 @@ try{
                     
                     
                     <div class="postForm">
-                        <form action="" method="post" class="postForm__form">
-                            <input type="text" placeholder="Add a comment" class="postForm__text" name="commentText">
+                        <form action="" method="post" class="postForm__form commentText__form">
+                            <input type="text" placeholder="Type a comment" class="postForm__text" id="commentText" name="commentText">
                             <input type="submit" value="Post" class="postForm__button button">
                         </form>
                     </div>
-                </div>
-                <div id="colors">
+                    <div id="colors">
 
                     <?php foreach($palette as $p):?>
                     <div class="colorBlock" style="background:#<?php echo $p ?>"> </div>
                     <?php endforeach;?>
                 </div>
+                </div>
+                
             </div>
             
 
@@ -153,8 +154,9 @@ try{
                     <p class="feed__Comment">${res.comment}</p></div>
                     <div class="feed__line"> </div>`;
                     $(".newComment").append(newComment);
-                    $(".feed__Comments").slideDown();
+                    
                     $(".postForm__text").val("");
+                    $("#noComment").hide();
                 }
             });
 
