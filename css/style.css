@@ -615,16 +615,23 @@ input[type="file"]{
     .nav__right
     {
         margin-top: 10px;
+        display: flex;
+        flex-direction: row;
     }
 
     .button__logout
     {
+       margin-top: 42px; 
        margin-bottom: 10px;
+       height: 15px;
+       width: 100px;
     }
 
     #searchNav 
     {
-        margin-bottom: -10px;
+        margin-bottom: 10px;
+        padding-left: 2px;
+        padding-right: 2px;
     }
 
     .h2
@@ -687,7 +694,7 @@ input[type="file"]{
 {
     .navItems
     {
-       font-size: 18px;
+       font-size: 21px;
     }
 
     #searchNav
