@@ -98,8 +98,8 @@ main{
     display: block;
     text-align: center;
     color: white;
-    margin-top: 20px;
-    font-size: 12px;
+    margin-top: 50px;
+    font-size: 18px;
     font-style: italic;
 }
 
@@ -754,4 +754,42 @@ input[type="file"]{
         margin-right:auto;
         
     }
+
+    .formlogin
+    {
+        margin-top: 100px;
+        
+    }
+
+    .label
+    {
+        font-size: 28px;
+    }
+
+    .inlogfield
+    {
+    
+    padding: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 10px;
+    border-style: none;
+    font-size: 21px;
+    }
+
+    .registerbutton
+    {
+        padding-left: 85px;
+        padding-right: 175px;
+        font-size: 26px;
+        
+    }
+
+    .loginbutton
+    {
+        padding-left: 95px;
+        padding-right: 165px;
+    }
+
+
 }

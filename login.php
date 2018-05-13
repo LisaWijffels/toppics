@@ -38,10 +38,10 @@ if ( !empty($_POST) ) {
     <?php endif; ?>
     <form action="" method="post" class="formlogin">
         <label class="label" for="username">Username</label><br>
-        <input class="inputfield" type="text" name="username" value="<?php if(isset($_POST['username'])) { echo $_POST['username']; } ?>"><br>
+        <input class="inputfield inlogfield" type="text" name="username" value="<?php if(isset($_POST['username'])) { echo $_POST['username']; } ?>"><br>
         <label class="label" for="password">Password</label><br>
-        <input class="inputfield" type="password" name="password"><br>
-        <input class="button" type="submit" value="Login">
+        <input class="inputfield inlogfield" type="password" name="password"><br>
+        <input class="button registerbutton loginbutton" type="submit" value="Login">
     </form>
 
     <a href="register.php" id="registerlink">Dont have an account yet? Sign up here.</a>

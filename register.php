@@ -62,18 +62,18 @@ if ( !empty($_POST) ) {
     	<form action="" method="post" class="formlogin">
 
         <label class="label" for="username">Username</label><br>
-        <input class="inputfield" type="text" name="username" value="<?php if(isset($_POST['username'])) { echo $_POST['username']; } ?>"><br>
+        <input class="inputfield inlogfield" type="text" name="username" value="<?php if(isset($_POST['username'])) { echo $_POST['username']; } ?>"><br>
 
         <label class="label" for="email">Email</label><br>
-        <input class="inputfield" type="email" name="email" value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>"><br>
+        <input class="inputfield inlogfield" type="email" name="email" value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>"><br>
 
         <label class="label" for="password">Password</label><br>
-        <input class="inputfield" type="password" name="password"><br>
+        <input class="inputfield inlogfield" type="password" name="password"><br>
 
         <label class="label" for="password_confirmation">Confirm Password</label><br>
-        <input class="inputfield" type="password" name="password_confirmation"><br>
+        <input class="inputfield inlogfield" type="password" name="password_confirmation"><br>
 
-        <input class="button" type="submit" value="Register">
+        <input class="button registerbutton" type="submit" value="Register">
         <a href="login.php" id="registerlink">Already have an account? Log in here.</a>
     </form>
 

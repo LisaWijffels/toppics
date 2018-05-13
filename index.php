@@ -91,8 +91,8 @@ $showOwnPosts = $showOwn->ShowOwnPosts();
                 <p><span id="location"></span></p>
             </div>
             <input class="inputfield post_desc" type="text" name="post_desc" placeholder="What's your topic about?"><br>
-            <label for="post_tags">Fill in tags, separate them with ,</label><br>
-            <input class="inputfield post_tags" type="text" name="post_tags" placeholder="summer, beach, ..."><br>
+            <label for="post_tags">Tags, separate them with a comma</label><br>
+            <input class="inputfield post_tags" type="text" name="post_tags" placeholder="tags: summer, beach, ..."><br>
             <input class="button postForm__Button" id="buttondrop" type="submit" value="Drop it like it's hot">
         </form>
     </main>    
