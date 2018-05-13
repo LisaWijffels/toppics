@@ -87,7 +87,7 @@ $("#buttondrop").on("click", function (e) {
                             <div class="flexrow flex_between">
                                 <a href="user.php?user=${res.post_user}" class="feed__postUser">${res.post_user}</a>
                             
-                            <a class="link__block button" href="#" data-id="${res.post_id}">⛔</a>
+                            <a class="link__block button" href="#" title="report picture" data-id="${res.post_id}">⛔</a>
                         </div>
                         <a href="details.php?post=${res.post_id}" class="post__id" data-id="${res.post_id}">
                         <img class="feed__postImg" src="post_images/ ${res.post_image}"></a>

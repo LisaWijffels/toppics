@@ -17,14 +17,14 @@ $('.show_more').on("click", function(){
                 console.log("SAME USER");
                 $content = $(`<div class="flexrow flex_between flex_align_center">
             <a href="user.php?user=${res.posts[i]['username']}" data-id="${res.posts[i]['id']}" class="feed__postUser">${res.posts[i]['username']}</a>
-            <a class="link__edit button" href="editpost.php?post=${res.posts[i]['post_id']}">✏️</a>
-            <a class="link__block button" href="#" data-id="${res.posts[i]['post_id']}" >⛔</a></div>
+            <a class="link__edit button" title="edit picture" href="editpost.php?post=${res.posts[i]['post_id']}">✏️</a>
+            <a class="link__block button" href="#" title="report picture" data-id="${res.posts[i]['post_id']}" >⛔</a></div>
             <a href="details.php?post=${res.posts[i]['post_id']}">
             <img class="feed__postImg" src="post_images/ ${res.posts[i]['post_image']}"></a>
             <p class="feed__postDesc">${res.posts[i]['post_desc']}</p>
             <div class="feed__flex">  
-                <p class="feed__postLikes">💗${['post_likes']} likes</p>
-                <a href="details.php?post=${res.posts[i]['post_id']}" class="feed__postComments">💬</a>
+                <p class="feed__postLikes" title="like">💗${['post_likes']} likes</p>
+                <a href="details.php?post=${res.posts[i]['post_id']}" title="comment" class="feed__postComments">💬</a>
                 <p class="feed__postDate">${res.posts[i]['post_date']}</p>
             </div>`);
 
@@ -33,13 +33,13 @@ $('.show_more').on("click", function(){
                 $content = $(`<div class="flexrow flex_between flex_align_center">
             <a href="user.php?user=${res.posts[i]['username']}" data-id="${res.posts[i]['id']}" class="feed__postUser">${res.posts[i]['username']}</a>
             
-            <a class="link__block button" href="#" data-id="${res.posts[i]['post_id']}" >⛔</a></div>
+            <a class="link__block button" href="#" title="report picture" data-id="${res.posts[i]['post_id']}" >⛔</a></div>
             <a href="details.php?post=${res.posts[i]['post_id']}">
             <img class="feed__postImg" src="post_images/ ${res.posts[i]['post_image']}"></a>
             <p class="feed__postDesc">${res.posts[i]['post_desc']}</p>
             <div class="feed__flex">  
-                <p class="feed__postLikes">💗${res.posts[i]['post_likes']} likes</p>
-                <a href="details.php?post=${res.posts[i]['post_id']}" class="feed__postComments">💬</a>
+                <p class="feed__postLikes" title="like">💗${res.posts[i]['post_likes']} likes</p>
+                <a href="details.php?post=${res.posts[i]['post_id']}" title="comment" class="feed__postComments">💬</a>
                 <p class="feed__postDate">${res.posts[i]['post_date']}</p>
             </div>`);
                 
@@ -77,14 +77,14 @@ $('.show_more_follow').on("click", function(){
                 console.log("SAME USER");
                 $content = $(`<div class="flexrow flex_between flex_align_center">
             <a href="user.php?user=${res.posts[i]['username']}" data-id="${res.posts[i]['id']}" class="feed__postUser">${res.posts[i]['username']}</a>
-            <a class="link__edit button" href="editpost.php?post=${res.posts[i]['post_id']}">✏️</a>
-            <a class="link__block button" href="#" data-id="${res.posts[i]['post_id']}" >⛔</a></div>
+            <a class="link__edit button" title="edit picture" href="editpost.php?post=${res.posts[i]['post_id']}">✏️</a>
+            <a class="link__block button" href="#" title="report picture" data-id="${res.posts[i]['post_id']}" >⛔</a></div>
             <a href="details.php?post=${res.posts[i]['post_id']}">
             <img class="feed__postImg" src="post_images/ ${res.posts[i]['post_image']}"></a>
             <p class="feed__postDesc">${res.posts[i]['post_desc']}</p>
             <div class="feed__flex">  
-                <p class="feed__postLikes">💗${['post_likes']} likes</p>
-                <a href="details.php?post=${res.posts[i]['post_id']}" class="feed__postComments">💬</a>
+                <p class="feed__postLikes" title="lik">💗${['post_likes']} likes</p>
+                <a href="details.php?post=${res.posts[i]['post_id']}" title="comment" class="feed__postComments">💬</a>
                 <p class="feed__postDate">${res.posts[i]['post_date']}</p>
             </div>`);
 
@@ -93,13 +93,13 @@ $('.show_more_follow').on("click", function(){
                 $content = $(`<div class="flexrow flex_between flex_align_center">
             <a href="user.php?user=${res.posts[i]['username']}" data-id="${res.posts[i]['id']}" class="feed__postUser">${res.posts[i]['username']}</a>
             
-            <a class="link__block button" href="#" data-id="${res.posts[i]['post_id']}" >⛔</a></div>
+            <a class="link__block button" href="#" title="report picture" data-id="${res.posts[i]['post_id']}" >⛔</a></div>
             <a href="details.php?post=${res.posts[i]['post_id']}">
             <img class="feed__postImg" src="post_images/ ${res.posts[i]['post_image']}"></a>
             <p class="feed__postDesc">${res.posts[i]['post_desc']}</p>
             <div class="feed__flex">  
-                <p class="feed__postLikes">💗${res.posts[i]['post_likes']} likes</p>
-                <a href="details.php?post=${res.posts[i]['post_id']}" class="feed__postComments">💬</a>
+                <p class="feed__postLikes" title="like">💗${res.posts[i]['post_likes']} likes</p>
+                <a href="details.php?post=${res.posts[i]['post_id']}" title="comment" class="feed__postComments">💬</a>
                 <p class="feed__postDate">${res.posts[i]['post_date']}</p>
             </div>`);
                 

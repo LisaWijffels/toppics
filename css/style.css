@@ -478,6 +478,12 @@ input[type="file"]{
 
 /* detail.php */
 
+.block
+{
+    width: 40px;
+    text-align: center;
+}
+
 .postForm__text
 {
     margin-left: 15px;

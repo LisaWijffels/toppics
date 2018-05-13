@@ -62,20 +62,20 @@ foreach($checkBlock as $b){
                         <div class="flexrow flex_between">
                         <a href="user.php?user=<?php echo $p['username']; ?>" data-id="<?php echo $p['id']; ?>" class="feed__postUser"><?php echo $p['username']?></a>
                             <?php if($p['username'] == $_SESSION['username']): ?>
-                                <a class="link__edit button" href="editpost.php?post=<?php echo $p['post_id']; ?>">✏️</a>
+                                <a class="link__edit button" title="edit picture"  href="editpost.php?post=<?php echo $p['post_id']; ?>">✏️</a>
                             <?php endif; ?>
-                            <a class="link__block button <?php if(in_array($p["post_id"], $blockArray)): ?>blocked<?php endif; ?>" href="#" data-id="<?php echo $p['post_id'] ?>">⛔</a>
+                            <a class="link__block button <?php if(in_array($p["post_id"], $blockArray)): ?>blocked<?php endif; ?>" href="#" title="report picture" data-id="<?php echo $p['post_id'] ?>">⛔</a>
                         </div>
                         <a href="details.php?post=<?php echo $p['post_id']; ?>" class="post__id" data-id="<?php echo $p['post_id']; ?>">
                         <img class="feed__postImg" src="post_images/ <?php echo $p['post_image']; ?>"></a>
                         <p class="feed__postDesc"><?php echo $p['post_desc']; ?></p>
                         
                         <div class="feed__flex">  
-                            <p class="feed__postLikes" data-like="like" data-id="<?php echo $p['post_id']; ?>" >
+                            <p class="feed__postLikes" title="like" data-like="like" data-id="<?php echo $p['post_id']; ?>" >
                             💗<span class="postLikes">
                             <?php echo $p['post_likes']; ?></span> likes</p>
 
-                            <a href="details.php?post=<?php echo $p['post_id']; ?>" class="feed__postComments">💬</a>
+                            <a href="details.php?post=<?php echo $p['post_id']; ?>" title="comment" class="feed__postComments">💬</a>
 
                             <?php $timeago=get_timeago(strtotime($p['post_date'])); ?>
                             <p class="feed__postDate"><?php echo $timeago; ?></p>

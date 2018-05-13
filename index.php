@@ -116,20 +116,20 @@ $showOwnPosts = $showOwn->ShowOwnPosts();
                         <div class="flexrow flex_between flex_align_center">
                         <a href="user.php?user=<?php echo $o['username']; ?>" data-id="<?php echo $o['id']; ?>" class="feed__postUser"><?php echo $o['username']?></a>
                             <?php if($o['username'] == $_SESSION['username']): ?>
-                                <a class="link__edit button" href="editpost.php?post=<?php echo $o['post_id']; ?>">✏️</a>
+                                <a class="link__edit button" title="edit picture" href="editpost.php?post=<?php echo $o['post_id']; ?>">✏️</a>
                             <?php endif; ?>
-                            <a class="link__block button <?php if(in_array($o["post_id"], $blockArray)): ?>blocked<?php endif; ?>" href="#" data-id="<?php echo $o['post_id'] ?>">⛔</a>
+                            <a class="link__block button <?php if(in_array($o["post_id"], $blockArray)): ?>blocked<?php endif; ?>" href="#" title="report picture" data-id="<?php echo $o['post_id'] ?>">⛔</a>
                         </div>
                         <a href="details.php?post=<?php echo $o['post_id']; ?>" class="post__id" data-id="<?php echo $o['post_id']; ?>">
                         <img class="feed__postImg" src="post_images/ <?php echo $o['post_image']; ?>"></a>
                         <p class="feed__postDesc"><?php echo $o['post_desc']; ?></p>
                         
                         <div class="feed__flex">  
-                            <p class="feed__postLikes" data-like="like" data-id="<?php echo $o['post_id']; ?>" >
+                            <p class="feed__postLikes" data-like="like" title="like" data-id="<?php echo $o['post_id']; ?>" >
                             💗<span class="postLikes">
                             <?php echo $o['post_likes']; ?></span> likes</p>
 
-                            <a href="details.php?post=<?php echo $o['post_id']; ?>" class="feed__postComments">💬</a>
+                            <a href="details.php?post=<?php echo $o['post_id']; ?>" title="comment" class="feed__postComments">💬</a>
 
                             <?php $timeago=get_timeago(strtotime($o['post_date'])); ?>
                             <p class="feed__postDate"><?php echo $timeago; ?></p>
@@ -146,20 +146,20 @@ $showOwnPosts = $showOwn->ShowOwnPosts();
                         <div class="flexrow flex_between flex_align_center">
                         <a href="user.php?user=<?php echo $f['username']; ?>" data-id="<?php echo $u['id']; ?>" class="feed__postUser"><?php echo $f['username']?></a>
                             <?php if($f['username'] == $_SESSION['username']): ?>
-                                <a class="link__edit button" href="editpost.php?post=<?php echo $f['post_id']; ?>">✏️</a>
+                                <a class="link__edit button" title="edit picture" href="editpost.php?post=<?php echo $f['post_id']; ?>">✏️</a>
                             <?php endif; ?>
-                            <a class="link__block button <?php if(in_array($f["post_id"], $blockArray)): ?>blocked<?php endif; ?>" href="#" data-id="<?php echo $f['post_id'] ?>">⛔</a>
+                            <a class="link__block button <?php if(in_array($f["post_id"], $blockArray)): ?>blocked<?php endif; ?>" title="report picture" href="#" data-id="<?php echo $f['post_id'] ?>">⛔</a>
                         </div>
                         <a href="details.php?post=<?php echo $f['post_id']; ?>" class="post__id" data-id="<?php echo $f['post_id']; ?>">
                         <img class="feed__postImg" src="post_images/ <?php echo $f['post_image']; ?>"></a>
                         <p class="feed__postDesc"><?php echo $f['post_desc']; ?></p>
                         
                         <div class="feed__flex">  
-                            <p class="feed__postLikes" data-like="like" data-id="<?php echo $f['post_id']; ?>" >
+                            <p class="feed__postLikes" title="like" data-like="like" data-id="<?php echo $f['post_id']; ?>" >
                             💗<span class="postLikes">
                             <?php echo $f['post_likes']; ?></span> likes</p>
 
-                            <a href="details.php?post=<?php echo $f['post_id']; ?>" class="feed__postComments">💬</a>
+                            <a href="details.php?post=<?php echo $f['post_id']; ?>" title="comment" class="feed__postComments">💬</a>
 
                             <?php $timeago=get_timeago(strtotime($f['post_date'])); ?>
                             <p class="feed__postDate"><?php echo $timeago; ?></p>

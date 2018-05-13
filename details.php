@@ -70,12 +70,17 @@ try{
         <?php if(!isset($error) ): ?>
             <div>
                 <div class="feed__post" id="feedDetail">
-                    <p class="feed__postUser"><?php echo $postDetails[0]['username']?></p>
+
+                <div class="flexrow flex_between flex_align_center">
+                    <a href="user.php?user=<?php echo $postDetails[0]['username']; ?>" class="feed__postUser"><?php echo $postDetails[0]['username']?></a>
+                    <a class="block link__block button <?php if(in_array($o["post_id"], $blockArray)): ?>blocked<?php endif; ?>" href="#" title="report picture" data-id="<?php echo $o['post_id'] ?>">⛔</a>
+                </div>
                     <?php foreach($postLocation as $l): ?>
                             <div>
                                 <p class="locationpost"> 🌍<span class="post_location"><?php echo $l['location_name'] ?></span></p>
                             </div>
                         <?php endforeach; ?>
+                        
                     <a href="details.php?post=<?php echo $postDetails[0]['post_id']; ?>" class="post__id" data-id="<?php echo $postDetails[0]['post_id']; ?>">
                     <img class="feed__postImg" src="post_images/ <?php echo $postDetails[0]['post_image']; ?>"></a>
                     <p class="feed__postDesc"><?php echo $postDetails[0]['post_desc']; ?></p>
@@ -85,7 +90,7 @@ try{
                         <?php endforeach; ?>
                     </p>
                     <div class="feed__flex">  
-                        <p class="feed__postLikes">💗<?php echo $postDetails[0]['post_likes']; ?> likes</p>
+                        <p class="feed__postLikes" title="like">💗<?php echo $postDetails[0]['post_likes']; ?> likes</p>
                         
                         <?php $timeago=get_timeago(strtotime($postDetails[0]['post_date'])); ?>
                             <p class="feed__postDate"><?php echo $timeago; ?></p>
