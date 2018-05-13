@@ -21,8 +21,7 @@ if ( !empty($_GET) ){
     $db = Db::getInstance();
     $user = new User($db);
     $user->setUsername($username);
-
-    $Userposts = User::showUserPosts($username);
+    $Userposts = $user->showUserPosts($username);
     
 } else {
     $error = true;
