@@ -7,7 +7,7 @@ include_once("../classes/Post.class.php");
     {
 
         session_start();
-        $user_id = $_SESSION['username'];
+        $post_user = $_SESSION['username'];
 
     
             $likesUpdate = $_POST['likes'];
@@ -17,7 +17,7 @@ include_once("../classes/Post.class.php");
             $db = Db::getInstance();
             $l = new Post($db);
             $l->setPost_id($postID);
-            $l->setUser_id($user_id);
+            $l->setPost_user_id($post_user);
             
 
             if($likeUnlike == "like")
