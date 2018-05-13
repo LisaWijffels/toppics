@@ -199,7 +199,7 @@ include_once("Post.class.php");
         {
             $conn = Db::getInstance();
             $stmt = $conn->prepare("SELECT id, username, user_text, post_id, post_desc, post_image, post_likes, post_user_id, post_date 
-            FROM `users`, `posts` WHERE users.id = posts.post_user_id AND username = :username");
+            FROM `users`, `posts` WHERE users.id = posts.post_user_id AND username = :username ORDER BY post_date desc");
             $stmt->bindParam(":username", $username);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

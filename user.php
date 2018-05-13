@@ -69,13 +69,13 @@ catch(Exception $e)
         <?php foreach ($Userposts as $u): ?>
             <div class="feed__post" data-id="<?php echo $u[0]['post_id'] ?>">
                 
-                <div class="flexrow flex_between"><a href="user.php?user=<?php echo $p['username']; ?>" data-id="<?php echo $u['id']; ?>" class="feed__postUser"><?php echo $u['username']?>
+                <div class="flexrow flex_between"><a href="user.php?user=<?php echo $u['username']; ?>" data-id="<?php echo $u['id']; ?>" class="feed__postUser"><?php echo $u['username']?>
                 </a><?php if($u['username'] == $_SESSION['username']): ?>
                 <a class="link__edit button" title="edit picture" href="editpost.php?post=<?php echo $u[0]['post_id']; ?>">✏️</a><?php endif; ?>
                 <a class="link__block button <?php if(in_array($o["post_id"], $blockArray)): ?>blocked<?php endif; ?>" href="#" title="report picture" data-id="<?php echo $o['post_id'] ?>">⛔</a>
                 </div>
                
-                <a href="details.php?post=<?php echo $u[0]['post_id']; ?>" class="post__id" data-id="<?php echo $u[0]['post_id']; ?>">
+                <a href="details.php?post=<?php echo $u['post_id']; ?>" class="post__id" data-id="<?php echo $u[0]['post_id']; ?>">
                 <img class="feed__postImg" src="post_images/ <?php echo $u['post_image']; ?>"></a>
                 <p class="feed__postDesc"><?php echo $u['post_desc']; ?></p>
                 
