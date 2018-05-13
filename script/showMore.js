@@ -2,12 +2,11 @@ $('.show_more').on("click", function(){
     console.log("Clicked loadmoare");
     var lastPic = $(".feed .feed__post:last-child");
     var lastId = lastPic.attr('data-id');
-    var date = $('.feed__postDate').attr('data-date');
     console.log("Data id " +lastId);
     $.ajax({
         type: "POST",
         url: "ajax/showMore.php",
-        data: { lastId : lastId, date : date},
+        data: { lastId : lastId },
         
     }).done(function( res ) { 
         console.log("Session user = "+res.user);
@@ -26,7 +25,7 @@ $('.show_more').on("click", function(){
                 <p class="feed__postLikes" title="like" data-like="like" data-id="${res.posts[i]['post_id']}">💗 
                 <span class="postLikes">${res.posts[i]['post_likes']}</span> likes </p>
                 <a href="details.php?post=${res.posts[i]['post_id']}" title="comment" class="feed__postComments">💬</a>
-                <p class="feed__postDate">${res.date}</p>
+                <p class="feed__postDate">${res.posts[i]['post_date']}</p>
             </div>`);
             
             $divPost = $(`<div class="feed__post" data-id="${res.posts[i]['post_id']}">`);         

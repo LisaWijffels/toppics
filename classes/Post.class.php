@@ -166,10 +166,12 @@ include_once('Db.class.php');
 
                 public function getPost_date()
                 {
-                        return $this->post_date;
+                                return $this->post_date;
                 }
 
-                public function setPost_date($post_date){
+                public function setPost_date($post_date)
+                {
+
                         $this->post_date = $post_date;
 
                         return $this;
