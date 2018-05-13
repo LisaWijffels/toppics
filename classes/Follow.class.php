@@ -129,10 +129,18 @@ include_once("Db.class.php");
             $stmt->bindValue(":loggeduser", $this->loggeduser);
             $stmt->bindValue(":id", $id['users_id']);
             $stmt->execute();
+            $followposts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $foundPosts = [];
+                foreach($followposts as $f){
+                            
+                    $foundPosts[$f['post_id']] = $f;
+                            
+                }
 
             }
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $followposts;
         }
 
 
