@@ -90,7 +90,9 @@ try{
                         <?php endforeach; ?>
                     </p>
                     <div class="feed__flex">  
-                        <p class="feed__postLikes" title="like">💗<?php echo $postDetails[0]['post_likes']; ?> likes</p>
+                        <p class="feed__postLikes" title="like" data-like="like" data-id="<?php echo $postDetails[0]['post_id']; ?>" >
+                            💗<span class="postLikes">
+                            <?php echo $postDetails[0]['post_likes']; ?></span> likes</p>
                         
                         <?php $timeago=get_timeago(strtotime($postDetails[0]['post_date'])); ?>
                             <p class="feed__postDate"><?php echo $timeago; ?></p>

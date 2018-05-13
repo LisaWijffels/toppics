@@ -80,7 +80,7 @@ catch(Exception $e)
                 <p class="feed__postDesc"><?php echo $u['post_desc']; ?></p>
                 
                 <div class="feed__flex">  
-                    <p class="feed__postLikes" data-like="like" title="like" data-id="<?php echo $u[0]['post_id']; ?>" >
+                    <p class="feed__postLikes" data-like="like" title="like" data-id="<?php echo $u['post_id']; ?>" >
                     💗<span class="postLikes">
                     <?php echo $u['post_likes']; ?></span> likes</p>
 
@@ -97,7 +97,7 @@ catch(Exception $e)
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="script/follow.js"></script>
-<script src="script/getLocation.js"></script>
+<script src="script/likePost.js"></script>
 
 </body>
 </html>

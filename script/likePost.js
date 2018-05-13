@@ -5,8 +5,9 @@ $(".feed__postLikes").on("click", function(e) {
     let likeUnlike = thisPost.attr("data-like");
     let postID = thisPost.attr("data-id");
 
-    //console.log(likes);
-    //console.log(postID);
+    console.log("clicked like");
+    console.log(likes);
+    console.log(postID);
     //console.log(likeUnlike);
 
     $.ajax({

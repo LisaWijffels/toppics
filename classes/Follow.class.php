@@ -122,8 +122,12 @@ include_once("Db.class.php");
 
             $conn = Db::getInstance();
             $stmt = $conn->prepare("SELECT * FROM posts, users, follow, locations 
-            WHERE NOT post_user_id = :loggeduser AND posts.post_user_id = users.id AND follower_id = :loggeduser AND users_id = :id 
-            AND users.id in (follower_id, users_id) AND posts.post_id < :lastId 
+            WHERE NOT post_user_id = :loggeduser 
+            AND posts.post_user_id = users.id 
+            AND follower_id = :loggeduser 
+            AND users_id = :id 
+            AND users.id in (follower_id, users_id) 
+            AND posts.post_id < :lastId 
             ORDER BY post_date desc limit 5");
             $stmt->bindValue(":lastId", $lastId);
             $stmt->bindValue(":loggeduser", $this->loggeduser);
