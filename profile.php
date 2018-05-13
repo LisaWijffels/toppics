@@ -16,6 +16,11 @@ if(isset ($_SESSION['username']) ){
     header('Location: login.php');
 }
 
+if ( isset($_GET['search']) ){
+    $search = $_GET['search'];
+    header('Location: index.php?search='.$search);
+}
+
 // Alle gegevens van ingelogde user binnenhalen
 $db = Db::getInstance();
 $user = new User($db);

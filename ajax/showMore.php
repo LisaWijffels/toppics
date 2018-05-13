@@ -13,7 +13,9 @@ session_start();
         $feedback['posts'] = $showpost->LoadMore($lastId);
         $feedback['user'] = $_SESSION['username'];
 
-        
+        $date = $_POST['date'];
+        $feedback['date'] = $timeago=get_timeago(strtotime($date));
+            
 
         header('Content-Type: application/json');
 	    echo json_encode($feedback);

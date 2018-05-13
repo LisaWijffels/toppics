@@ -83,7 +83,7 @@ try{
                         
                     <a href="details.php?post=<?php echo $postDetails[0]['post_id']; ?>" class="post__id" data-id="<?php echo $postDetails[0]['post_id']; ?>">
                     <img class="feed__postImg" src="post_images/ <?php echo $postDetails[0]['post_image']; ?>"></a>
-                    <p class="feed__postDesc"><?php echo $postDetails[0]['post_desc']; ?></p>
+                    <p class="feed__postDesc">Description: <?php echo $postDetails[0]['post_desc']; ?></p>
                     <p class="feed__postTag feed__postDesc">Tags: 
                         <?php foreach($postTags as $t): ?>
                             <?php echo $t['tag_name']; ?>

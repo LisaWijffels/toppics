@@ -11,9 +11,14 @@ session_start();
 // Enkel deze pagina tonen als er een user ingelogged is
 if(isset ($_SESSION['username']) ){
     $loggeduser = $_SESSION['username'];
-    echo "logged user is ".$loggeduser;
+    //echo "logged user is ".$loggeduser;
 } else {
     header('Location: login.php');
+}
+
+if ( isset($_GET['search']) ){
+    $search = $_GET['search'];
+    header('Location: index.php?search='.$search);
 }
 
 if ( !empty($_GET) ){

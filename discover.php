@@ -78,7 +78,7 @@ foreach($checkBlock as $b){
                             <a href="details.php?post=<?php echo $p['post_id']; ?>" title="comment" class="feed__postComments">💬</a>
 
                             <?php $timeago=get_timeago(strtotime($p['post_date'])); ?>
-                            <p class="feed__postDate"><?php echo $timeago; ?></p>
+                            <p data-date="<?php echo $p['post_date'];?>" class="feed__postDate"><?php echo $timeago; ?></p>
 
                             
                         </div>

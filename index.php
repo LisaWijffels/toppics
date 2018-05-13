@@ -14,8 +14,6 @@ if(isset ($_SESSION['username'])){
     header('Location: login.php');
 }
 
-
-
 if ( isset($_GET['search']) ){
     $search = $_GET['search'];
     $followposts = Post::searchPosts($search);
